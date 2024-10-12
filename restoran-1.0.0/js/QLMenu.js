@@ -173,6 +173,21 @@ $(document).ready(function () {
             }
         });
     });
+    function deleteImage(imageName) {
+        $.ajax({
+            url: `https://resmant1111-001-site1.jtempurl.com/controller/delete-image`,
+            method: "POST",
+            data: { imageName: imageName },
+            success: function (response) {
+                alert(response);
+            },
+            error: function (xhr, status, error) {
+                console.error("Không thể xóa hình ảnh:", error);
+                alert("Có lỗi xảy ra khi xóa hình ảnh.");
+            }
+        });
+    }
+    
 
     $("#cancelDeleteBtn").on("click", function () {
         $("#confirmDeleteModal").hide(); // Ẩn modal xác nhận
@@ -180,26 +195,60 @@ $(document).ready(function () {
 
     let menuItemId;
 
-    $(document).on('click', '.btn-edit', function () {
-        menuItemId = $(this).data('id'); // Lưu ID món ăn cần sửa
-        $.ajax({
-            url: `https://resmant1111-001-site1.jtempurl.com/Menu/GetById?id=${menuItemId}`,
-            method: "GET",
-            success: function (menuItem) {
-                $("#itemNameEdit").val(menuItem.itemName);
-                $("#categoryEdit").val(menuItem.category);
-                $("#priceEdit").val(menuItem.price);
-                $("#descriptionEdit").val(menuItem.description);
-                if (menuItem.image) {
-                    $("#currentImage").attr("src", "data:image/jpeg;base64," + menuItem.image).show();
-                }
-                $("#editMenuModal").show(); // Hiện modal sửa món ăn
-            },
-            error: function (xhr, status, error) {
-                console.error("Không thể tải thông tin món ăn:", error);
+// Khi người dùng chọn file ảnh mới
+$("#imageUpload").change(function () {
+    var imageFile = $("#imageUpload")[0].files[0]; // Lấy file ảnh mới
+
+    if (imageFile) {
+        // Hiển thị tên file ảnh
+        $("#imageNameEdit").text("Tên file: " + imageFile.name);
+
+        // Hiển thị ảnh preview
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#currentImage").attr("src", e.target.result).show(); // Hiện ảnh mới
+        };
+        reader.readAsDataURL(imageFile);
+    } else {
+        $("#imageNameEdit").text("Không có ảnh");
+        $("#currentImage").hide(); // Ẩn ảnh nếu không có file nào được chọn
+    }
+});
+
+// Khi nhấn nút "Sửa" món ăn
+$(document).on('click', '.btn-edit', function () {
+    menuItemId = $(this).data('id'); // Lưu ID món ăn cần sửa
+    $.ajax({
+        url: `https://resmant1111-001-site1.jtempurl.com/Menu/GetById?id=${menuItemId}`,
+        method: "GET",
+        success: function (menuItem) {
+            // Khôi phục tất cả các trường trong modal
+            $("#itemNameEdit").val(menuItem.itemName);
+            $("#categoryEdit").val(menuItem.category);
+            $("#priceEdit").val(menuItem.price);
+            $("#descriptionEdit").val(menuItem.description);
+
+            // Nếu món ăn có ảnh
+            if (menuItem.image) {
+                $("#imageNameEdit").text(menuItem.image); // Cập nhật tên file ảnh
+                $("#currentImage").attr("src", `https://resmant1111-001-site1.jtempurl.com/uploads/${menuItem.image}`).show();
+            } else {
+                $("#imageNameEdit").text("Không có ảnh");
+                $("#currentImage").hide();
             }
-        });
+
+            // Reset input file cho hình ảnh mới
+            $("#imageUpload").val(''); // Đặt lại input file để không giữ file trước đó
+
+            $("#editMenuModal").show(); // Hiện modal sửa món ăn
+        },
+        error: function (xhr, status, error) {
+            console.error("Không thể tải thông tin món ăn:", error);
+        }
     });
+});
+
+    
 
     $("#cancelEditMenuBtn").click(function () {
         $("#editMenuModal").hide(); // Ẩn modal sửa món ăn
@@ -210,83 +259,73 @@ $(document).ready(function () {
         var category = $("#categoryEdit").val();
         var price = parseFloat($("#priceEdit").val());
         var description = $("#descriptionEdit").val().trim();
-        var imageFile = $("#imageUpload")[0].files[0];
-        var currentImageBase64 = $("#currentImage").attr("src").split(',')[1]; // Lấy ảnh cũ nếu có
-
-        // Kiểm tra các điều kiện
-        if (!itemName) {
-            alert("Tên món ăn không được để trống.");
+        var imageInput = $("#imageUpload")[0];  // Đối tượng input file
+        var imageFile = imageInput.files.length > 0 ? imageInput.files[0] : null;  // Kiểm tra xem có file nào được chọn không
+        var currentImage = $("#currentImage").attr("src").split('/').pop(); // Lấy tên ảnh hiện tại
+    
+        if (!itemName || !category || !price || price <= 0) {
+            alert("Vui lòng điền đầy đủ thông tin hợp lệ.");
             return;
         }
-
-        if (!category) {
-            alert("Phân loại phải được chọn.");
-            return;
-        }
-
-        if (!price || !Number.isInteger(price) || price <= 0) {
-            alert("Giá phải là số nguyên và lớn hơn 0.");
-            return;
-        }
-
+    
         if (imageFile) {
-            var reader = new FileReader();
-            reader.onloadend = function () {
-                var base64Image = reader.result.split(',')[1];
-
-                var updatedMenuItem = {
-                    menuItemId: menuItemId,
-                    itemName: itemName,
-                    category: category,
-                    price: price,
-                    description: description,
-                    image: base64Image // Gửi ảnh mới nếu có
-                };
-
-                $.ajax({
-                    url: "https://resmant1111-001-site1.jtempurl.com/Menu/Update",
-                    method: "PUT",
-                    contentType: "application/json",
-                    data: JSON.stringify(updatedMenuItem),
-                    success: function (response) {
-                        loadMenuItems();
-                        $("#editMenuModal").hide();
-                        alert("Món ăn đã được cập nhật thành công!");
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("Không thể cập nhật món ăn:", error);
-                        alert("Có lỗi xảy ra khi cập nhật món ăn.");
-                    }
-                });
-            };
-            reader.readAsDataURL(imageFile);
+            var formData = new FormData();
+            formData.append('file', imageFile);
+    
+            // Upload ảnh mới
+            $.ajax({
+                url: "https://resmant1111-001-site1.jtempurl.com/controller/upload-image",
+                method: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    var updatedMenuItem = {
+                        menuItemId: menuItemId,
+                        itemName: itemName,
+                        category: category,
+                        price: price,
+                        description: description,
+                        image: response.imagePath.split('/').pop() // Chỉ lấy tên file ảnh mới
+                    };
+    
+                    updateMenuItem(updatedMenuItem);
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra khi tải ảnh.");
+                }
+            });
         } else {
-            // Nếu không có ảnh mới, giữ lại ảnh cũ
+            // Nếu không có ảnh mới, giữ lại tên ảnh hiện tại
             var updatedMenuItem = {
                 menuItemId: menuItemId,
                 itemName: itemName,
                 category: category,
                 price: price,
                 description: description,
-                image: currentImageBase64 // Gửi lại ảnh cũ
+                image: currentImage // Giữ lại ảnh cũ
             };
-
-            $.ajax({
-                url: "https://resmant1111-001-site1.jtempurl.com/Menu/Update",
-                method: "PUT",
-                contentType: "application/json",
-                data: JSON.stringify(updatedMenuItem),
-                success: function (response) {
-                    loadMenuItems();
-                    $("#editMenuModal").hide();
-                    alert("Món ăn đã được cập nhật thành công!");
-                },
-                error: function (xhr, status, error) {
-                    console.error("Không thể cập nhật món ăn:", error);
-                    alert("Có lỗi xảy ra khi cập nhật món ăn.");
-                }
-            });
+    
+            updateMenuItem(updatedMenuItem);
         }
     });
+    
+    function updateMenuItem(updatedMenuItem) {
+        $.ajax({
+            url: "https://resmant1111-001-site1.jtempurl.com/Menu/Update",
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(updatedMenuItem),
+            success: function () {
+                loadMenuItems();
+                $("#editMenuModal").hide();
+                alert("Món ăn đã được cập nhật thành công!");
+            },
+            error: function () {
+                alert("Có lỗi xảy ra khi cập nhật món ăn.");
+            }
+        });
+    }
+    
 
 });
