@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <!-- Thư viện DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <!-- Thư viện jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Thư viện DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link href="css/QL.css" rel="stylesheet">
+    <script src="js/QLMenu.js"></script>
+    <script src="js/QLKh.js"></script>
+    <script src="js/QLVoucher.js"></script>
+    <script src="js/ChuyenTab.js"></script>
+    <title>Quản lý</title>
+    <!-- Favicon -->
+    <link rel="icon" href="https://resmant1111-001-site1.jtempurl.com/uploads/Designer.jpeg" type="image/png">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="#" id="manageMenu">Quản lý Menu</a>
+        <a href="#" id="manageCustomer">Quản lý khách hàng</a>
+        <a href="#" id="manageVoucher">Quản lý voucher</a>
+        <a href="#">Đăng xuất</a>
+    </div>
+    
+    <!-------------------------------------------------------------- QL Menu-------------------------------------------->
+    <div class="content" id="MenuContent">
+        <h1>Danh Sách Món ăn</h1>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <button id="addMenuBtn" class="btn-add">Thêm Món ăn</button>
+        </div>
+    
+        <table id="MenuTable" class="display">
+            <thead>
+                <tr>
+                    <th>Tên món ăn</th>
+                    <th>Phân loại</th>
+                    <th>Giá</th>
+                    <th>Mô tả</th>
+                    <th>Hình ảnh</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu sẽ được chèn vào đây -->
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Modal Thêm Món ăn -->
+    <div id="addMenuModal" class="addModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+        <h2>Thêm Món ăn</h2>
+        <label for="itemName">Tên món ăn:</label>
+        <input type="text" id="itemName" required /><br />
+    
+        <label for="category">Phân loại:</label>
+        <select id="category" required>
+            <option value="">Chọn phân loại</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br />
+    
+        <label for="price">Giá:</label>
+        <input type="number" id="price" step="0.01" required /><br />
+    
+        <label for="description">Mô tả:</label>
+        <textarea id="description"></textarea><br />
+    
+        <label for="image">Hình ảnh:</label>
+        <input type="file" id="image" accept="image/*" /><br />
+        <img id="imagePreview" style="max-width: 200px; max-height: 200px;" /><br />
+        
+    
+        <button id="saveMenuBtn">Lưu</button>
+        <button id="cancelMenuBtn" class="cancelBtn">Hủy</button>
+    </div>
+    
+    <!-- Modal Sửa Món ăn -->
+    <div id="editMenuModal" class="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+        <h2>Sửa Món ăn</h2>
+        <label for="itemNameEdit">Tên món ăn:</label>
+        <input type="text" id="itemNameEdit" required /><br /><br />
+    
+        <label for="categoryEdit">Phân loại:</label>
+        <select id="categoryEdit" required>
+            <option value="">Chọn phân loại</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br /><br />
+    
+        <label for="priceEdit">Giá:</label>
+        <input type="number" id="priceEdit" step="0.01" required /><br /><br />
+    
+        <label for="descriptionEdit">Mô tả:</label>
+        <textarea id="descriptionEdit"></textarea><br /><br />
+    
+        <label for="imageUpload">Hình ảnh:</label>
+        <input type="file" id="imageUpload" accept="image/*" /><br /><br />
+    
+        <img id="currentImage" src="" alt="Hình ảnh hiện tại" style="width: 100px; height: 100px; display: none;" /><br />
+    
+        <button id="saveEditMenuBtn" >Lưu</button>
+        <button id="cancelEditMenuBtn" class="cancelBtn">Hủy</button>
+    </div>
+    
+    <!-- Modal để xác nhận xóa món ăn -->
+    <div id="confirmDeleteModal" class="deleteModal" style="display:none;">
+        <h2>Xác Nhận Xóa</h2>
+        <p>Bạn có chắc chắn muốn xóa món ăn này không?</p>
+        <button id="confirmDeleteBtn">Có</button>
+        <button id="cancelDeleteBtn">Không</button>
+    </div>
+    <!-------------------------------------------------------------- QL Khách hàng-------------------------------------------->
+    <div class="content" id="CustomerContent">
+        <h1>Danh Sách Tài khoản</h1>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            
+        </div>
+    
+        <table id="CustomerTable" class="display">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Tên</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Ngày tạo</th>
+                    <th>Điểm thưởng</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu sẽ được chèn vào đây -->
+            </tbody>
+        </table>
+    </div>
+    <!-- Modal để xác nhận xóa tài khoản -->
+    <div id="confirmDeleteModal1" class="deleteModal" style="display:none;">
+        <h2>Xác Nhận Xóa</h2>
+        <p>Bạn có chắc chắn muốn xóa tài khoản này không ?</p>
+        <button id="confirmDeleteBtn1">Có</button>
+        <button id="cancelDeleteBtn1">Không</button>
+    </div>
+    <!-- Modal Sửa tài khoản -->
+    <div id="editCustomerModal" class="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+        <h2>Chỉnh sửa tài khoản</h2>
+        <label for="UsernameEdit">Username:</label>
+        <input type="text" id="UsernameEdit" readonly required /><br />
+        <label for="NameEdit">Name:</label>
+        <input type="text" id="NameEdit" required /><br />
+        <label for="PasswordEdit">Password:</label>
+        <input type="text" id="PasswordEdit" required /><br />
+        <label for="EmailEdit">Email:</label>
+        <input type="text" id="EmailEdit" required /><br />
+        <label for="PhoneEdit">Phone:</label>
+        <input type="number" id="PhoneEdit" step="0.01" required /><br />
+        <label for="PointEdit">Point:</label>
+        <input type="text" id="PointEdit" required /><br />
+        <label for="DayEdit">Day Joined:</label>
+        <input type="text" id="DayEdit" readonly required /><br />
+        
+        <button id="saveEditCustomerBtn">Lưu</button>
+        <button id="cancelEditCustomerBtn" class="cancelBtn">Hủy</button>
+    </div>
+
+    <!-------------------------------------------------------------- QL Voucher-------------------------------------------->
+    <div class="content" id="VoucherContent">
+        <h1>Danh Sách voucher</h1>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <button id="addVoucherBtn" class="btn-add">Thêm voucher</button>
+            
+        </div>
+    
+        <table id="VoucherTable" class="display">
+            <thead>
+                <tr>
+                    <th>Loại voucher</th>
+                    <th>Số điểm cần</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu sẽ được chèn vào đây -->
+            </tbody>
+        </table>
+    </div>
+     <!-- Modal để xác nhận xóa voucher -->
+     <div id="confirmDeleteModal2" class="deleteModal" style="display:none;">
+        <h2>Xác Nhận Xóa</h2>
+        <p>Bạn có chắc chắn muốn xóa voucher này không ?</p>
+        <button id="confirmDeleteBtn2">Có</button>
+        <button id="cancelDeleteBtn2">Không</button>
+    </div>
+    <!-- Modal Thêm Voucher -->
+    <div id="addVoucherModal" class="addModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+        <h2>Thêm voucher</h2>
+        <label for="voucherType">Loại voucher:</label>
+        <input type="text" id="voucherType" required /><br /><br />
+    
+        <label for="voucherPoint">Số điểm cần:</label>
+        <input type="number" id="voucherPoint" step="0.01" required /><br /><br />
+    
+        <button id="saveVoucherBtn" >Lưu</button>
+        <button id="cancelVoucherBtn" class="cancelBtn">Hủy</button>
+    </div>
+    <!-- Modal Sửa voucher -->
+    <div id="editVoucherModal" class="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+        <h2>Chỉnh sửa tài khoản</h2>
+        <label for="voucherTypeEdit">Loại voucher:</label>
+        <input type="text" id="voucherTypeEdit" required /><br /><br />
+        <label for="voucherPointEdit">Số điểm cần:</label>
+        <input type="number" id="voucherPointEdit" step="0.01" required /><br /><br />
+        <button id="saveEditVoucherBtn">Lưu</button>
+        <button id="cancelEditVoucherBtn" class="cancelBtn">Hủy</button>
+    </div>
+    
+</body>
+</html>

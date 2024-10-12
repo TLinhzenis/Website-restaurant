@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt bàn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .item {
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .item img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .item-name {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .reserved {
+            color: red;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .modal-content button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .modal-content .yes-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .modal-content .no-btn {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Ô 1 -->
+        <div class="item" onclick="openModal(this)">
+            <img src="https://via.placeholder.com/150" alt="Image 1">
+            <div class="item-name">Tên 1</div>
+        </div>
+
+        <!-- Ô 2 -->
+        <div class="item" onclick="openModal(this)">
+            <img src="https://via.placeholder.com/150" alt="Image 2">
+            <div class="item-name">Tên 2</div>
+        </div>
+
+        <!-- Ô 3 -->
+        <div class="item" onclick="openModal(this)">
+            <img src="https://via.placeholder.com/150" alt="Image 3">
+            <div class="item-name">Tên 3</div>
+        </div>
+
+        <!-- Ô 4 -->
+        <div class="item" onclick="openModal(this)">
+            <img src="https://via.placeholder.com/150" alt="Image 4">
+            <div class="item-name">Tên 4</div>
+        </div>
+
+        <!-- Thêm các ô khác ở đây -->
+    </div>
+
+    <!-- Modal -->
+    <div id="reservationModal" class="modal">
+        <div class="modal-content">
+            <p>Bạn có muốn đặt bàn này không?</p>
+            <button class="yes-btn" onclick="reserveTable()">Có</button>
+            <button class="no-btn" onclick="closeModal()">Không</button>
+        </div>
+    </div>
+
+    <script>
+        let currentElement = null;
+
+        function openModal(element) {
+            // Kiểm tra nếu bàn đã được đặt
+            if (element.classList.contains('reserved')) {
+                alert('Bàn đã được đặt!');
+                return;
+            }
+
+            // Hiển thị modal và lưu lại phần tử hiện tại
+            currentElement = element;
+            document.getElementById('reservationModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            // Đóng modal
+            document.getElementById('reservationModal').style.display = 'none';
+        }
+
+        function reserveTable() {
+            if (currentElement) {
+                // Thay đổi ảnh và chữ khi đặt bàn
+                let image = currentElement.querySelector('img');
+                let name = currentElement.querySelector('.item-name');
+
+                // Đổi ảnh sang ảnh khác (thay thế URL ảnh mới ở đây)
+                image.src = 'https://via.placeholder.com/150/FF0000'; // Ảnh khác
+
+                // Đổi màu chữ thành màu đỏ
+                name.classList.add('reserved');
+
+                // Thêm class 'reserved' để đánh dấu bàn đã được đặt
+                currentElement.classList.add('reserved');
+            }
+
+            // Đóng modal sau khi đặt bàn
+            closeModal();
+        }
+    </script>
+
+</body>
+</html>
