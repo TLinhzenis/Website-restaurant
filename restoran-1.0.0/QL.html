@@ -85,7 +85,7 @@
     <div id="editMenuModal" class="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
         <h2>Sửa Món ăn</h2>
         <label for="itemNameEdit">Tên món ăn:</label>
-        <input type="text" id="itemNameEdit" required /><br /><br />
+        <input type="text" id="itemNameEdit" required /><br />
     
         <label for="categoryEdit">Phân loại:</label>
         <select id="categoryEdit" required>
@@ -93,19 +93,19 @@
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
-        </select><br /><br />
+        </select><br />
     
         <label for="priceEdit">Giá:</label>
-        <input type="number" id="priceEdit" step="0.01" required /><br /><br />
+        <input type="number" id="priceEdit" step="0.01" required /><br />
     
         <label for="descriptionEdit">Mô tả:</label>
-        <textarea id="descriptionEdit"></textarea><br /><br />
+        <textarea id="descriptionEdit"></textarea><br />
     
         
         <label for="imageUpload">Hình ảnh:</label>
-        <input type="file" id="imageUpload" accept="image/*" /><br /><br />
+        <input type="file" id="imageUpload" accept="image/*" /><br />
     
-        <img id="currentImage" src="" alt="Hình ảnh hiện tại" style="width: 100px; height: 100px; display: none;" /><br />
+        <img id="currentImage" src="" alt="Hình ảnh hiện tại" style="width: 100px; height: 100px; display: none;" /><br /><br />
     
         <button id="saveEditMenuBtn">Lưu</button>
         <button id="cancelEditMenuBtn" class="cancelBtn">Hủy</button>
