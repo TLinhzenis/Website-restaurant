@@ -113,7 +113,7 @@ $(document).ready(function () {
         var password = $("#PasswordEdit").val();
         var email = $("#EmailEdit").val();
         var phoneNumber = $("#PhoneEdit").val();
-        var point = $("#PointEdit").val();
+        var point = parseFloat($("#PointEdit").val(), 10);
         var dayJoined = $("#DayEdit").val(); // Lấy giá trị hiển thị của dayJoined
     
         // Kiểm tra các điều kiện
@@ -129,6 +129,10 @@ $(document).ready(function () {
     
         if (!fullName) {
             alert("Name không được để trống.");
+            return;
+        }
+        if (!point || point < 0 || !Number.isInteger(point)) {
+            alert("Số điểm phải là số nguyên không âm.");
             return;
         }
     

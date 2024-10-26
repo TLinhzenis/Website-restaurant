@@ -14,6 +14,7 @@
     <script src="js/QLMenu.js"></script>
     <script src="js/QLKh.js"></script>
     <script src="js/QLVoucher.js"></script>
+    <script src="js/QLStaff.js"></script>
     <script src="js/ChuyenTab.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Quản lý</title>
@@ -22,13 +23,24 @@
 </head>
 <body>
     <div class="sidebar">
-        <h2>Menu</h2>
-        <i class="fa-solid fa-user icon"></i>
         <p id="welcomeMessage"></p>
-        <a href="#" id="manageMenu">Quản lý Menu</a>
-        <a href="#" id="manageCustomer">Quản lý khách hàng</a>
-        <a href="#" id="manageVoucher">Quản lý voucher</a>
-        <a href="#">Đăng xuất</a>
+        <h2>Menu</h2>
+        <a href="#" id="manageMenu">
+            <i class=" fa-solid fa-clipboard-list "></i>  Quản lý Menu
+        </a>
+        <a href="#" id="manageCustomer">
+            <i class="fa-solid fa-user icon"></i>  Quản lý khách hàng
+        </a>
+        <a href="#" id="manageStaff">
+            <i class="fa-solid fa-users"></i>  Quản lý nhân viên
+        </a>
+        <a href="#" id="manageVoucher">
+            <i class="fa-solid fa-ticket"></i>  Quản lý voucher
+        </a>
+        <a href="#" id="logoutButton">
+            <i class="fa-solid fa-right-from-bracket"></i>  Đăng xuất
+        </a>
+
 
     </div>
     
@@ -227,6 +239,53 @@
         <button id="saveEditVoucherBtn">Lưu</button>
         <button id="cancelEditVoucherBtn" class="cancelBtn">Hủy</button>
     </div>
+
+    <!-------------------------------------------------------------- QL Nhân viên-------------------------------------------->
+    <div class="content" id="StaffContent">
+        <h1>Danh Sách Nhân viên</h1>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <button id="addStaffBtn" class="btn-add">Thêm nhân viên</button>
+        </div>
     
+        <table id="StaffTable" class="display">
+            <thead>
+                <tr>
+                    <th>Tên</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Chức vụ</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu sẽ được chèn vào đây -->
+            </tbody>
+        </table>
+    </div>
+    <!-- Modal để xác nhận xóa tài khoản -->
+    <div id="confirmDeleteModal3" class="deleteModal" style="display:none;">
+        <h2>Xác Nhận Xóa</h2>
+        <p>Bạn có chắc chắn muốn xóa nhân viên này không ?</p>
+        <button id="confirmDeleteBtn3">Có</button>
+        <button id="cancelDeleteBtn3">Không</button>
+    </div>   
+    <!-- Modal Thêm Nhân viên -->
+    <div id="addStaffModal" class="addModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+        <h2>Thêm nhân viên</h2>
+        <label for="staffName">Tên nhân viên:</label>
+        <input type="text" id="staffName" required /><br /><br />
+    
+        <label for="usernameStaff">Username:</label>
+        <input type="text" id="usernameStaff"  required /><br /><br />
+
+        <label for="passwordStaff">Username:</label>
+        <input type="text" id="passwordStaff"  required /><br /><br />
+
+        <label for="role">Chức vụ:</label>
+        <input type="text" id="role"  required /><br /><br />
+    
+        <button id="saveStaffBtn" >Lưu</button>
+        <button id="cancelStaffBtn" class="cancelBtn">Hủy</button>
+    </div>
 </body>
 </html>

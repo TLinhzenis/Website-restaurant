@@ -93,8 +93,8 @@ $(document).ready(function () {
             return;
         }
 
-        if (!price || price <= 0) {
-            alert("Giá phải lớn hơn 0.");
+        if (!price || price <= 0 || !Number.isInteger(price)) {
+            alert("Giá phải là số nguyên lớn hơn 0.");
             return;
         }
 
@@ -265,6 +265,10 @@ $(document).on('click', '.btn-edit', function () {
     
         if (!itemName || !category || !price || price <= 0) {
             alert("Vui lòng điền đầy đủ thông tin hợp lệ.");
+            return;
+        }
+        if (!price || price <= 0 || !Number.isInteger(price)) {
+            alert("Giá phải là số nguyên lớn hơn 0.");
             return;
         }
     

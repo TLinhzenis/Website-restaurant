@@ -91,11 +91,32 @@
 /*============================ Xử lý đăng nhập ======================================*/
 document.querySelector('.login100-form-btn').addEventListener('click', function (e) {
     e.preventDefault();
-    const username = document.querySelector('input[name="username"]').value;
-    const password = document.querySelector('input[name="pass"]').value;
+    const usernameInput = document.querySelector('input[name="username"]');
+    const passwordInput = document.querySelector('input[name="pass"]');
+    const username = usernameInput.value;
+    const password = passwordInput.value;
     
+
     const loadingIcon = document.querySelector('.loading-icon');
     loadingIcon.style.display = 'inline'; // Hiển thị biểu tượng loading
+    document.querySelector('.error-message').style.display = 'none'; // Ẩn thông báo lỗi
+
+    // Kiểm tra ô tài khoản và mật khẩu
+    if (!username) {
+        usernameInput.focus(); // Đặt tiêu điểm vào ô username
+        document.querySelector('.error-message').innerText = "Tài khoản không được để trống"; // Thông báo cho ô username
+        document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
+        loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+        return; // Ngừng thực hiện nếu tài khoản trống
+    }
+
+    if (!password) {
+        passwordInput.focus(); // Đặt tiêu điểm vào ô password
+        document.querySelector('.error-message').innerText = "Mật khẩu không được để trống"; // Thông báo cho ô password
+        document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
+        loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+        return; // Ngừng thực hiện nếu mật khẩu trống
+    }
 
     fetch(`https://resmant1111-001-site1.jtempurl.com/staff/Login?username=${username}&password=${password}`, {
         method: 'POST',
@@ -108,9 +129,12 @@ document.querySelector('.login100-form-btn').addEventListener('click', function 
         loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
         if (data.message === "Đăng nhập thành công") {
             localStorage.setItem('fullName', data.fullName);
+            localStorage.setItem('role', data.role);
             window.location.href = 'QL.html';
         } else {
-            alert("Sai tài khoản hoặc mật khẩu");
+            // Hiển thị thông báo lỗi dưới ô nhập liệu
+            document.querySelector('.error-message').innerText = "Sai tài khoản hoặc mật khẩu"; // Hiển thị thông báo
+            document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
         }
     })
     .catch(error => {

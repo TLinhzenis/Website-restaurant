@@ -326,13 +326,14 @@ th {
 
         .editModal button#cancelEditMenuBtn:hover {
             background-color: #c82333; /* Màu nền khi hover cho nút hủy */}
-            .icon {
-                display: inline-block; /* Biểu tượng hiển thị bên cạnh văn bản */
-                vertical-align: middle; /* Căn giữa theo chiều dọc */
-                color:#FEA116;
-            }
-            #welcomeMessage {
-                display: inline-block; /* Đoạn văn hiển thị bên cạnh biểu tượng */
-                margin-left: 10px; /* Thêm khoảng cách giữa biểu tượng và văn bản */
-                color:#FEA116;
-            }
+
+/* CSS cho fullname  */
+#welcomeMessage {
+    display: inline-block; /* Đoạn văn hiển thị bên cạnh biểu tượng */
+    margin-left: 10px; /* Thêm khoảng cách giữa biểu tượng và văn bản */
+    color:#FEA116;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    margin-left: 0;
+    font-weight: bold;
+}
