@@ -33,4 +33,8 @@ $(document).ready(function() {
         $('#VoucherContent').show();
         setActiveMenu(this); // Làm nổi bật mục được chọn
     });
+    // Lấy fullname từ localStorage và hiển thị
+    const fullName = localStorage.getItem('fullName');
+    document.getElementById('welcomeMessage').innerText = ` ${fullName}`;
+
 });
