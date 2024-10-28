@@ -103,9 +103,9 @@ $(document).ready(function () {
         }
 
             var newStaffItem = {
-                FullName: staffName,  // Sửa lại tên biến cho đúng
-                Username: usernameStaff, // Sửa lại tên biến cho đúng
-                Password: passwordStaff,  // Sửa lại tên biến cho đúng
+                FullName: staffName,   
+                Username: usernameStaff,  
+                Password: passwordStaff,   
                 Role: role, 
                 
             };
@@ -116,7 +116,7 @@ $(document).ready(function () {
                 contentType: "application/json",
                 data: JSON.stringify(newStaffItem),
                 success: function (response) {
-                    loadVouchers();
+                    loadStaffs();
                     $("#addStaffModal").hide(); // Ẩn modal
                     alert("Nhân viên đã được thêm thành công!");
                 },
@@ -126,5 +126,76 @@ $(document).ready(function () {
                 }
             });
         
+    });
+
+    // Xử lý sự kiện cho nút "Sửa"
+
+
+    let StaffId;
+
+    $(document).on('click', '.btn-edit3', function () {
+        StaffId = $(this).data('id'); // Lưu ID món ăn cần sửa
+        $.ajax({
+            url: `https://resmant1111-001-site1.jtempurl.com/Staff/GetById?id=${StaffId}`,
+            method: "GET",
+            success: function (staff) {
+                $("#staffNameEdit").val(staff.fullName);
+                $("#usernameStaffEdit").val(voucher.username);
+                $("#passwordStaffEdit").val(voucher.password);
+                $("#roleEdit").val(voucher.role);
+
+                
+                $("#editStaffModal").show(); // Hiện modal sửa món ăn
+            },
+            error: function (xhr, status, error) {
+                console.error("Không thể tải thông tin nhân viên:", error);
+            }
+        });
+    });
+
+    $("#cancelEditVoucherBtn").click(function () {
+        $("#editVoucherModal").hide(); // Ẩn modal sửa món ăn
+    });
+
+    $("#saveEditVoucherBtn").click(function () {
+        var voucherType = $("#voucherTypeEdit").val().trim();
+        var voucherPoint = parseFloat($("#voucherPoint").val());
+        
+    
+        // Kiểm tra các điều kiện
+        if (!voucherType) {
+            alert("Loại voucher không được để trống.");
+            return;
+        }
+        if (!voucherPoint || !Number.isInteger(voucherPoint) || voucherPoint <= 0) {
+            alert("Điểm số phải là số nguyên và lớn hơn 0.");
+            return;
+        }
+
+    
+        
+    
+        var updatedVoucher = {
+            VoucherId: VoucherId,
+            voucherType: voucherType,
+            voucherPoint: voucherPoint,
+           
+        };
+    
+        $.ajax({
+            url: "https://resmant1111-001-site1.jtempurl.com/Voucher/Update",
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(updatedVoucher),
+            success: function (response) {
+                loadVouchers();
+                $("#editVoucherModal").hide();
+                alert("Voucher đã được cập nhật thành công!");
+            },
+            error: function (xhr, status, error) {
+                console.error("Không thể cập nhật Voucher:", error);
+                alert("Có lỗi xảy ra khi cập nhật Voucher.");
+            }
+        });
     });
 });

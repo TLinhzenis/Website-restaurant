@@ -3,24 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hiển Thị Hình Ảnh</title>
+    <title>Menu</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        img {
-            max-width: 100%; /* Giúp hình ảnh co giãn theo chiều rộng màn hình */
-            height: auto;
+        .menu-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+        }
+        .menu-item img {
+            width: 100px; /* Chiều rộng của ảnh */
+            height: auto; /* Giữ tỉ lệ ảnh */
+            margin-right: 15px;
+            border-radius: 5px; /* Bo góc cho ảnh */
+        }
+        .menu-item h2 {
+            margin: 0;
+        }
+        .menu-item p {
+            margin: 5px 0;
+        }
+        .menu-item button {
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Hình Ảnh Từ API</h1>
-    <img src="https://resmant1111-001-site1.jtempurl.com/uploads/logo.png" alt="Hình ảnh Designer">
-    <p>Nguồn: <a href="http://localhost:5134/uploads/hienmau_6251071053.jpg" target="_blank">Xem hình ảnh gốc</a></p>
+
+    <h1>Danh sách Món Ăn</h1>
+    <div id="menuContainer">
+        <!-- Dữ liệu món ăn sẽ được thêm vào đây -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            fetchMenuItems();
+
+            function fetchMenuItems() {
+                $.ajax({
+                    url: 'https://resmant1111-001-site1.jtempurl.com/Menu/List', // Địa chỉ API để lấy danh sách món ăn
+                    method: 'GET',
+                    success: function(data) {
+                        let menuContainer = $('#menuContainer');
+                        menuContainer.empty(); // Xóa nội dung cũ
+                        data.forEach(item => {
+                            menuContainer.append(`
+                                <div class="menu-item">
+                                    <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://resmant1111-001-site1.jtempurl.com/uploads/${item.image}" alt="${item.name}" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>${item.itemName}</span>
+                                                <span class="text-primary">${item.price}</span>
+                                            </h5>
+                                            <small class="fst-italic">${item.description}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                                </div>
+                                
+                            `);
+                        });
+                    },
+                    error: function(err) {
+                        console.error('Lỗi khi lấy dữ liệu món ăn:', err);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

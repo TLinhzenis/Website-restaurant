@@ -117,3 +117,32 @@
     
 })(jQuery);
 
+$(document).ready(function() {
+    // Kiểm tra xem người dùng đã đăng nhập chưa
+    const fullName = localStorage.getItem('fullNameU');  
+
+    // Nếu không có tên người dùng, đặt giá trị mặc định là "User"
+    document.getElementById('welcomeMessage').innerText = fullName ? fullName : 'User';
+
+     // Xử lý sự kiện click cho liên kết người dùng
+     $('#userLink').on('click', function(e) {
+        e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+        if (fullName) {
+            // Nếu người dùng đã đăng nhập, dẫn tới UpdateUser.html
+            window.location.href = 'UpdateUser.html';
+        } else {
+            // Nếu người dùng chưa đăng nhập, dẫn tới LoginUser.html
+            window.location.href = 'LoginUser.html';
+        }
+    });
+
+    // Ngăn người dùng quay lại sau khi đăng xuất
+    $('#logoutButton').on('click', function (e) {
+        e.preventDefault();
+        sessionStorage.clear();
+        localStorage.clear();
+        window.location.href = 'LoginUser.html';
+    });
+});
+
+

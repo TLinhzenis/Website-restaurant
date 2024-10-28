@@ -32,6 +32,8 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -71,13 +73,13 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
-                    <a href="" class="btn btn-primary py-2 px-4 text-center">
+                    <a href="#" id="userLink" class="btn btn-primary py-2 px-4 text-center">
                         <i class="fa-solid fa-user"></i>
-                        <div style="font-size: 10px;">User</div>  
+                        <div style="font-size: 10px;"><p id="welcomeMessage"></p></div>  
                     </a>
                     
                     
-                    <a href="contact.html" class="nav-item nav-link"><i class="fa-solid fa-right-from-bracket"></i></a>
+                    <a href="#" id="logoutButton" class="nav-item nav-link" ><i class="fa-solid fa-right-from-bracket"></i></a>
                 </div>
             </nav>
 
@@ -840,6 +842,7 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

@@ -16,6 +16,13 @@ $(document).ready(function () {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Định dạng số
     }
 
+    function formatDateToVietnameseTimezone(utcDateString) {
+        const utcDate = new Date(utcDateString);
+        const vietnamTime = new Date(utcDate.getTime() + 6 * 60 * 60 * 1000);
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Asia/Ho_Chi_Minh' };
+        return vietnamTime.toLocaleString('vi-VN', options);
+    }
+
     // Hàm load danh sách khách hàng từ API
     function loadCustomers() {
         $.ajax({
@@ -31,7 +38,7 @@ $(document).ready(function () {
                         item.password,
                         item.email,
                         item.phoneNumber,
-                        item.dateJoined,
+                        formatDateToVietnameseTimezone(item.dateJoined), // Chuyển đổi và hiển thị ngày tham gia
                         formatPrice(item.point),
                         `<button class="btn-edit1" data-id="${item.customerId}">Sửa</button>
                          <button class="btn-delete1" data-id="${item.customerId}">Xóa</button>`
@@ -48,7 +55,6 @@ $(document).ready(function () {
 
     // Gọi hàm loadCustomers khi trang được tải
     loadCustomers();
-
 
     // Xử lý sự kiện cho nút "Xóa"
     let customerIdToDelete;
@@ -77,9 +83,8 @@ $(document).ready(function () {
     $("#cancelDeleteBtn1").on("click", function () {
         $("#confirmDeleteModal1").hide(); // Ẩn modal xác nhận
     });
+
     // Xử lý sự kiện cho nút "Sửa"
-
-
     let CustomerId;
 
     $(document).on('click', '.btn-edit1', function () {
@@ -94,7 +99,7 @@ $(document).ready(function () {
                 $("#EmailEdit").val(customer.email);
                 $("#PhoneEdit").val(customer.phoneNumber);
                 $("#PointEdit").val(customer.point);
-                $("#DayEdit").val(customer.dateJoined);
+                $("#DayEdit").val(formatDateToVietnameseTimezone(customer.dateJoined)); // Chuyển đổi ngày tham gia
                 $("#editCustomerModal").show(); // Hiện modal sửa món ăn
             },
             error: function (xhr, status, error) {
@@ -168,5 +173,4 @@ $(document).ready(function () {
             }
         });
     });
-    
 });

@@ -278,7 +278,7 @@
         <label for="usernameStaff">Username:</label>
         <input type="text" id="usernameStaff"  required /><br /><br />
 
-        <label for="passwordStaff">Username:</label>
+        <label for="passwordStaff">Password:</label>
         <input type="text" id="passwordStaff"  required /><br /><br />
 
         <label for="role">Chức vụ:</label>
@@ -286,6 +286,23 @@
     
         <button id="saveStaffBtn" >Lưu</button>
         <button id="cancelStaffBtn" class="cancelBtn">Hủy</button>
+    </div>
+    <!-- Modal Sửa nhân viên -->
+    <div id="editStaffModal" class="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+        <h2>Chỉnh sửa thông tin nhân viên</h2>
+        <label for="staffNameEdit">Tên nhân viên:</label>
+        <input type="text" id="staffNameEdit" required /><br /><br />
+
+        <label for="usernameStaffEdit">Username:</label>
+        <input type="text" id="usernameStaffEdit" required /><br /><br />
+
+        <label for="passwordStaffEdit">Password:</label>
+        <input type="text" id="passwordStaffEdit" required /><br /><br />
+
+        <label for="roleEdit">Vai trò:</label>
+        <input type="text" id="roleEdit" required /><br /><br />
+        <button id="saveEditStaffBtn">Lưu</button>
+        <button id="cancelEditStaffBtn" class="cancelBtn">Hủy</button>
     </div>
 </body>
 </html>
