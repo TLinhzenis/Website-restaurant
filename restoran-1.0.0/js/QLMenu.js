@@ -83,24 +83,44 @@ $(document).ready(function () {
         var imageFile = $("#image")[0].files[0];
 
         // Kiểm tra các điều kiện
+        
+
         if (!itemName) {
-            alert("Tên món ăn không được để trống.");
-            return;
+           
+            document.querySelector('.error-message').innerText = "Tên món ăn không được để trống"; // Thông báo cho ô username
+            document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
+
 
         if (!category) {
-            alert("Phân loại phải được chọn.");
-            return;
+            document.querySelector('.error-message').innerText = "Phân loại phải được chọn"; // Thông báo cho ô username
+            document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
 
-        if (!price || price <= 0 || !Number.isInteger(price)) {
-            alert("Giá phải là số nguyên lớn hơn 0.");
-            return;
+        if ( !price) {
+            document.querySelector('.error-message').innerText = "Vui lòng điền giá"; // Thông báo cho ô username
+            document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
+
+        if ( price <= 0 || !Number.isInteger(price)) {
+            document.querySelector('.error-message').innerText = "Giá phải là số nguyên lớn hơn 0"; // Thông báo cho ô username
+            document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
+        }
+
 
         if (!imageFile) {
-            alert("Vui lòng chọn hình ảnh.");
-            return;
+            document.querySelector('.error-message').innerText = "Vui lòng chọn ảnh"; // Thông báo cho ô username
+            document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
 
         // Tạo form data để gửi ảnh lên API
@@ -134,7 +154,7 @@ $(document).ready(function () {
                     success: function (response) {
                         loadMenuItems(); // Hàm tải lại danh sách món ăn
                         $("#addMenuModal").hide(); // Ẩn modal sau khi thêm thành công
-                        alert("Món ăn đã được thêm thành công!");
+                        showNotification("Món ăn đã được thêm thành công!");
                     },
                     error: function (xhr, status, error) {
                         console.error("Không thể thêm món ăn:", error);
@@ -164,7 +184,7 @@ $(document).ready(function () {
             method: "POST",
             success: function (response) {
                 loadMenuItems();
-                alert("Món ăn đã được xóa thành công!");
+                showNotification("Món ăn đã được xóa thành công!");
                 $("#confirmDeleteModal").hide(); // Ẩn modal xác nhận
             },
             error: function (xhr, status, error) {
@@ -323,13 +343,23 @@ $(document).on('click', '.btn-edit', function () {
             success: function () {
                 loadMenuItems();
                 $("#editMenuModal").hide();
-                alert("Món ăn đã được cập nhật thành công!");
+                showNotification("Món ăn đã được sửa thành công!");
             },
             error: function () {
                 alert("Có lỗi xảy ra khi cập nhật món ăn.");
             }
         });
     }
+
+    function showNotification(message) {
+        $("#notificationMessage").text(message);
+        $("#notificationModal").show(); // Hiển thị modal thông báo
+    }
+
+    // Khi nhấn nút Đóng trong modal thông báo
+    $("#closeNotificationBtn").click(function () {
+        $("#notificationModal").hide(); // Ẩn modal thông báo
+    });
     
 
 });

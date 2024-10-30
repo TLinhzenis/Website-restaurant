@@ -63,7 +63,7 @@ $(document).ready(function () {
             method: "POST",
             success: function (response) {
                 loadStaffs();
-                alert("Nhân viên đã được xóa thành công!");
+                showNotification("Nhân viên đã được xóa thành công!");
                 $("#confirmDeleteModal3").hide(); // Ẩn modal xác nhận
             },
             error: function (xhr, status, error) {
@@ -118,7 +118,8 @@ $(document).ready(function () {
                 success: function (response) {
                     loadStaffs();
                     $("#addStaffModal").hide(); // Ẩn modal
-                    alert("Nhân viên đã được thêm thành công!");
+                    
+                    showNotification("Nhân viên đã được thêm thành công!");
                 },
                 error: function (xhr, status, error) {
                     console.error("Không thể thêm Nhân viên:", error);
@@ -134,68 +135,73 @@ $(document).ready(function () {
     let StaffId;
 
     $(document).on('click', '.btn-edit3', function () {
-        StaffId = $(this).data('id'); // Lưu ID món ăn cần sửa
+        StaffId = $(this).data('id'); // Lưu ID nhân viên cần sửa
         $.ajax({
             url: `https://resmant1111-001-site1.jtempurl.com/Staff/GetById?id=${StaffId}`,
             method: "GET",
             success: function (staff) {
                 $("#staffNameEdit").val(staff.fullName);
-                $("#usernameStaffEdit").val(voucher.username);
-                $("#passwordStaffEdit").val(voucher.password);
-                $("#roleEdit").val(voucher.role);
-
-                
-                $("#editStaffModal").show(); // Hiện modal sửa món ăn
+                $("#usernameStaffEdit").val(staff.username);
+                $("#passwordStaffEdit").val(staff.password);
+                $("#roleEdit").val(staff.role);
+    
+                $("#editStaffModal").show(); // Hiện modal sửa nhân viên
             },
             error: function (xhr, status, error) {
                 console.error("Không thể tải thông tin nhân viên:", error);
             }
         });
     });
-
-    $("#cancelEditVoucherBtn").click(function () {
-        $("#editVoucherModal").hide(); // Ẩn modal sửa món ăn
+    
+    $("#cancelEditStaffBtn").click(function () {
+        $("#editStaffModal").hide(); // Ẩn modal sửa nhân viên
     });
-
-    $("#saveEditVoucherBtn").click(function () {
-        var voucherType = $("#voucherTypeEdit").val().trim();
-        var voucherPoint = parseFloat($("#voucherPoint").val());
-        
+    
+    $("#saveEditStaffBtn").click(function () {
+        var staffName = $("#staffNameEdit").val().trim();
+        var usernameStaff = $("#usernameStaffEdit").val().trim();
+        var passwordStaff = $("#passwordStaffEdit").val().trim();
+        var role = $("#roleEdit").val().trim();
     
         // Kiểm tra các điều kiện
-        if (!voucherType) {
-            alert("Loại voucher không được để trống.");
+        if (!staffName || !role) {
+            alert("Không được để trống tên và chức vụ.");
             return;
         }
-        if (!voucherPoint || !Number.isInteger(voucherPoint) || voucherPoint <= 0) {
-            alert("Điểm số phải là số nguyên và lớn hơn 0.");
-            return;
-        }
-
     
-        
-    
-        var updatedVoucher = {
-            VoucherId: VoucherId,
-            voucherType: voucherType,
-            voucherPoint: voucherPoint,
-           
+        var updatedStaff = {
+            StaffId: StaffId, // Thêm StaffId vào dữ liệu gửi
+            FullName: staffName,
+            Username: usernameStaff,
+            Password: passwordStaff,
+            Role: role
         };
     
         $.ajax({
-            url: "https://resmant1111-001-site1.jtempurl.com/Voucher/Update",
+            url: "https://resmant1111-001-site1.jtempurl.com/Staff/Update",
             method: "PUT",
             contentType: "application/json",
-            data: JSON.stringify(updatedVoucher),
+            data: JSON.stringify(updatedStaff),
             success: function (response) {
-                loadVouchers();
-                $("#editVoucherModal").hide();
-                alert("Voucher đã được cập nhật thành công!");
+                loadStaffs(); // Giả sử đây là hàm tải lại danh sách nhân viên
+                $("#editStaffModal").hide();
+                
+                showNotification("Nhân viên đã được cập nhật thành công!");
             },
             error: function (xhr, status, error) {
-                console.error("Không thể cập nhật Voucher:", error);
-                alert("Có lỗi xảy ra khi cập nhật Voucher.");
+                console.error("Không thể cập nhật Nhân viên:", error);
+                alert("Có lỗi xảy ra khi cập nhật Nhân viên.");
             }
         });
     });
+    function showNotification(message) {
+        $("#notificationMessage").text(message);
+        $("#notificationModal").show(); // Hiển thị modal thông báo
+    }
+
+    // Khi nhấn nút Đóng trong modal thông báo
+    $("#closeNotificationBtn").click(function () {
+        $("#notificationModal").hide(); // Ẩn modal thông báo
+    });
+    
 });

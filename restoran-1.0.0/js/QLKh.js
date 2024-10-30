@@ -35,7 +35,7 @@ $(document).ready(function () {
                     var row = [
                         item.username,
                         item.fullName,
-                        item.password,
+                        '*'.repeat(item.password.length),
                         item.email,
                         item.phoneNumber,
                         formatDateToVietnameseTimezone(item.dateJoined), // Chuyển đổi và hiển thị ngày tham gia
@@ -43,8 +43,18 @@ $(document).ready(function () {
                         `<button class="btn-edit1" data-id="${item.customerId}">Sửa</button>
                          <button class="btn-delete1" data-id="${item.customerId}">Xóa</button>`
                     ];
-                    table.row.add(row).draw(); // Thêm hàng mới
+                    table.row.add(row) // Thêm hàng mới
                 });
+                table.draw(); // Hoàn tất thêm các hàng
+                // Hạn chế quyền truy cập
+                const userRole = localStorage.getItem('role'); // 'admin' hoặc 'user'
+
+                if (userRole !== 'admin') {
+                    // Vô hiệu hóa tất cả các nút "Sửa" cho user không phải admin
+                    $('.btn-edit1').attr('disabled', true).css('color', 'gray').css('pointer-events', 'none');
+                }
+                
+            
 
             },
             error: function (xhr, status, error) {
@@ -52,6 +62,15 @@ $(document).ready(function () {
             }
         });
     }
+    // Lắng nghe sự kiện vẽ lại của DataTables
+    table.on('draw.dt', function () {
+        const userRole = localStorage.getItem('role');
+        if (userRole !== 'admin') {
+            // Vô hiệu hóa các nút "Sửa" trên mỗi trang
+            $('.btn-edit1').attr('disabled', true).css('color', 'gray').css('pointer-events', 'none');
+        }
+    });
+
 
     // Gọi hàm loadCustomers khi trang được tải
     loadCustomers();

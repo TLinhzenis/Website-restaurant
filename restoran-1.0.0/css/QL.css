@@ -336,4 +336,41 @@ th {
     margin-bottom: 10px;
     margin-left: 0;
     font-weight: bold;
+    padding-right: 30px;
 }
+
+/* CSS cho Modal Thông báo */
+
+.notificationModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px; /* Bo góc cho modal */
+    width: 400px; /* Độ rộng của modal */
+}
+
+    .notificationModal h2 {
+        margin-bottom: 20px; /* Khoảng cách giữa tiêu đề và văn bản */
+    }
+
+    .notificationModal button {
+        background-color: #000; /* Màu nền cho nút */
+        color: white; /* Màu chữ */
+        border: none; /* Bỏ viền */
+        border-radius: 4px; /* Bo góc cho nút */
+        padding: 10px 15px; /* Khoảng cách cho nút */
+        cursor: pointer; /* Con trỏ chuột khi hover */
+        transition: background-color 0.3s; /* Hiệu ứng chuyển tiếp cho màu nền */
+    }
+
+        .notificationModal button:hover {
+            background-color: #FEA116; /* Màu nền khi hover */
+            color:#000;
+        }
