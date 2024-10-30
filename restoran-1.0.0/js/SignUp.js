@@ -106,7 +106,14 @@ $(document).ready(function () {
     var email = $("#email").val().trim();
     var phone = $("#phone").val().trim();
 
-    if (!username || !password || !rppassword) {
+    if (
+      !username ||
+      !password ||
+      !rppassword ||
+      !fullName ||
+      !email ||
+      !phone
+    ) {
       $(".error-message").text("Không được để trống thông tin").show();
       return;
     } else {
