@@ -89,7 +89,7 @@ $(document).ready(function () {
             method: "POST",
             success: function (response) {
                 loadCustomers();
-                alert("Tài khoản đã được xóa thành công!");
+                showNotification("Tài khoản đã được xóa thành công!");
                 $("#confirmDeleteModal1").hide(); // Ẩn modal xác nhận
             },
             error: function (xhr, status, error) {
@@ -139,30 +139,46 @@ $(document).ready(function () {
         var phoneNumber = $("#PhoneEdit").val();
         var point = parseFloat($("#PointEdit").val(), 10);
         var dayJoined = $("#DayEdit").val(); // Lấy giá trị hiển thị của dayJoined
+
+        const validateEmail = (email) => {
+            return email.match(
+              /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+          };
     
         // Kiểm tra các điều kiện
         if (!password) {
-            alert("Password không được để trống.");
-            return;
+            document.querySelector('.error-message1').innerText = "Vui lòng nhập password"; // Thông báo cho ô username
+            document.querySelector('.error-message1').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
     
-        if (!email) {
-            alert("Email không được để trống.");
-            return;
+        if (!email || !validateEmail(email)) {
+            document.querySelector('.error-message1').innerText = "Vui lòng nhập email đúng định dạng"; // Thông báo cho ô username
+            document.querySelector('.error-message1').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
     
         if (!fullName) {
-            alert("Name không được để trống.");
-            return;
+            document.querySelector('.error-message1').innerText = "Vui lòng điền đầy đủ tên"; // Thông báo cho ô username
+            document.querySelector('.error-message1').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
-        if (!point || point < 0 || !Number.isInteger(point)) {
-            alert("Số điểm phải là số nguyên không âm.");
-            return;
+        if (point < 0 || !Number.isInteger(point)) {
+            document.querySelector('.error-message1').innerText = "Điểm phải là số nguyên dương "; // Thông báo cho ô username
+            document.querySelector('.error-message1').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
     
         if (!phoneNumber) {
-            alert("Phone không được để trống.");
-            return;
+            document.querySelector('.error-message').innerText = "Vui lòng nhập số điện thoại"; // Thông báo cho ô username
+            document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
     
         var updatedCustomer = {
@@ -184,12 +200,22 @@ $(document).ready(function () {
             success: function (response) {
                 loadCustomers();
                 $("#editCustomerModal").hide();
-                alert("Tài khoản đã được cập nhật thành công!");
+                showNotification("Tài khoản đã được cập nhật thành công!");
             },
             error: function (xhr, status, error) {
                 console.error("Không thể cập nhật tài khoản:", error);
                 alert("Có lỗi xảy ra khi cập nhật tài khoản.");
             }
         });
+    });
+
+    function showNotification(message) {
+        $("#notificationMessage").text(message);
+        $("#notificationModal").show(); // Hiển thị modal thông báo
+    }
+
+    // Khi nhấn nút Đóng trong modal thông báo
+    $("#closeNotificationBtn").click(function () {
+        $("#notificationModal").hide(); // Ẩn modal thông báo
     });
 });

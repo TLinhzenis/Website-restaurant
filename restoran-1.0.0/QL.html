@@ -78,9 +78,9 @@
         <label for="category">Phân loại:</label>
         <select id="category" required>
             <option value="">Chọn phân loại</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            <option value="1">Khai vị</option>
+            <option value="2">Món chính</option>
+            <option value="3">Tráng miệng</option>
         </select><br />
 
         <label for="price">Giá:</label>
@@ -135,8 +135,11 @@
     
         <img id="currentImage" src="" alt="Hình ảnh hiện tại" style="width: 100px; height: 100px; display: none;" /><br /><br />
     
+        <div class="error-message2" style="color: red; display: none;"></div><br />
         <button id="saveEditMenuBtn">Lưu</button>
         <button id="cancelEditMenuBtn" class="cancelBtn">Hủy</button>
+
+        
     </div>
     
     
@@ -196,9 +199,15 @@
         <input type="text" id="PointEdit" required /><br />
         <label for="DayEdit">Day Joined:</label>
         <input type="text" id="DayEdit" readonly required /><br />
+        <div class="error-message1" style="color: red; display: none;"></div><br />
         
         <button id="saveEditCustomerBtn">Lưu</button>
         <button id="cancelEditCustomerBtn" class="cancelBtn">Hủy</button>
+    </div>
+    <!-- Modal Thông Báo -->
+    <div id="notificationModal" class="notificationModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+        <h2 id="notificationMessage"></h2>
+        <button id="closeNotificationBtn">Đóng</button>
     </div>
 
     <!-------------------------------------------------------------- QL Voucher-------------------------------------------->
@@ -237,9 +246,11 @@
     
         <label for="voucherPoint">Số điểm cần:</label>
         <input type="number" id="voucherPoint" step="0.01" required /><br /><br />
+        <div class="error-message3" style="color: red; display: none;"></div><br />
     
         <button id="saveVoucherBtn" >Lưu</button>
         <button id="cancelVoucherBtn" class="cancelBtn">Hủy</button>
+
     </div>
     <!-- Modal Sửa voucher -->
     <div id="editVoucherModal" class="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
@@ -248,8 +259,16 @@
         <input type="text" id="voucherTypeEdit" required /><br /><br />
         <label for="voucherPointEdit">Số điểm cần:</label>
         <input type="number" id="voucherPointEdit" step="0.01" required /><br /><br />
+
+        <div class="error-message4" style="color: red; display: none;"></div><br />
         <button id="saveEditVoucherBtn">Lưu</button>
         <button id="cancelEditVoucherBtn" class="cancelBtn">Hủy</button>
+    </div>
+
+    <!-- Modal Thông Báo -->
+    <div id="notificationModal1" class="notificationModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+        <h2 id="notificationMessage"></h2>
+        <button id="closeNotificationBtn">Đóng</button>
     </div>
 
     <!-------------------------------------------------------------- QL Nhân viên-------------------------------------------->
@@ -287,14 +306,25 @@
         <label for="staffName">Tên nhân viên:</label>
         <input type="text" id="staffName" required /><br /><br />
     
-        <label for="usernameStaff">Username:</label>
-        <input type="text" id="usernameStaff"  required /><br /><br />
+        <div id="usernamePasswordGroup" style="display:none;">
+            <label for="usernameStaff">Username:</label>
+            <input type="text" id="usernameStaff" /><br /><br />
+        
+            <label for="passwordStaff">Password:</label>
+            <input type="text" id="passwordStaff" /><br /><br />
+        </div>
+        
 
-        <label for="passwordStaff">Password:</label>
-        <input type="text" id="passwordStaff"  required /><br /><br />
 
-        <label for="role">Chức vụ:</label>
-        <input type="text" id="role"  required /><br /><br />
+        <select id="role" required>
+            <option value="">Chọn chức vụ</option>
+            <option value="admin">admin</option>
+            <option value="Bồi bàn">Bồi bàn</option>
+            <option value="Đầu bếp">Đầu bếp</option>
+            <option value="Quản lý">Quản lý</option>
+            <option value="Phụ bếp">Phụ bếp</option>
+        </select><br />
+        <div class="error-message5" style="color: red; display: none;"></div><br />
     
         <button id="saveStaffBtn" >Lưu</button>
         <button id="cancelStaffBtn" class="cancelBtn">Hủy</button>
@@ -306,13 +336,23 @@
         <input type="text" id="staffNameEdit" required /><br /><br />
 
         <label for="usernameStaffEdit">Username:</label>
-        <input type="text" id="usernameStaffEdit" required /><br /><br />
+        <input type="text" id="usernameStaffEdit" readonly required /><br /><br />
 
         <label for="passwordStaffEdit">Password:</label>
         <input type="text" id="passwordStaffEdit" required /><br /><br />
 
-        <label for="roleEdit">Vai trò:</label>
-        <input type="text" id="roleEdit" required /><br /><br />
+        
+        <select id="roleEdit" required>
+            <option value="">Chọn chức vụ</option>
+            <option value="admin">admin</option>
+            <option value="Bồi bàn">Bồi bàn</option>
+            <option value="Đầu bếp">Đầu bếp</option>
+            <option value="Quản lý">Quản lý</option>
+            <option value="Phụ bếp">Phụ bếp</option>
+        </select><br />
+        
+
+        <div class="error-message6" style="color: red; display: none;"></div><br />
         <button id="saveEditStaffBtn">Lưu</button>
         <button id="cancelEditStaffBtn" class="cancelBtn">Hủy</button>
     </div>

@@ -283,13 +283,17 @@ $(document).on('click', '.btn-edit', function () {
         var imageFile = imageInput.files.length > 0 ? imageInput.files[0] : null;  // Kiểm tra xem có file nào được chọn không
         var currentImage = $("#currentImage").attr("src").split('/').pop(); // Lấy tên ảnh hiện tại
     
-        if (!itemName || !category || !price || price <= 0) {
-            alert("Vui lòng điền đầy đủ thông tin hợp lệ.");
-            return;
+        if (!itemName || !category || !price ) {
+            document.querySelector('.error-message2').innerText = "Vui lòng điền đầy đủ thông tin"; // Thông báo cho ô username
+            document.querySelector('.error-message2').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
-        if (!price || price <= 0 || !Number.isInteger(price)) {
-            alert("Giá phải là số nguyên lớn hơn 0.");
-            return;
+        if (price <= 0 || !Number.isInteger(price)) {
+            document.querySelector('.error-message2').innerText = "Giá phải là số nguyên lớn hơn 0"; // Thông báo cho ô username
+            document.querySelector('.error-message2').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
     
         if (imageFile) {

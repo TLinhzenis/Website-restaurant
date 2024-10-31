@@ -98,8 +98,10 @@ $(document).ready(function () {
 
         // Kiểm tra các điều kiện
         if (!staffName || !role) {
-            alert("Không được để trống tên và chức vụ.");
-            return;
+            document.querySelector('.error-message5').innerText = "Vui lòng điền đầy đủ tên và chức vụ"; // Thông báo cho ô username
+            document.querySelector('.error-message5').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
 
             var newStaffItem = {
@@ -122,8 +124,12 @@ $(document).ready(function () {
                     showNotification("Nhân viên đã được thêm thành công!");
                 },
                 error: function (xhr, status, error) {
-                    console.error("Không thể thêm Nhân viên:", error);
-                    alert("Có lỗi xảy ra khi thêm Nhân viên.");
+                    const errorMessage =
+                    JSON.parse(xhr.responseText).message || "Có lỗi xảy ra khi đăng kí.";
+                  $(".error-message5").text(errorMessage).show();
+                    
+                        
+                    
                 }
             });
         
@@ -165,8 +171,10 @@ $(document).ready(function () {
     
         // Kiểm tra các điều kiện
         if (!staffName || !role) {
-            alert("Không được để trống tên và chức vụ.");
-            return;
+            document.querySelector('.error-message6').innerText = "Vui lòng điền đầy đủ tên và chức vụ"; // Thông báo cho ô username
+            document.querySelector('.error-message6').style.display = 'block'; // Hiển thị phần tử thông báo
+            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            return; // Ngừng thực hiện nếu tài khoản trống
         }
     
         var updatedStaff = {
@@ -203,5 +211,21 @@ $(document).ready(function () {
     $("#closeNotificationBtn").click(function () {
         $("#notificationModal").hide(); // Ẩn modal thông báo
     });
+
+    $(document).ready(function () {
+        $('#role').change(function () {
+            const role = $(this).val();
+            if (role === "admin" || role === "Quản lý") {
+                $('#usernamePasswordGroup').show();
+            } else {
+                $('#usernamePasswordGroup').hide();
+                // Xóa nội dung của ô username và password
+                $('#usernameStaff').val('');  // Xóa ô username
+                $('#passwordStaff').val('');  // Xóa ô password
+            }
+        });
+    });
+    
+    
     
 });
