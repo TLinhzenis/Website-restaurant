@@ -115,21 +115,13 @@ $(document).ready(function () {
     }
 
     if (!password || password.length < 6) {
-      $(".error-message")
-        .text(
-          !password
-            ? "Mật khẩu không được để trống"
-            : "Mật khẩu phải có ít nhất 6 ký tự"
-        )
-        .show();
+      $(".error-message").text("Mật khẩu phải có ít nhất 6 ký tự").show();
       $("#password").focus(); // Đưa con trỏ vào trường mật khẩu
       return; // Kết thúc hàm validateInput
     }
 
     if (!rppassword || rppassword !== password) {
-      $(".error-message")
-        .text(!rppassword ? "Bạn cần xác nhận mật khẩu" : "Mật khẩu không khớp")
-        .show();
+      $(".error-message").text("Bạn cần xác nhận mật khẩu").show();
       $("#RPpassword").focus(); // Đưa con trỏ vào trường mật khẩu
       return; // Kết thúc hàm validateInput
     }
@@ -146,25 +138,15 @@ $(document).ready(function () {
 
     // Kiểm tra định dạng email
     if (!email || !validateEmail(email)) {
-      $(".error-message")
-        .text(
-          !email ? "Không được để trống email" : "Email không đúng định dạng"
-        )
-        .show();
-      $("#email").focus(); // Đưa con trỏ vào trường email
-      isValid = false; // Đặt biến isValid thành false
-      return; // Kết thúc hàm validateInput
+      $(".error-message").text("Email không đúng định dạng").show();
+      $("#email").focus();
+      isValid = false;
+      return;
     }
 
     var phonePattern = /^0[0-9]{9}$/;
     if (!phone || !phonePattern.test(phone)) {
-      $(".error-message")
-        .text(
-          !phone
-            ? "Số điện thoại không được để trống"
-            : "Số điện thoại không đúng định dạng"
-        )
-        .show();
+      $(".error-message").text("Số điện thoại không đúng định dạng").show();
       $("#phone").focus(); // Đưa con trỏ vào trường mật khẩu
       return; // Kết thúc hàm validateInput
     }
