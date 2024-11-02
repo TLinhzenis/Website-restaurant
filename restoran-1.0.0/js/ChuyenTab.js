@@ -52,8 +52,14 @@ $(document).ready(function() {
 
     // Lấy fullname từ localStorage và hiển thị
     const fullName = localStorage.getItem('fullName');  
-    document.getElementById('welcomeMessage').innerText = `Welcome: ${fullName}`;
+    const avatarURL = localStorage.getItem('image');
+    const role = localStorage.getItem('role');
+    console.log(avatarURL);
+    var imageUrl = `https://resmant1111-001-site1.jtempurl.com/uploads/${avatarURL}` ;
 
+    document.getElementById('avatar').src = imageUrl;
+    document.getElementById('userName').innerText = `${fullName}`;
+    document.getElementById('userRole').innerText = `${role}`;
     // Ngăn người dùng quay lại sau khi đăng xuất
     $('#logoutButton').on('click', function (e) {
         e.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
