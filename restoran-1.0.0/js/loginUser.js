@@ -129,6 +129,7 @@ document.querySelector('.login100-form-btn').addEventListener('click', function 
         loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
         if (data.message === "Đăng nhập thành công") {
             localStorage.setItem('fullNameU', data.fullName);
+            localStorage.setItem('customerId', data.customerId);
             window.location.href = 'index.html';
         } else {
             // Hiển thị thông báo lỗi dưới ô nhập liệu

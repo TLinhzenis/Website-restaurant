@@ -122,7 +122,7 @@ $(document).ready(function() {
     const fullName = localStorage.getItem('fullNameU');  
 
     // Nếu không có tên người dùng, đặt giá trị mặc định là "User"
-    document.getElementById('welcomeMessage').innerText = fullName ? fullName : 'User';
+    document.getElementById('welcomeMessage').innerText = fullName ? fullName : 'Login';
 
      // Xử lý sự kiện click cho liên kết người dùng
      $('#userLink').on('click', function(e) {

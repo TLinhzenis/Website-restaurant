@@ -1,4 +1,8 @@
 $(document).ready(function() {
+
+    function formatPrice(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Định dạng số
+    }
     fetchMenuItems();
 
     function fetchMenuItems() {
@@ -27,7 +31,7 @@ $(document).ready(function() {
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>${item.itemName}</span>
-                                            <span class="text-primary">${item.price} VND</span>
+                                            <span class="text-primary"> ${formatPrice(item.price)} VND</span>
                                         </h5>
                                         <small class="fst-italic">${item.description}</small>
                                     </div>

@@ -278,6 +278,11 @@ th {
 
     .editModal h2 {
         margin-bottom: 20px; /* Khoảng cách giữa tiêu đề và ô nhập */
+        font-size: 18px;
+    }
+    .editModal h3 {
+        font-weight: normal;
+        font-size: 25px;
     }
 
     .editModal label {
@@ -329,9 +334,9 @@ th {
 /* CSS cho fullname  */
 
 
-/* CSS cho Modal Thông báo */
+ /* CSS cho Modal Thông báo */
 
-.notificationModal {
+ .notificationModal {
     display: none;
     position: fixed;
     top: 50%;
@@ -343,11 +348,17 @@ th {
     z-index: 1000;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 8px; /* Bo góc cho modal */
-    width: 400px; /* Độ rộng của modal */
+    width: 500px; /* Độ rộng của modal */
 }
 
     .notificationModal h2 {
         margin-bottom: 20px; /* Khoảng cách giữa tiêu đề và văn bản */
+        font-size: 18px;
+        
+    }
+    .notificationModal h3 {
+        font-weight: normal;
+        font-size: 25px;
     }
 
     .notificationModal button {
