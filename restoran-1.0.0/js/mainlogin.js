@@ -95,7 +95,6 @@ document.querySelector('.login100-form-btn').addEventListener('click', function 
     const passwordInput = document.querySelector('input[name="pass"]');
     const username = usernameInput.value;
     const password = passwordInput.value;
-    
 
     const loadingIcon = document.querySelector('.loading-icon');
     loadingIcon.style.display = 'inline'; // Hiển thị biểu tượng loading
@@ -103,19 +102,19 @@ document.querySelector('.login100-form-btn').addEventListener('click', function 
 
     // Kiểm tra ô tài khoản và mật khẩu
     if (!username) {
-        usernameInput.focus(); // Đặt tiêu điểm vào ô username
-        document.querySelector('.error-message').innerText = "Tài khoản không được để trống"; // Thông báo cho ô username
-        document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
-        loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
-        return; // Ngừng thực hiện nếu tài khoản trống
+        usernameInput.focus();
+        document.querySelector('.error-message').innerText = "Tài khoản không được để trống";
+        document.querySelector('.error-message').style.display = 'block';
+        loadingIcon.style.display = 'none';
+        return;
     }
 
     if (!password) {
-        passwordInput.focus(); // Đặt tiêu điểm vào ô password
-        document.querySelector('.error-message').innerText = "Mật khẩu không được để trống"; // Thông báo cho ô password
-        document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
-        loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
-        return; // Ngừng thực hiện nếu mật khẩu trống
+        passwordInput.focus();
+        document.querySelector('.error-message').innerText = "Mật khẩu không được để trống";
+        document.querySelector('.error-message').style.display = 'block';
+        loadingIcon.style.display = 'none';
+        return;
     }
 
     fetch(`https://resmant1111-001-site1.jtempurl.com/staff/Login?username=${username}&password=${password}`, {
@@ -126,22 +125,28 @@ document.querySelector('.login100-form-btn').addEventListener('click', function 
     })
     .then(response => response.json())
     .then(data => {
-        loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+        loadingIcon.style.display = 'none';
         if (data.message === "Đăng nhập thành công") {
-            localStorage.setItem('fullName', data.fullName);
-            localStorage.setItem('role', data.role);
-            console.log(data.role);
-            localStorage.setItem('image', data.image);
-            window.location.href = 'QL.html';
+            if (data.role === "admin" || data.role === "Quản lý") {
+                // Lưu thông tin vào localStorage
+                localStorage.setItem('fullName', data.fullName);
+                localStorage.setItem('role', data.role);
+                localStorage.setItem('image', data.image);
+                window.location.href = 'QL.html'; // Chuyển hướng
+            } else {
+                // Hiển thị thông báo lỗi nếu role không phải là admin hoặc Quản lý
+                document.querySelector('.error-message').innerText = "Sai tài khoản hoặc mật khẩu";
+                document.querySelector('.error-message').style.display = 'block';
+            }
         } else {
-            // Hiển thị thông báo lỗi dưới ô nhập liệu
-            document.querySelector('.error-message').innerText = "Sai tài khoản hoặc mật khẩu"; // Hiển thị thông báo
-            document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
+            document.querySelector('.error-message').innerText = "Sai tài khoản hoặc mật khẩu";
+            document.querySelector('.error-message').style.display = 'block';
         }
     })
     .catch(error => {
-        loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+        loadingIcon.style.display = 'none';
         console.error('Error:', error);
     });
 });
+
 

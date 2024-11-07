@@ -107,8 +107,20 @@ $(document).ready(function () {
         if (!staffName || !role) {
             document.querySelector('.error-message5').innerText = "Vui lòng điền đầy đủ tên và chức vụ"; // Thông báo cho ô username
             document.querySelector('.error-message5').style.display = 'block'; // Hiển thị phần tử thông báo
-            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            $("#staffName").focus();
             return; // Ngừng thực hiện nếu tài khoản trống
+        }
+        if (!usernameStaff) {
+            document.querySelector('.error-message5').innerText = "Tên tài khoản không được để trống"; // Thông báo cho ô username
+            document.querySelector('.error-message5').style.display = 'block'; // Hiển thị phần tử thông báo
+            $("#usernamedStaff").focus(); // Đưa con trỏ vào trường mật khẩu
+            return; // Kết thúc hàm validateInput
+        }
+        if (!passwordStaff || passwordStaff.length < 6) {
+            document.querySelector('.error-message5').innerText = "Mật khẩu phải có ít nhất 6 kí tự"; // Thông báo cho ô username
+            document.querySelector('.error-message5').style.display = 'block'; // Hiển thị phần tử thông báo
+            $("#passwordStaff").focus(); // Đưa con trỏ vào trường mật khẩu
+            return; // Kết thúc hàm validateInput
         }
 
         if (!imageFile) {
@@ -149,6 +161,16 @@ $(document).ready(function () {
                     $("#addStaffModal").hide(); // Ẩn modal
                     
                     showNotification("Nhân viên đã được thêm thành công!");
+
+                                        // Reset form thêm nhân viên
+                                        $("#staffName").val('');
+                                        $("#usernameStaff").val('');
+                                        $("#passwordStaff").val('');
+                                        $("#role").val('');
+                                        $("#image1").val('');
+                                        $("#imageName1").text('');
+                                        $("#imagePreview1").attr("src", '');
+                                        $(".error-message5").hide();
                 },
                 error: function (xhr, status, error) {
                     const errorMessage =
@@ -284,8 +306,20 @@ $("#imageUpload1").change(function () {
         if (!staffName || !role) {
             document.querySelector('.error-message6').innerText = "Vui lòng điền đầy đủ tên và chức vụ"; // Thông báo cho ô username
             document.querySelector('.error-message6').style.display = 'block'; // Hiển thị phần tử thông báo
-            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+            $("#staffName").focus();
             return; // Ngừng thực hiện nếu tài khoản trống
+        }
+        if (!passwordStaff || passwordStaff.length < 6) {
+            document.querySelector('.error-message6').innerText = "Mật khẩu phải có ít nhất 6 kí tự"; // Thông báo cho ô username
+            document.querySelector('.error-message6').style.display = 'block'; // Hiển thị phần tử thông báo
+            $("#passwordStaffEdit").focus(); // Đưa con trỏ vào trường mật khẩu
+            return; // Kết thúc hàm validateInput
+        }
+        if (!usernameStaff) {
+            document.querySelector('.error-message5').innerText = "Tên tài khoản không được để trống"; // Thông báo cho ô username
+            document.querySelector('.error-message5').style.display = 'block'; // Hiển thị phần tử thông báo
+            $("#usernameStaff").focus(); // Đưa con trỏ vào trường mật khẩu
+            return; // Kết thúc hàm validateInput
         }
         if (imageFile1) {
             var formData = new FormData();
@@ -363,14 +397,18 @@ $("#imageUpload1").change(function () {
             const role = $(this).val();
             if (role === "admin" || role === "Quản lý") {
                 $('#usernamePasswordGroup').show();
+                // Xóa giá trị "Unavailable" nếu chuyển về admin hoặc Quản lý
+                $('#usernameStaff').val('');
+                $('#passwordStaff').val('');
             } else {
                 $('#usernamePasswordGroup').hide();
-                // Xóa nội dung của ô username và password
-                $('#usernameStaff').val('');  // Xóa ô username
-                $('#passwordStaff').val('');  // Xóa ô password
+                // Đặt "Unavailable" vào các trường username và password
+                $('#usernameStaff').val('Unavailable');
+                $('#passwordStaff').val('Unavailable');
             }
         });
     });
+    
     
     
     
