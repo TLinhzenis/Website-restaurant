@@ -9,6 +9,15 @@ $(document).ready(function () {
             { title: "Chức năng", width: "100px" }
         ]
     });
+
+    $(document).ready(function () {
+        // Chặn ký tự không phải chữ trong ô nhập Tên
+        $("#staffName, #staffNameEdit").on("input", function () {
+            // Xóa tất cả các ký tự không phải chữ cái và khoảng trắng
+            $(this).val($(this).val().replace(/[^a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẶÂẦẤẨẪẬÊỀếỂễệỳỵỷỹý\s]/g, ''));
+        });
+    });
+    
     // Hạn chế quyền truy cập
     const userRole = localStorage.getItem('role'); // 'admin' hoặc 'user', tùy thuộc vào hệ thống của bạn
 
