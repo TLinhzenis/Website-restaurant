@@ -83,7 +83,7 @@
     <div id="addMenuModal" class="addModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
         <h2>Thêm Món ăn</h2>
         <label for="itemName">Tên món ăn:</label>
-        <input type="text" id="itemName" required /><br />
+        <input type="text" id="itemName" placeholder="Nhập tên món ăn" required /><br />
   
         <label for="category">Phân loại:</label>
         <select id="category" required>
@@ -94,10 +94,12 @@
         </select><br />
 
         <label for="price">Giá:</label>
-        <input type="number" id="price" step="0.01" required /><br />
+        <input type="text" id="price" inputmode="numeric" maxlength="8" placeholder="Nhập giá" required 
+               oninput="this.value = this.value.replace(/[^0-9]/g, '')" /><br />
+        
 
         <label for="description">Mô tả:</label>
-        <textarea id="description"></textarea><br />
+        <textarea id="description" placeholder="Mô tả"></textarea><br />
 
         <label for="image">Hình ảnh:</label>
         <input type="file" id="image" accept="image/*" /><br />
@@ -248,10 +250,10 @@
     <div id="addVoucherModal" class="addModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
         <h2>Thêm voucher</h2>
         <label for="voucherType">Loại voucher:</label>
-        <input type="text" id="voucherType" required /><br /><br />
+        <input type="text" id="voucherType" placeholder="Nhập loại voucher" required /><br /><br />
     
         <label for="voucherPoint">Số điểm cần:</label>
-        <input type="number" id="voucherPoint" step="0.01" required /><br /><br />
+        <input type="number" id="voucherPoint" step="0.01" placeholder="Nhập số điểm cần" required /><br /><br />
         <div class="error-message3" style="color: red; display: none;"></div><br />
     
         <button id="saveVoucherBtn" >Lưu</button>
@@ -307,14 +309,14 @@
     <div id="addStaffModal" class="addModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
         <h2>Thêm nhân viên</h2>
         <label for="staffName">Tên nhân viên:</label>
-        <input type="text" id="staffName" required /><br /><br />
+        <input type="text" id="staffName" placeholder="Nhập tên nhân viên" required /><br /><br />
     
         <div id="usernamePasswordGroup" style="display:none;">
             <label for="usernameStaff">Username:</label>
-            <input type="text" id="usernameStaff" /><br /><br />
+            <input type="text" id="usernameStaff" placeholder="Nhập tên đăng nhập" /><br /><br />
         
             <label for="passwordStaff">Password:</label>
-            <input type="text" id="passwordStaff" /><br /><br />
+            <input type="text" id="passwordStaff" placeholder="Nhập mật khẩu" /><br /><br />
         </div>
         
 
@@ -322,10 +324,12 @@
         <select id="role" required>
             <option value="">Chọn chức vụ</option>
             <option value="admin">admin</option>
-            <option value="Bồi bàn">Bồi bàn</option>
-            <option value="Đầu bếp">Đầu bếp</option>
             <option value="Quản lý">Quản lý</option>
+            <option value="Bếp trưởng">Bếp trưởng</option>
+            <option value="Đầu bếp">Đầu bếp</option>
             <option value="Phụ bếp">Phụ bếp</option>
+            <option value="Bồi bàn">Bồi bàn</option>
+            <option value="Thu ngân">Thu ngân</option>
         </select><br />
         <label for="image">Hình ảnh:</label>
         <input type="file" id="image1" accept="image/*" /><br />
@@ -351,10 +355,12 @@
         <select id="roleEdit" required>
             <option value="">Chọn chức vụ</option>
             <option value="admin">admin</option>
-            <option value="Bồi bàn">Bồi bàn</option>
-            <option value="Đầu bếp">Đầu bếp</option>
             <option value="Quản lý">Quản lý</option>
+            <option value="Bếp trưởng">Bếp trưởng</option>
+            <option value="Đầu bếp">Đầu bếp</option>
             <option value="Phụ bếp">Phụ bếp</option>
+            <option value="Bồi bàn">Bồi bàn</option>
+            <option value="Thu ngân">Thu ngân</option>
         </select><br />
         <label for="imageUpload">Hình ảnh:</label>
         <input type="file" id="imageUpload1" accept="image/*" /><br />

@@ -266,10 +266,17 @@ $("#imageUpload1").change(function () {
                 $("#usernameStaffEdit").val(staff.username);
                 $("#passwordStaffEdit").val(staff.password);
                 $("#roleEdit").val(staff.role);
+
+            // Kiểm tra vai trò của nhân viên và vô hiệu hóa trường mật khẩu nếu không phải "admin" hoặc "Quản lý"
+            if (staff.role !== "admin" && staff.role !== "Quản lý") {
+                $("#passwordStaffEdit").prop('disabled', true);
+            } else {
+                $("#passwordStaffEdit").prop('disabled', false);
+            }
     
                 $("#editStaffModal").show(); // Hiện modal sửa nhân viên
                 
-                // Nếu món ăn có ảnh
+                // Nếu nhân viên có ảnh
             if (staff.image) {
                 $("#imageNameEdit1").text(staff.image); // Cập nhật tên file ảnh
                 $("#currentImage1").attr("src", `https://resmant1111-001-site1.jtempurl.com/uploads/${staff.image}`).show();
