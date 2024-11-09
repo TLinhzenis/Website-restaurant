@@ -270,8 +270,9 @@ $(document).on('click', '.btn-edit', function () {
         success: function (menuItem) {
             // Khôi phục tất cả các trường trong modal
             $("#itemNameEdit").val(menuItem.itemName);
+
             $("#categoryEdit").val(menuItem.category);
-            $("#priceEdit").val(menuItem.price);
+            $("#priceEdit").val(formatPrice(menuItem.price));
             $("#descriptionEdit").val(menuItem.description);
 
             // Nếu món ăn có ảnh
