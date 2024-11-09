@@ -92,20 +92,23 @@
             <option value="2">Món chính</option>
             <option value="3">Tráng miệng</option>
         </select><br />
-
         <label for="price">Giá:</label>
-        <input type="text" id="price" inputmode="numeric" maxlength="8" placeholder="Nhập giá" required 
-               oninput="formatCurrency(this)" /><br />
-        
-        <script>
-        function formatCurrency(input) {
-        
-            let value = input.value.replace(/[^0-9]/g, '');
-            
-            input.value = new Intl.NumberFormat('vi-VN').format(value);
-        }
+        <input type="text" id="price" inputmode="numeric" placeholder="Nhập giá" required 
+         oninput="formatCurrency(this)" /><br />
+         <script>
+            function formatCurrency(input) {
+                // Lấy giá trị và loại bỏ các ký tự không phải số
+                let value = input.value.replace(/[^0-9]/g, '');
+                
+                // Giới hạn độ dài tối đa là 8 chữ số
+                if (value.length > 8) {
+                    value = value.substring(0, 8);
+                }
+                
+                // Định dạng lại giá trị
+                input.value = new Intl.NumberFormat('vi-VN').format(value);
+            }
         </script>
-        
 
         <label for="description">Mô tả:</label>
         <textarea id="description" placeholder="Mô tả"></textarea><br />
@@ -115,9 +118,6 @@
         <img id="imagePreview" style="max-width: 150px; max-height: 150px;" /><br />
         <div class="error-message" style="color: red; display: none;"></div><br />
 
-        
-        
-    
         <button id="saveMenuBtn">Lưu</button>
         <button id="cancelMenuBtn" class="cancelBtn">Hủy</button>
     </div>
@@ -145,9 +145,12 @@
             <option value="3">Tráng miệng</option>
         </select><br />
     
+
+
         <label for="priceEdit">Giá:</label>
-        <input type="number" id="priceEdit" step="0.01" required /><br />
-        
+        <input type="text" id="priceEdit" inputmode="numeric" placeholder="Nhập giá" required 
+         oninput="formatCurrency(this)" /><br />
+
         
     
         <label for="descriptionEdit">Mô tả:</label>
