@@ -131,9 +131,9 @@
         <label for="categoryEdit">Phân loại:</label>
         <select id="categoryEdit" required>
             <option value="">Chọn phân loại</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            <option value="1">Khai vị</option>
+            <option value="2">Món chính</option>
+            <option value="3">Tráng miệng</option>
         </select><br />
     
         <label for="priceEdit">Giá:</label>
@@ -372,5 +372,82 @@
         <button id="saveEditStaffBtn">Lưu</button>
         <button id="cancelEditStaffBtn" class="cancelBtn">Hủy</button>
     </div>
+        <!-------------------------------------------------------------- QL Nhân viên-------------------------------------------->
+        <div class="content" id="TableContent">
+            <h1>Danh Sách bàn ăn</h1>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <button id="addStaffBtn" class="btn-add">Thêm bàn ăn</button>
+            </div>
+        
+            <table id="TableTable" class="display">
+                <thead>
+                    <tr>
+                        <th>Số bàn</th>
+                        <th>Sức chứa</th>
+                        <th>Trạng thái</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Ảnh</th>
+    
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dữ liệu sẽ được chèn vào đây -->
+                </tbody>
+            </table>
+        </div>
+        <!-- Modal để xác nhận xóa tài khoản -->
+        <div id="confirmDeleteModal4" class="deleteModal" style="display:none;">
+            <h2>Xác Nhận Xóa</h2><hr>
+            <p>Bạn có chắc chắn muốn xóa bàn ăn này không ?</p><br>
+            <button id="confirmDeleteBtn4">Có</button>
+            <button id="cancelDeleteBtn4">Không</button>
+        </div>   
+        <!-- Modal Thêm Nhân viên -->
+        <div id="addTableModal" class="addModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+            <h2>Thêm nhân viên</h2>
+            <label for="tableNumber">Số bàn:</label>
+            <input type="text" id="tableNumber" placeholder="Nhập số bàn" required /><br /><br />
+            <label for="tableCapacity">Sức chứa:</label>
+            <input type="text" id="tableCapacity" placeholder="Nhập sức chứa" required /><br /><br />
+            <label for="tableStatus">Sức chứa:</label>
+            <input type="text" id="tableStatus" placeholder="Nhập trạng thái" required /><br /><br />
+        
+                <label for="usernameTable">Username:</label>
+                <input type="text" id="usernameTable" placeholder="Nhập tên đăng nhập" /><br /><br />
+            
+                <label for="passwordTable">Password:</label>
+                <input type="text" id="passwordTable" placeholder="Nhập mật khẩu" /><br /><br />
+
+            <div class="error-message6" style="color: red; display: none;"></div><br />
+        
+            <button id="saveStaffBtn" >Lưu</button>
+            <button id="cancelStaffBtn" class="cancelBtn">Hủy</button>
+        </div>
+        <!-- Modal Sửa nhân viên -->
+        <div id="editTableModal" class="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
+            <h2>Chỉnh sửa thông tin nhân viên</h2>
+            <label for="tableNumberEdit">Số bàn:</label>
+            <input type="text" id="tableNumberEdit" required /><br /><br />
+
+            <label for="tableCapacityEdit">Sức chứa:</label>
+            <input type="text" id="tableCapacityEdit" required /><br /><br />
+
+            <label for="tableStatusEdit">Tên nhân viên:</label>
+            <input type="text" id="tableNumberEdit" required /><br /><br />
+    
+            <label for="usernameTableEdit">Username:</label>
+            <input type="text" id="usernameTableEdit" readonly required /><br /><br />
+    
+            <label for="passwordTableEdit">Password:</label>
+            <input type="text" id="passwordTableEdit" required /><br /><br />
+            
+    
+            <div class="error-message6" style="color: red; display: none;"></div><br />
+            <button id="saveEditStaffBtn">Lưu</button>
+            <button id="cancelEditStaffBtn" class="cancelBtn">Hủy</button>
+        </div>
+    
 </body>
 </html>

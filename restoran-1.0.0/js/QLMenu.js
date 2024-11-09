@@ -12,6 +12,7 @@ $(document).ready(function () {
     function formatPrice(price) {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Định dạng số
     }
+
     function loadMenuItems() {
         $.ajax({
             url: "https://resmant1111-001-site1.jtempurl.com/Menu/List",
@@ -23,9 +24,23 @@ $(document).ready(function () {
                     // Kiểm tra nếu có hình ảnh thì hiển thị, nếu không thì để trống
                     var imageUrl = item.image ? `https://resmant1111-001-site1.jtempurl.com/uploads/${item.image}` : '';
     
+                    var categoryName;
+                    switch (item.category) {
+                        case "1":
+                            categoryName = "Khai vị";
+                            break;
+                        case "2":
+                            categoryName = "Món chính";
+                            break;
+                        case "3":
+                            categoryName = "Tráng miệng";
+                            break;
+                        default:
+                            categoryName = "Khác"; // Nếu không thuộc loại nào
+                    }
                     var row = [
                         item.itemName,
-                        item.category,
+                        categoryName,
                         formatPrice(item.price) + " VND",
                         item.description,
                         imageUrl ? `<img src="${imageUrl}" alt="Hình ảnh" style="width: 100px; height: 100px;" />` : 'Không có ảnh',
@@ -54,25 +69,36 @@ $(document).ready(function () {
         $("#addMenuModal").hide(); // Ẩn modal
     });
 
-    // Khi người dùng chọn file ảnh
-    $("#image").change(function () {
-        var imageFile = $("#image")[0].files[0];
+// Khi người dùng chọn file ảnh
+$("#image").change(function () {
+    var imageFile = $("#image")[0].files[0];
 
-        if (imageFile) {
-            // Hiển thị tên file ảnh
-            $("#imageName").text("Tên file: " + imageFile.name);
-
-            // Hiển thị ảnh preview
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $("#imagePreview").attr("src", e.target.result);
-            };
-            reader.readAsDataURL(imageFile);
-        } else {
-            $("#imageName").text("");
-            $("#imagePreview").attr("src", "");
+    if (imageFile) {
+        var maxSize = 0.5 * 1024 * 1024; 
+        if (imageFile.size > maxSize) {
+            document.querySelector('.error-message').innerText = "Ảnh được chọn có dung lượng quá lớn"; // Thông báo cho ô username
+            document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
+            $("#image").val(""); // Xóa file đã chọn
+            $("#imageName").text(""); // Xóa tên file hiển thị
+            $("#imagePreview").attr("src", ""); // Xóa ảnh preview
+            return;
         }
-    });
+
+        // Hiển thị tên file ảnh
+        $("#imageName").text("Tên file: " + imageFile.name);
+
+        // Hiển thị ảnh preview
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#imagePreview").attr("src", e.target.result);
+        };
+        reader.readAsDataURL(imageFile);
+    } else {
+        $("#imageName").text("");
+        $("#imagePreview").attr("src", "");
+    }
+});
+
 
     // Khi nhấn nút Lưu
     $("#saveMenuBtn").click(function () {
