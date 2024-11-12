@@ -11,6 +11,7 @@ $(document).ready(function() {
     $('#CustomerContent').hide();
     $('#VoucherContent').hide();
     $('#StaffContent').hide();
+    $('#ThongKeContent').hide();
 
 
     // Xử lý sự kiện khi nhấn vào "Quản lý Menu"
@@ -19,6 +20,7 @@ $(document).ready(function() {
         $('#CustomerContent').hide();
         $('#VoucherContent').hide();
         $('#StaffContent').hide();
+        $('#ThongKeContent').hide();
         setActiveMenu(this); // Làm nổi bật mục được chọn
     });
     $('#manageMenu').click();
@@ -29,6 +31,7 @@ $(document).ready(function() {
         $('#CustomerContent').show(); // Hiển thị bảng Khách hàng
         $('#VoucherContent').hide();
         $('#StaffContent').hide();
+        $('#ThongKeContent').hide();
         setActiveMenu(this); // Làm nổi bật mục được chọn
     });
 
@@ -38,6 +41,7 @@ $(document).ready(function() {
         $('#CustomerContent').hide();
         $('#VoucherContent').show();
         $('#StaffContent').hide();
+        $('#ThongKeContent').hide();
         setActiveMenu(this); // Làm nổi bật mục được chọn
     });
 
@@ -47,6 +51,17 @@ $(document).ready(function() {
         $('#CustomerContent').hide();
         $('#VoucherContent').hide();
         $('#StaffContent').show();
+        $('#ThongKeContent').hide();
+        setActiveMenu(this); // Làm nổi bật mục được chọn
+    });
+
+    // Xử lý sự kiện khi nhấn vào "Thống kê"
+    $('#manageThongKe').click(function() {
+        $('#MenuContent').hide();
+        $('#CustomerContent').hide();
+        $('#VoucherContent').hide();
+        $('#StaffContent').hide();
+        $('#ThongKeContent').show();
         setActiveMenu(this); // Làm nổi bật mục được chọn
     });
 

@@ -3,80 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <title>Thống kê Doanh thu</title>
     <style>
-        .menu-item {
+        body {
+            font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             align-items: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .form-container {
             margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            text-align: center;
         }
-        .menu-item img {
-            width: 100px; /* Chiều rộng của ảnh */
-            height: auto; /* Giữ tỉ lệ ảnh */
-            margin-right: 15px;
-            border-radius: 5px; /* Bo góc cho ảnh */
+        .form-container input {
+            margin: 5px;
+            padding: 8px;
+            font-size: 16px;
         }
-        .menu-item h2 {
-            margin: 0;
+        .form-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
         }
-        .menu-item p {
-            margin: 5px 0;
-        }
-        .menu-item button {
-            margin-right: 10px;
+        #chartContainer {
+            width: 80%;
+            max-width: 600px;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
-    <h1>Danh sách Món Ăn</h1>
-    <div id="menuContainer">
-        <!-- Dữ liệu món ăn sẽ được thêm vào đây -->
+    <h1>Thống kê Doanh thu Bán Hàng</h1>
+    <div id="chartContainer">
+        <canvas id="revenueChart"></canvas>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            fetchMenuItems();
+        // Dữ liệu ban đầu
+        const labels = [];
+        const data = [];
 
-            function fetchMenuItems() {
-                $.ajax({
-                    url: 'https://resmant1111-001-site1.jtempurl.com/Menu/List', // Địa chỉ API để lấy danh sách món ăn
-                    method: 'GET',
-                    success: function(data) {
-                        let menuContainer = $('#menuContainer');
-                        menuContainer.empty(); // Xóa nội dung cũ
-                        data.forEach(item => {
-                            menuContainer.append(`
-                                <div class="menu-item">
-                                    <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="https://resmant1111-001-site1.jtempurl.com/uploads/${item.image}" alt="${item.name}" style="width: 80px;">
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                                <span>${item.itemName}</span>
-                                                <span class="text-primary">${item.price}</span>
-                                            </h5>
-                                            <small class="fst-italic">${item.description}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                    
-                                </div>
-                                
-                            `);
-                        });
-                    },
-                    error: function(err) {
-                        console.error('Lỗi khi lấy dữ liệu món ăn:', err);
+        // Khởi tạo biểu đồ với Chart.js
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(ctx, {
+            type: 'bar', // Dạng biểu đồ cột
+            data: {
+                labels: labels, // Thẻ tiêu đề của trục X
+                datasets: [{
+                    label: 'Số lượng bán',
+                    data: data, // Dữ liệu số lượng bán
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)', // Màu nền cột
+                    borderColor: 'rgba(75, 192, 192, 1)', // Màu viền cột
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true // Bắt đầu từ 0 trên trục Y
                     }
-                });
+                }
             }
         });
+
+        // Hàm để gọi API và lấy dữ liệu món ăn
+        async function fetchMenuData() {
+            try {
+                // Gọi API để lấy tất cả các món ăn và số lượng bán
+                const response = await fetch('https://resmant1111-001-site1.jtempurl.com/Menu/GetTop5OrderByQuantity');
+                
+                if (!response.ok) {
+                    throw new Error('Không thể lấy dữ liệu từ API.');
+                }
+
+                const menuItems = await response.json();
+
+                // Xóa dữ liệu cũ trên biểu đồ
+                labels.length = 0;
+                data.length = 0;
+
+                // Thêm dữ liệu vào biểu đồ từ API
+                menuItems.forEach(item => {
+                    labels.push(item.itemName); // Thêm tên món ăn vào trục X
+                    data.push(item.totalQuantity); // Thêm số lượng vào dữ liệu biểu đồ
+                });
+
+                // Cập nhật lại biểu đồ
+                revenueChart.update();
+            } catch (error) {
+                console.error('Lỗi khi lấy dữ liệu từ API:', error);
+                alert('Không thể tải dữ liệu món ăn.');
+            }
+        }
+
+        // Gọi hàm để lấy dữ liệu món ăn khi trang được tải
+        window.onload = fetchMenuData;
     </script>
 </body>
 </html>

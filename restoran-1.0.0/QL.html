@@ -10,17 +10,20 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Thư viện DataTables JS -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="css/QL.css" rel="stylesheet">
     <script src="js/QLMenu.js"></script>
     <script src="js/QLKh.js"></script>
     <script src="js/QLVoucher.js"></script>
     <script src="js/QLStaff.js"></script>
     <script src="js/ChuyenTab.js"></script>
+    <script src="js/QLThongKe.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link
       href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap"
       rel="stylesheet"
     />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Quản lý</title>
     <!-- Favicon -->
     <link rel="icon" href="https://resmant1111-001-site1.jtempurl.com/uploads/Designer.jpeg" type="image/png">
@@ -47,6 +50,9 @@
         </a>
         <a href="#" id="manageVoucher" style="font-family: 'Nunito', sans-serif;">
             <i class="fa-solid fa-ticket" style="margin-right: 5px;"></i>  Quản lý voucher
+        </a>
+        <a href="#" id="manageThongKe" style="font-family: 'Nunito', sans-serif;">
+            <i class="fa-solid fa-ticket" style="margin-right: 5px;"></i>  Thống kê
         </a>
         <a href="#" id="logoutButton" style="font-family: 'Nunito', sans-serif;">
             <i class="fa-solid fa-right-from-bracket" style="margin-right: 5px;"></i>  Đăng xuất
@@ -386,5 +392,25 @@
         <button id="saveEditStaffBtn">Lưu</button>
         <button id="cancelEditStaffBtn" class="cancelBtn">Hủy</button>
     </div>
+    <!-------------------------------------------------------------- QL Nhân viên-------------------------------------------->
+    <div class="content" id="ThongKeContent">
+    <h1>Thống kê Doanh thu Bán Hàng</h1>
+    <div id="chartContainer">
+        <canvas id="revenueChart"></canvas>
+    </div>
+    </div>
+    <style>
+        /* CSS để điều chỉnh kích thước của canvas */
+        #chartContainer {
+            width: 100%; /* Đặt chiều rộng 100% của khung chứa */
+            max-width: 1000px; /* Đặt kích thước tối đa cho khung chứa */
+            margin: 0 auto; /* Canh giữa khung chứa */
+        }
+    
+        #revenueChart {
+            width: 100%; /* Đặt chiều rộng của biểu đồ */
+            height: 500px; /* Đặt chiều cao của biểu đồ */
+        }
+    </style>
 </body>
 </html>
