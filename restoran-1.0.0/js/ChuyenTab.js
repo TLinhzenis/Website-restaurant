@@ -6,12 +6,13 @@ $(document).ready(function() {
         // Thêm lớp 'active' vào mục được chọn
         $(selectedMenu).addClass('active');
     }
+    
 
     // Ẩn bảng Quản lý khách hàng khi trang được tải lần đầu
     $('#CustomerContent').hide();
     $('#VoucherContent').hide();
     $('#StaffContent').hide();
-    $('#ThongKeContent').hide();
+    $('#MenuContent').hide();
 
 
     // Xử lý sự kiện khi nhấn vào "Quản lý Menu"
@@ -23,7 +24,7 @@ $(document).ready(function() {
         $('#ThongKeContent').hide();
         setActiveMenu(this); // Làm nổi bật mục được chọn
     });
-    $('#manageMenu').click();
+    
 
     // Xử lý sự kiện khi nhấn vào "Quản lý khách hàng"
     $('#manageCustomer').click(function() {
@@ -64,6 +65,7 @@ $(document).ready(function() {
         $('#ThongKeContent').show();
         setActiveMenu(this); // Làm nổi bật mục được chọn
     });
+    $('#manageThongKe').click();
 
     // Lấy fullname từ localStorage và hiển thị
     const fullName = localStorage.getItem('fullName');  

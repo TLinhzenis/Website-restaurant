@@ -39,6 +39,9 @@
             
         </div>
         <hr style="margin-right: 50px;"/>
+        <a href="#" id="manageThongKe" style="font-family: 'Nunito', sans-serif;">
+            <i class="fa-solid fa-chart-pie" style="margin-right: 5px;"></i>  Thống kê
+        </a>
         <a href="#" id="manageMenu" style="font-family: 'Nunito', sans-serif;">
             <i class=" fa-solid fa-clipboard-list " style="margin-right: 5px;"></i>  Quản lý Menu
         </a>
@@ -51,9 +54,7 @@
         <a href="#" id="manageVoucher" style="font-family: 'Nunito', sans-serif;">
             <i class="fa-solid fa-ticket" style="margin-right: 5px;"></i>  Quản lý voucher
         </a>
-        <a href="#" id="manageThongKe" style="font-family: 'Nunito', sans-serif;">
-            <i class="fa-solid fa-ticket" style="margin-right: 5px;"></i>  Thống kê
-        </a>
+        
         <a href="#" id="logoutButton" style="font-family: 'Nunito', sans-serif;">
             <i class="fa-solid fa-right-from-bracket" style="margin-right: 5px;"></i>  Đăng xuất
         </a>
@@ -394,23 +395,130 @@
     </div>
     <!-------------------------------------------------------------- QL Nhân viên-------------------------------------------->
     <div class="content" id="ThongKeContent">
-    <h1>Thống kê Doanh thu Bán Hàng</h1>
-    <div id="chartContainer">
-        <canvas id="revenueChart"></canvas>
+        <h1>Thống kê</h1>
+        <!-- Phần chứa 3 ô nhỏ -->
+        <div class="stats-container">
+            <div class="stat-box">
+                <h3>Doanh số</h3>
+                <p>Hằng ngày: <span id="dailyRevenue"></span></p>
+                <p>7 ngày: <span id="weeklyRevenue"></span></p>
+                <p>30 ngày: <span id="monthlyRevenue"></span></p>
+            </div>
+            <div class="stat-box">
+                <h3>Số lượng đơn hàng</h3>
+                <p>Hằng ngày: <span id="dailyOrders"></span></p>
+                <p>7 ngày: <span id="weeklyOrders"></span></p>
+                <p>30 ngày: <span id="monthlyOrders"></span></p>
+            </div>
+            <div class="stat-box">
+                <h3>Khách hàng hàng đầu</h3>
+                <p><span class="rank-circle rank-1">1</span>: <span id="top1Customer"></span></p>
+                <p><span class="rank-circle rank-2">2</span>: <span id="top2Customer"></span></p>
+                <p><span class="rank-circle rank-3">3</span>: <span id="top3Customer"></span></p>
+            </div>
+            
+        </div><hr>
+        
+        <!-- Phần chứa biểu đồ -->
+        <div id="chartContainer">
+            <h3 style="padding-left: 400px;">Doanh thu từng tháng</h3>
+            <canvas id="revenueChart"></canvas>
+        </div><hr>
+        
+        <!-- Bảng xếp hạng 5 món ăn bán chạy nhất -->
+        <div class="top-dishes">
+            <h3 style="padding-left: 500px;">Top 5 Món ăn bán chạy nhất</h3>
+            <table id="topDishesTable">
+                <thead>
+                    <tr>
+                        <th>Hạng</th>
+                        <th>Tên Món</th>
+                        <th>Số lượng bán</th>
+                    </tr>
+                </thead>
+                <tbody id="topDishesBody">
+                    <!-- Dữ liệu món ăn sẽ được thêm vào đây -->
+                </tbody>
+            </table>
+        </div>
     </div>
-    </div>
+    
     <style>
-        /* CSS để điều chỉnh kích thước của canvas */
+        /* CSS cho cấu trúc và kiểu dáng */
+        .stats-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+    
+        .stat-box {
+            flex: 1;
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Thêm shadow cho các ô */
+        }
+    
         #chartContainer {
-            width: 100%; /* Đặt chiều rộng 100% của khung chứa */
-            max-width: 1000px; /* Đặt kích thước tối đa cho khung chứa */
-            margin: 0 auto; /* Canh giữa khung chứa */
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            
         }
     
         #revenueChart {
-            width: 100%; /* Đặt chiều rộng của biểu đồ */
-            height: 500px; /* Đặt chiều cao của biểu đồ */
+            width: 100%;
+            height: 500px;
+        }
+    
+        .top-dishes {
+            margin-top: 20px;
+        }
+    
+        #topDishesTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    
+        #topDishesTable th, #topDishesTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+    
+        #topDishesTable th {
+            background-color: #f2f2f2;
+        }
+    
+        /* Định dạng vòng tròn xếp hạng */
+        .rank-circle {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+    
+        /* Màu sắc cho các hạng */
+        .rank-1 {
+            background-color: red;
+        }
+    
+        .rank-2 {
+            background-color: yellow;
+            color: black; /* Màu chữ đen để dễ đọc trên nền vàng */
+        }
+    
+        .rank-3 {
+            background-color: green;
         }
     </style>
+    
+    
 </body>
 </html>
