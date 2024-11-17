@@ -1,524 +1,721 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- Thư viện DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"
+    />
     <!-- Thư viện jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Thư viện DataTables JS -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="css/QL.css" rel="stylesheet">
+    <link href="css/QL.css" rel="stylesheet" />
     <script src="js/QLMenu.js"></script>
     <script src="js/QLKh.js"></script>
     <script src="js/QLVoucher.js"></script>
     <script src="js/QLStaff.js"></script>
     <script src="js/ChuyenTab.js"></script>
     <script src="js/QLThongKe.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap"
       rel="stylesheet"
     />
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Quản lý</title>
     <!-- Favicon -->
-    <link rel="icon" href="https://resmant1111-001-site1.jtempurl.com/uploads/Designer.jpeg" type="image/png">
-</head>
-<body>
+    <link
+      rel="icon"
+      href="https://resmant1111-001-site1.jtempurl.com/uploads/Designer.jpeg"
+      type="image/png"
+    />
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
     <div class="sidebar">
-        <div style="display: flex; flex-direction: row; align-items: center;">
-            <img id="avatar" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;" />
-            <div>
-                <h2 id="userName" style="margin: 0; font-family: 'Nunito', sans-serif; max-width: 150px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;"></h2>
-                <p id="userRole" style="margin: 0; font-family: 'Nunito', sans-serif; color:#FEA116"></p>
-            </div>
-            
+      <div style="display: flex; flex-direction: row; align-items: center">
+        <img
+          id="avatar"
+          style="
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+          "
+        />
+        <div>
+          <h2
+            id="userName"
+            style="
+              margin: 0;
+              font-family: 'Nunito', sans-serif;
+              max-width: 150px;
+              word-wrap: break-word;
+              overflow-wrap: break-word;
+              white-space: normal;
+            "
+          ></h2>
+          <p
+            id="userRole"
+            style="margin: 0; font-family: 'Nunito', sans-serif; color: #fea116"
+          ></p>
         </div>
-        <hr style="margin-right: 50px;"/>
-        <a href="#" id="manageThongKe" style="font-family: 'Nunito', sans-serif;">
-            <i class="fa-solid fa-chart-pie" style="margin-right: 5px;"></i>  Thống kê
-        </a>
-        <a href="#" id="manageMenu" style="font-family: 'Nunito', sans-serif;">
-            <i class=" fa-solid fa-clipboard-list " style="margin-right: 5px;"></i>  Quản lý Menu
-        </a>
-        <a href="#" id="manageCustomer" style="font-family: 'Nunito', sans-serif;">
-            <i class="fa-solid fa-user icon" style="margin-right: 5px;"></i>  Quản lý khách hàng
-        </a>
-        <a href="#" id="manageStaff" style="font-family: 'Nunito', sans-serif;">
-            <i class="fa-solid fa-users" style="margin-right: 5px;"></i>  Quản lý nhân viên
-        </a>
-        <a href="#" id="manageVoucher" style="font-family: 'Nunito', sans-serif;">
-            <i class="fa-solid fa-ticket" style="margin-right: 5px;"></i>  Quản lý voucher
-        </a>
-        
-        <a href="#" id="logoutButton" style="font-family: 'Nunito', sans-serif;">
-            <i class="fa-solid fa-right-from-bracket" style="margin-right: 5px;"></i>  Đăng xuất
-        </a>
+      </div>
+      <hr style="margin-right: 50px" />
+      <a href="#" id="manageThongKe" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-chart-pie" style="margin-right: 5px"></i> Thống kê
+      </a>
+      <a href="#" id="manageMenu" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-clipboard-list" style="margin-right: 5px"></i>
+        Quản lý Menu
+      </a>
+      <a href="#" id="manageCustomer" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-user icon" style="margin-right: 5px"></i> Quản lý
+        khách hàng
+      </a>
+      <a href="#" id="manageStaff" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-users" style="margin-right: 5px"></i> Quản lý nhân
+        viên
+      </a>
+      <a href="#" id="manageVoucher" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-ticket" style="margin-right: 5px"></i> Quản lý
+        voucher
+      </a>
 
-
+      <a href="#" id="logoutButton" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-right-from-bracket" style="margin-right: 5px"></i>
+        Đăng xuất
+      </a>
     </div>
-    
+
     <!-------------------------------------------------------------- QL Menu-------------------------------------------->
     <div class="content" id="MenuContent">
-        <h1>Danh Sách Món ăn</h1>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <button id="addMenuBtn" class="btn-add">Thêm Món ăn</button>
-        </div>
-    
-        <table id="MenuTable" class="display">
-            <thead>
-                <tr>
-                    <th>Tên món ăn</th>
-                    <th>Phân loại</th>
-                    <th>Giá</th>
-                    <th>Mô tả</th>
-                    <th>Hình ảnh</th>
-                    <th>Chức năng</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dữ liệu sẽ được chèn vào đây -->
-            </tbody>
-        </table>
+      <h1>Danh Sách Món ăn</h1>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        "
+      >
+        <button id="addMenuBtn" class="btn-add">Thêm Món ăn</button>
+      </div>
+
+      <table id="MenuTable" class="display">
+        <thead>
+          <tr>
+            <th>Tên món ăn</th>
+            <th>Phân loại</th>
+            <th>Giá</th>
+            <th>Mô tả</th>
+            <th>Hình ảnh</th>
+            <th>Chức năng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dữ liệu sẽ được chèn vào đây -->
+        </tbody>
+      </table>
     </div>
-    
+
     <!-- Modal Thêm Món ăn -->
-    <div id="addMenuModal" class="addModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
-        <h2>Thêm Món ăn</h2>
-        <label for="itemName">Tên món ăn:</label>
-        <input type="text" id="itemName" placeholder="Nhập tên món ăn" required /><br />
-  
-        <label for="category">Phân loại:</label>
-        <select id="category" required>
-            <option value="">Chọn phân loại</option>
-            <option value="1">Khai vị</option>
-            <option value="2">Món chính</option>
-            <option value="3">Tráng miệng</option>
-        </select><br />
-        <label for="price">Giá:</label>
-        <input type="text" id="price" inputmode="numeric" placeholder="Nhập giá" required 
-         oninput="formatCurrency(this)" /><br />
-         <script>
-            function formatCurrency(input) {
-                // Lấy giá trị và loại bỏ các ký tự không phải số
-                let value = input.value.replace(/[^0-9]/g, '');
-                
-                // Giới hạn độ dài tối đa là 8 chữ số
-                if (value.length > 8) {
-                    value = value.substring(0, 8);
-                }
-                
-                // Định dạng lại giá trị
-                input.value = new Intl.NumberFormat('vi-VN').format(value);
-            }
-        </script>
+    <div
+      id="addMenuModal"
+      class="addModal"
+      style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 1000;
+      "
+    >
+      <h2>Thêm Món ăn</h2>
+      <label for="itemName">Tên món ăn:</label>
+      <input
+        type="text"
+        id="itemName"
+        placeholder="Nhập tên món ăn"
+        required
+      /><br />
 
-        <label for="description">Mô tả:</label>
-        <textarea id="description" placeholder="Mô tả"></textarea><br />
+      <label for="category">Phân loại:</label>
+      <select id="category" required>
+        <option value="">Chọn phân loại</option>
+        <option value="1">Khai vị</option>
+        <option value="2">Món chính</option>
+        <option value="3">Tráng miệng</option></select
+      ><br />
+      <label for="price">Giá:</label>
+      <input
+        type="text"
+        id="price"
+        inputmode="numeric"
+        placeholder="Nhập giá"
+        required
+        oninput="formatCurrency(this)"
+      /><br />
+      <script>
+        function formatCurrency(input) {
+          // Lấy giá trị và loại bỏ các ký tự không phải số
+          let value = input.value.replace(/[^0-9]/g, "");
+          // Giới hạn độ dài tối đa là 8 chữ số
+          if (value.length > 8) {
+            value = value.substring(0, 8);
+          }
+          // Định dạng lại giá trị
+          input.value = new Intl.NumberFormat("vi-VN").format(value);
+        }
+      </script>
 
-        <label for="image">Hình ảnh:</label>
-        <input type="file" id="image" accept="image/*" /><br />
-        <img id="imagePreview" style="max-width: 150px; max-height: 150px;" /><br />
-        <div class="error-message" style="color: red; display: none;"></div><br />
+      <label for="description">Mô tả:</label>
+      <textarea id="description" placeholder="Mô tả"></textarea><br />
 
-        <button id="saveMenuBtn">Lưu</button>
-        <button id="cancelMenuBtn" class="cancelBtn">Hủy</button>
+      <label for="image">Hình ảnh:</label>
+      <input type="file" id="image" accept="image/*" /><br />
+      <img
+        id="imagePreview"
+        style="max-width: 150px; max-height: 150px"
+      /><br />
+      <div class="error-message" style="color: red; display: none"></div>
+      <br />
+
+      <button id="saveMenuBtn">Lưu</button>
+      <button id="cancelMenuBtn" class="cancelBtn">Hủy</button>
     </div>
     <!-- Modal Thông Báo -->
-    <div id="notificationModal" class="notificationModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
-        <h2>Thông báo</h2><hr>
-        <p id="notificationMessage"></p><br>
-        <button id="closeNotificationBtn">Đóng</button>
+    <div
+      id="notificationModal"
+      class="notificationModal"
+      style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 1000;
+      "
+    >
+      <h2>Thông báo</h2>
+      <hr />
+      <p id="notificationMessage"></p>
+      <br />
+      <button id="closeNotificationBtn">Đóng</button>
     </div>
 
-   
-
-    
     <!-- Modal Sửa Món ăn -->
-    <div id="editMenuModal" class="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
-        <h2>Sửa Món ăn</h2>
-        <label for="itemNameEdit">Tên món ăn:</label>
-        <input type="text" id="itemNameEdit" required /><br />
-    
-        <label for="categoryEdit">Phân loại:</label>
-        <select id="categoryEdit" required>
-            <option value="">Chọn phân loại</option>
-            <option value="1">Khai vị</option>
-            <option value="2">Món chính</option>
-            <option value="3">Tráng miệng</option>
-        </select><br />
-    
+    <div
+      id="editMenuModal"
+      class="editModal"
+      style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 1000;
+      "
+    >
+      <h2>Sửa Món ăn</h2>
+      <label for="itemNameEdit">Tên món ăn:</label>
+      <input type="text" id="itemNameEdit" required /><br />
 
+      <label for="categoryEdit">Phân loại:</label>
+      <select id="categoryEdit" required>
+        <option value="">Chọn phân loại</option>
+        <option value="1">Khai vị</option>
+        <option value="2">Món chính</option>
+        <option value="3">Tráng miệng</option></select
+      ><br />
 
-        <label for="priceEdit">Giá:</label>
-        <input type="text" id="priceEdit" inputmode="numeric" placeholder="Nhập giá" required 
-         oninput="formatCurrency(this)" /><br />
+      <label for="priceEdit">Giá:</label>
+      <input
+        type="text"
+        id="priceEdit"
+        inputmode="numeric"
+        placeholder="Nhập giá"
+        required
+        oninput="formatCurrency(this)"
+      /><br />
 
-        
-    
-        <label for="descriptionEdit">Mô tả:</label>
-        <textarea id="descriptionEdit"></textarea><br />
-    
-        
-        <label for="imageUpload">Hình ảnh:</label>
-        <input type="file" id="imageUpload" accept="image/*" /><br />
-    
-        <img id="currentImage" src="" alt="Hình ảnh hiện tại" style="width: 100px; height: 100px; display: none;" /><br /><br />
-    
-        <div class="error-message2" style="color: red; display: none;"></div><br />
-        <button id="saveEditMenuBtn">Lưu</button>
-        <button id="cancelEditMenuBtn" class="cancelBtn">Hủy</button>
+      <label for="descriptionEdit">Mô tả:</label>
+      <textarea id="descriptionEdit"></textarea><br />
 
-        
+      <label for="imageUpload">Hình ảnh:</label>
+      <input type="file" id="imageUpload" accept="image/*" /><br />
+
+      <img
+        id="currentImage"
+        src=""
+        alt="Hình ảnh hiện tại"
+        style="width: 100px; height: 100px; display: none"
+      /><br /><br />
+
+      <div class="error-message2" style="color: red; display: none"></div>
+      <br />
+      <button id="saveEditMenuBtn">Lưu</button>
+      <button id="cancelEditMenuBtn" class="cancelBtn">Hủy</button>
     </div>
-    
-    
+
     <!-- Modal để xác nhận xóa món ăn -->
-    <div id="confirmDeleteModal" class="deleteModal" style="display:none;">
-        <h2>Xác Nhận Xóa</h2><hr>
-        <p>Bạn có chắc chắn muốn xóa món ăn này không?</p><br>
-        <button id="confirmDeleteBtn">Có</button>
-        <button id="cancelDeleteBtn">Không</button>
+    <div id="confirmDeleteModal" class="deleteModal" style="display: none">
+      <h2>Xác Nhận Xóa</h2>
+      <hr />
+      <p>Bạn có chắc chắn muốn xóa món ăn này không?</p>
+      <br />
+      <button id="confirmDeleteBtn">Có</button>
+      <button id="cancelDeleteBtn">Không</button>
     </div>
     <!-------------------------------------------------------------- QL Khách hàng-------------------------------------------->
     <div class="content" id="CustomerContent">
-        <h1>Danh Sách Tài khoản</h1>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            
-        </div>
-    
-        <table id="CustomerTable" class="display">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Tên</th>
-                    <th>Password</th>
-                    <th>Email</th>
-                    <th>Số điện thoại</th>
-                    <th>Ngày tạo</th>
-                    <th>Điểm thưởng</th>
-                    <th>Chức năng</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dữ liệu sẽ được chèn vào đây -->
-            </tbody>
-        </table>
+      <h1>Danh Sách Tài khoản</h1>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        "
+      ></div>
+
+      <table id="CustomerTable" class="display">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Tên</th>
+            <th>Password</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Ngày tạo</th>
+            <th>Điểm thưởng</th>
+            <th>Chức năng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dữ liệu sẽ được chèn vào đây -->
+        </tbody>
+      </table>
     </div>
     <!-- Modal để xác nhận xóa tài khoản -->
-    <div id="confirmDeleteModal1" class="deleteModal" style="display:none;">
-        <h2>Xác Nhận Xóa</h2><hr>
-        <p>Bạn có chắc chắn muốn xóa tài khoản này không ?</p><br>
-        <button id="confirmDeleteBtn1">Có</button>
-        <button id="cancelDeleteBtn1">Không</button>
+    <div id="confirmDeleteModal1" class="deleteModal" style="display: none">
+      <h2>Xác Nhận Xóa</h2>
+      <hr />
+      <p>Bạn có chắc chắn muốn xóa tài khoản này không ?</p>
+      <br />
+      <button id="confirmDeleteBtn1">Có</button>
+      <button id="cancelDeleteBtn1">Không</button>
     </div>
     <!-- Modal Sửa tài khoản -->
-    <div id="editCustomerModal" class="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
-        <h2>Chỉnh sửa tài khoản</h2>
-        <label for="UsernameEdit">Username:</label>
-        <input type="text" id="UsernameEdit" readonly required /><br />
-        <label for="NameEdit">Name:</label>
-        <input type="text" id="NameEdit" required /><br />
-        <label for="PasswordEdit">Password:</label>
-        <input type="text" id="PasswordEdit" required /><br />
-        <label for="EmailEdit">Email:</label>
-        <input type="text" id="EmailEdit" required /><br />
-        <label for="PhoneEdit">Phone:</label>
-        <input type="number" id="PhoneEdit" step="0.01" required /><br />
-        <label for="PointEdit">Point:</label>
-        <input type="text" id="PointEdit" required /><br />
-        <label for="DayEdit">Day Joined:</label>
-        <input type="text" id="DayEdit" readonly required /><br />
-        <div class="error-message1" style="color: red; display: none;"></div><br />
-        
-        <button id="saveEditCustomerBtn">Lưu</button>
-        <button id="cancelEditCustomerBtn" class="cancelBtn">Hủy</button>
+    <div
+      id="editCustomerModal"
+      class="editModal"
+      style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 1000;
+      "
+    >
+      <h2>Chỉnh sửa tài khoản</h2>
+      <label for="UsernameEdit">Username:</label>
+      <input type="text" id="UsernameEdit" readonly required /><br />
+      <label for="NameEdit">Name:</label>
+      <input type="text" id="NameEdit" required /><br />
+      <label for="PasswordEdit">Password:</label>
+      <input type="text" id="PasswordEdit" required /><br />
+      <label for="EmailEdit">Email:</label>
+      <input type="text" id="EmailEdit" required /><br />
+      <label for="PhoneEdit">Phone:</label>
+      <input type="number" id="PhoneEdit" step="0.01" required /><br />
+      <label for="PointEdit">Point:</label>
+      <input type="text" id="PointEdit" required /><br />
+      <label for="DayEdit">Day Joined:</label>
+      <input type="text" id="DayEdit" readonly required /><br />
+      <div class="error-message1" style="color: red; display: none"></div>
+      <br />
+
+      <button id="saveEditCustomerBtn">Lưu</button>
+      <button id="cancelEditCustomerBtn" class="cancelBtn">Hủy</button>
     </div>
 
     <!-------------------------------------------------------------- QL Voucher-------------------------------------------->
     <div class="content" id="VoucherContent">
-        <h1>Danh Sách voucher</h1>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <button id="addVoucherBtn" class="btn-add">Thêm voucher</button>
-            
-        </div>
-    
-        <table id="VoucherTable" class="display">
-            <thead>
-                <tr>
-                    <th>Loại voucher</th>
-                    <th>Số điểm cần</th>
-                    <th>Chức năng</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dữ liệu sẽ được chèn vào đây -->
-            </tbody>
-        </table>
+      <h1>Danh Sách voucher</h1>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        "
+      >
+        <button id="addVoucherBtn" class="btn-add">Thêm voucher</button>
+      </div>
+
+      <table id="VoucherTable" class="display">
+        <thead>
+          <tr>
+            <th>Loại voucher</th>
+            <th>Số điểm cần</th>
+            <th>Chức năng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dữ liệu sẽ được chèn vào đây -->
+        </tbody>
+      </table>
     </div>
-     <!-- Modal để xác nhận xóa voucher -->
-     <div id="confirmDeleteModal2" class="deleteModal" style="display:none;">
-        <h2>Xác Nhận Xóa</h2><hr>
-        <p>Bạn có chắc chắn muốn xóa voucher này không ?</p><br>
-        <button id="confirmDeleteBtn2">Có</button>
-        <button id="cancelDeleteBtn2">Không</button>
+    <!-- Modal để xác nhận xóa voucher -->
+    <div id="confirmDeleteModal2" class="deleteModal" style="display: none">
+      <h2>Xác Nhận Xóa</h2>
+      <hr />
+      <p>Bạn có chắc chắn muốn xóa voucher này không ?</p>
+      <br />
+      <button id="confirmDeleteBtn2">Có</button>
+      <button id="cancelDeleteBtn2">Không</button>
     </div>
     <!-- Modal Thêm Voucher -->
-    <div id="addVoucherModal" class="addModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
-        <h2>Thêm voucher</h2>
-        <label for="voucherType">Loại voucher:</label>
-        <input type="text" id="voucherType" placeholder="Nhập loại voucher" required /><br /><br />
-    
-        <label for="voucherPoint">Số điểm cần:</label>
-        <input type="number" id="voucherPoint" step="0.01" placeholder="Nhập số điểm cần" required /><br /><br />
-        <div class="error-message3" style="color: red; display: none;"></div><br />
-    
-        <button id="saveVoucherBtn" >Lưu</button>
-        <button id="cancelVoucherBtn" class="cancelBtn">Hủy</button>
+    <div
+      id="addVoucherModal"
+      class="addModal"
+      style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 1000;
+      "
+    >
+      <h2>Thêm voucher</h2>
+      <label for="voucherType">Loại voucher:</label>
+      <input
+        type="text"
+        id="voucherType"
+        placeholder="Nhập loại voucher"
+        required
+      /><br /><br />
 
+      <label for="voucherPoint">Số điểm cần:</label>
+      <input
+        type="number"
+        id="voucherPoint"
+        step="0.01"
+        placeholder="Nhập số điểm cần"
+        required
+      /><br /><br />
+      <div class="error-message3" style="color: red; display: none"></div>
+      <br />
+
+      <button id="saveVoucherBtn">Lưu</button>
+      <button id="cancelVoucherBtn" class="cancelBtn">Hủy</button>
     </div>
     <!-- Modal Sửa voucher -->
-    <div id="editVoucherModal" class="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
-        <h2>Chỉnh sửa tài khoản</h2>
-        <label for="voucherTypeEdit">Loại voucher:</label>
-        <input type="text" id="voucherTypeEdit" required /><br /><br />
-        <label for="voucherPointEdit">Số điểm cần:</label>
-        <input type="number" id="voucherPointEdit" step="0.01" required /><br /><br />
+    <div
+      id="editVoucherModal"
+      class="editModal"
+      style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 1000;
+      "
+    >
+      <h2>Chỉnh sửa tài khoản</h2>
+      <label for="voucherTypeEdit">Loại voucher:</label>
+      <input type="text" id="voucherTypeEdit" required /><br /><br />
+      <label for="voucherPointEdit">Số điểm cần:</label>
+      <input
+        type="number"
+        id="voucherPointEdit"
+        step="0.01"
+        required
+      /><br /><br />
 
-        <div class="error-message4" style="color: red; display: none;"></div><br />
-        <button id="saveEditVoucherBtn">Lưu</button>
-        <button id="cancelEditVoucherBtn" class="cancelBtn">Hủy</button>
+      <div class="error-message4" style="color: red; display: none"></div>
+      <br />
+      <button id="saveEditVoucherBtn">Lưu</button>
+      <button id="cancelEditVoucherBtn" class="cancelBtn">Hủy</button>
     </div>
-
 
     <!-------------------------------------------------------------- QL Nhân viên-------------------------------------------->
     <div class="content" id="StaffContent">
-        <h1>Danh Sách Nhân viên</h1>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <button id="addStaffBtn" class="btn-add">Thêm nhân viên</button>
-        </div>
-    
-        <table id="StaffTable" class="display">
-            <thead>
-                <tr>
-                    <th>Tên</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Chức vụ</th>
-                    <th>Ảnh</th>
+      <h1>Danh Sách Nhân viên</h1>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        "
+      >
+        <button id="addStaffBtn" class="btn-add">Thêm nhân viên</button>
+      </div>
 
-                    <th>Chức năng</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dữ liệu sẽ được chèn vào đây -->
-            </tbody>
-        </table>
+      <table id="StaffTable" class="display">
+        <thead>
+          <tr>
+            <th>Tên</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Chức vụ</th>
+            <th>Ảnh</th>
+
+            <th>Chức năng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dữ liệu sẽ được chèn vào đây -->
+        </tbody>
+      </table>
     </div>
     <!-- Modal để xác nhận xóa tài khoản -->
-    <div id="confirmDeleteModal3" class="deleteModal" style="display:none;">
-        <h2>Xác Nhận Xóa</h2><hr>
-        <p>Bạn có chắc chắn muốn xóa nhân viên này không ?</p><br>
-        <button id="confirmDeleteBtn3">Có</button>
-        <button id="cancelDeleteBtn3">Không</button>
-    </div>   
+    <div id="confirmDeleteModal3" class="deleteModal" style="display: none">
+      <h2>Xác Nhận Xóa</h2>
+      <hr />
+      <p>Bạn có chắc chắn muốn xóa nhân viên này không ?</p>
+      <br />
+      <button id="confirmDeleteBtn3">Có</button>
+      <button id="cancelDeleteBtn3">Không</button>
+    </div>
     <!-- Modal Thêm Nhân viên -->
-    <div id="addStaffModal" class="addModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
-        <h2>Thêm nhân viên</h2>
-        <label for="staffName">Tên nhân viên:</label>
-        <input type="text" id="staffName" placeholder="Nhập tên nhân viên" required /><br /><br />
-    
-        <div id="usernamePasswordGroup" style="display:none;">
-            <label for="usernameStaff">Username:</label>
-            <input type="text" id="usernameStaff" placeholder="Nhập tên đăng nhập" /><br /><br />
-        
-            <label for="passwordStaff">Password:</label>
-            <input type="text" id="passwordStaff" placeholder="Nhập mật khẩu" /><br /><br />
-        </div>
-        
+    <div
+      id="addStaffModal"
+      class="addModal"
+      style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 1000;
+      "
+    >
+      <h2>Thêm nhân viên</h2>
+      <label for="staffName">Tên nhân viên:</label>
+      <input
+        type="text"
+        id="staffName"
+        placeholder="Nhập tên nhân viên"
+        required
+      /><br /><br />
 
+      <div id="usernamePasswordGroup" style="display: none">
+        <label for="usernameStaff">Username:</label>
+        <input
+          type="text"
+          id="usernameStaff"
+          placeholder="Nhập tên đăng nhập"
+        /><br /><br />
 
-        <select id="role" required>
-            <option value="">Chọn chức vụ</option>
-            <option value="admin">admin</option>
-            <option value="Quản lý">Quản lý</option>
-            <option value="Bếp trưởng">Bếp trưởng</option>
-            <option value="Đầu bếp">Đầu bếp</option>
-            <option value="Phụ bếp">Phụ bếp</option>
-            <option value="Bồi bàn">Bồi bàn</option>
-            <option value="Thu ngân">Thu ngân</option>
-        </select><br />
-        <label for="image">Hình ảnh:</label>
-        <input type="file" id="image1" accept="image/*" /><br />
-        <img id="imagePreview1" style="max-width: 150px; max-height: 150px;" /><br />
-        <div class="error-message5" style="color: red; display: none;"></div><br />
-    
-        <button id="saveStaffBtn" >Lưu</button>
-        <button id="cancelStaffBtn" class="cancelBtn">Hủy</button>
+        <label for="passwordStaff">Password:</label>
+        <input
+          type="text"
+          id="passwordStaff"
+          placeholder="Nhập mật khẩu"
+        /><br /><br />
+      </div>
+
+      <select id="role" required>
+        <option value="">Chọn chức vụ</option>
+        <option value="admin">admin</option>
+        <option value="Quản lý">Quản lý</option>
+        <option value="Bếp trưởng">Bếp trưởng</option>
+        <option value="Đầu bếp">Đầu bếp</option>
+        <option value="Phụ bếp">Phụ bếp</option>
+        <option value="Bồi bàn">Bồi bàn</option>
+        <option value="Thu ngân">Thu ngân</option></select
+      ><br />
+      <label for="image">Hình ảnh:</label>
+      <input type="file" id="image1" accept="image/*" /><br />
+      <img
+        id="imagePreview1"
+        style="max-width: 150px; max-height: 150px"
+      /><br />
+      <div class="error-message5" style="color: red; display: none"></div>
+      <br />
+
+      <button id="saveStaffBtn">Lưu</button>
+      <button id="cancelStaffBtn" class="cancelBtn">Hủy</button>
     </div>
     <!-- Modal Sửa nhân viên -->
-    <div id="editStaffModal" class="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:1000;">
-        <h2>Chỉnh sửa thông tin nhân viên</h2>
-        <label for="staffNameEdit">Tên nhân viên:</label>
-        <input type="text" id="staffNameEdit" required /><br /><br />
+    <div
+      id="editStaffModal"
+      class="editModal"
+      style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 1000;
+      "
+    >
+      <h2>Chỉnh sửa thông tin nhân viên</h2>
+      <label for="staffNameEdit">Tên nhân viên:</label>
+      <input type="text" id="staffNameEdit" required /><br /><br />
 
-        <label for="usernameStaffEdit">Username:</label>
-        <input type="text" id="usernameStaffEdit" readonly required /><br /><br />
+      <label for="usernameStaffEdit">Username:</label>
+      <input type="text" id="usernameStaffEdit" readonly required /><br /><br />
 
-        <label for="passwordStaffEdit">Password:</label>
-        <input type="text" id="passwordStaffEdit" required /><br /><br />
+      <label for="passwordStaffEdit">Password:</label>
+      <input type="text" id="passwordStaffEdit" required /><br /><br />
 
-        
-        <select id="roleEdit" required>
-            <option value="">Chọn chức vụ</option>
-            <option value="admin">admin</option>
-            <option value="Quản lý">Quản lý</option>
-            <option value="Bếp trưởng">Bếp trưởng</option>
-            <option value="Đầu bếp">Đầu bếp</option>
-            <option value="Phụ bếp">Phụ bếp</option>
-            <option value="Bồi bàn">Bồi bàn</option>
-            <option value="Thu ngân">Thu ngân</option>
-        </select><br />
-        <label for="imageUpload">Hình ảnh:</label>
-        <input type="file" id="imageUpload1" accept="image/*" /><br />
-    
-        <img id="currentImage1" src="" alt="Hình ảnh hiện tại" style="width: 100px; height: 100px; display: none;" /><br /><br />
-        
+      <select id="roleEdit" required>
+        <option value="">Chọn chức vụ</option>
+        <option value="admin">admin</option>
+        <option value="Quản lý">Quản lý</option>
+        <option value="Bếp trưởng">Bếp trưởng</option>
+        <option value="Đầu bếp">Đầu bếp</option>
+        <option value="Phụ bếp">Phụ bếp</option>
+        <option value="Bồi bàn">Bồi bàn</option>
+        <option value="Thu ngân">Thu ngân</option></select
+      ><br />
+      <label for="imageUpload">Hình ảnh:</label>
+      <input type="file" id="imageUpload1" accept="image/*" /><br />
 
-        <div class="error-message6" style="color: red; display: none;"></div><br />
-        <button id="saveEditStaffBtn">Lưu</button>
-        <button id="cancelEditStaffBtn" class="cancelBtn">Hủy</button>
+      <img
+        id="currentImage1"
+        src=""
+        alt="Hình ảnh hiện tại"
+        style="width: 100px; height: 100px; display: none"
+      /><br /><br />
+
+      <div class="error-message6" style="color: red; display: none"></div>
+      <br />
+      <button id="saveEditStaffBtn">Lưu</button>
+      <button id="cancelEditStaffBtn" class="cancelBtn">Hủy</button>
     </div>
     <!-------------------------------------------------------------- QL Nhân viên-------------------------------------------->
     <div class="content" id="ThongKeContent">
-        <h1>Thống kê</h1>
-        <!-- Phần chứa 3 ô nhỏ -->
-        <div class="stats-container">
-            <div class="stat-box">
-                <h3>Doanh số</h3>
-                <p>Hằng ngày: <span id="dailyRevenue"></span></p>
-                <p>7 ngày: <span id="weeklyRevenue"></span></p>
-                <p>30 ngày: <span id="monthlyRevenue"></span></p>
+      <!-- <h1>Thống kê</h1> -->
+      <!-- Phần chứa 3 ô nhỏ -->
+      <div class="stats-container" style="width: 100%">
+        <div class="row" style="width: 100%">
+          <!-- Cột 1: 3 phần tử -->
+          <div class="col-12 col-md-6" style="padding-bottom: 20px">
+            <div class="row">
+              <div class="col-12" style="margin-bottom: 20px">
+                <div class="stat-box">
+                  <h3 class="stat-box-heading-text">Tổng quan</h3>
+                  <p>Thông tin tổng quan ở đây</p>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="stat-box">
+                  <div class="stat-box-heading">
+                    <h3 class="stat-box-heading-text">Doanh số</h3>
+                    <span class="icon-container">
+                      <img src="icons/IconMoney.svg" alt="Money Icon" />
+                    </span>
+                  </div>
+                  <div class="stat-box-footer">
+                    <p class="stat-box-footer-text">
+                      Hằng ngày: <span id="dailyRevenue"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="stat-box">
+                  <div class="stat-box-heading">
+                    <h3 class="stat-box-heading-text">Số lượng đơn hàng</h3>
+                    <span class="icon-container">
+                      <img src="icons/IconMoney.svg" alt="Money Icon" />
+                    </span>
+                  </div>
+                  <div class="stat-box-footer">
+                    <p class="stat-box-footer-text">
+                      Hằng ngày: <span id="dailyOrders"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Cột 2: 1 phần tử -->
+          <div class="col-12 col-md-6">
             <div class="stat-box">
-                <h3>Số lượng đơn hàng</h3>
-                <p>Hằng ngày: <span id="dailyOrders"></span></p>
-                <p>7 ngày: <span id="weeklyOrders"></span></p>
-                <p>30 ngày: <span id="monthlyOrders"></span></p>
+              <h3 class="stat-box-heading-text">Khách hàng hàng đầu</h3>
+              <p>
+                <span class="rank-circle rank-1">1</span>:
+                <span id="top1Customer"></span>
+              </p>
+              <p>
+                <span class="rank-circle rank-2">2</span>:
+                <span id="top2Customer"></span>
+              </p>
+              <p>
+                <span class="rank-circle rank-3">3</span>:
+                <span id="top3Customer"></span>
+              </p>
             </div>
-            <div class="stat-box">
-                <h3>Khách hàng hàng đầu</h3>
-                <p><span class="rank-circle rank-1">1</span>: <span id="top1Customer"></span></p>
-                <p><span class="rank-circle rank-2">2</span>: <span id="top2Customer"></span></p>
-                <p><span class="rank-circle rank-3">3</span>: <span id="top3Customer"></span></p>
-            </div>
-            
-        </div><hr>
-        
-        <!-- Phần chứa biểu đồ -->
-        <div id="chartContainer">
-            <h3 style="padding-left: 400px;">Doanh thu từng tháng</h3>
-            <canvas id="revenueChart"></canvas>
-        </div><hr>
-        
-        <!-- Bảng xếp hạng 5 món ăn bán chạy nhất -->
-        <div class="top-dishes">
-            <h3 style="padding-left: 500px;">Top 5 Món ăn bán chạy nhất</h3>
-            <table id="topDishesTable">
-                <thead>
-                    <tr>
-                        <th>Hạng</th>
-                        <th>Tên Món</th>
-                        <th>Số lượng bán</th>
-                    </tr>
-                </thead>
-                <tbody id="topDishesBody">
-                    <!-- Dữ liệu món ăn sẽ được thêm vào đây -->
-                </tbody>
-            </table>
+          </div>
         </div>
+      </div>
+
+      <!-- Phần chứa biểu đồ -->
+      <div id="chartContainer">
+        <h3>Doanh thu từng tháng</h3>
+        <canvas id="revenueChart"></canvas>
+      </div>
+
+      <!-- Bảng xếp hạng 5 món ăn bán chạy nhất -->
+      <div class="top-dishes">
+        <h3 style="padding-left: 500px">Top 5 Món ăn bán chạy nhất</h3>
+        <table id="topDishesTable">
+          <thead>
+            <tr>
+              <th>Hạng</th>
+              <th>Tên Món</th>
+              <th>Số lượng bán</th>
+            </tr>
+          </thead>
+          <tbody id="topDishesBody">
+            <!-- Dữ liệu món ăn sẽ được thêm vào đây -->
+          </tbody>
+        </table>
+      </div>
     </div>
-    
-    <style>
-        /* CSS cho cấu trúc và kiểu dáng */
-        .stats-container {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-    
-        .stat-box {
-            flex: 1;
-            background-color: #f0f0f0;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Thêm shadow cho các ô */
-        }
-    
-        #chartContainer {
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
-            
-        }
-    
-        #revenueChart {
-            width: 100%;
-            height: 500px;
-        }
-    
-        .top-dishes {
-            margin-top: 20px;
-        }
-    
-        #topDishesTable {
-            width: 100%;
-            border-collapse: collapse;
-        }
-    
-        #topDishesTable th, #topDishesTable td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-    
-        #topDishesTable th {
-            background-color: #f2f2f2;
-        }
-    
-        /* Định dạng vòng tròn xếp hạng */
-        .rank-circle {
-            display: inline-block;
-            width: 25px;
-            height: 25px;
-            line-height: 25px;
-            text-align: center;
-            border-radius: 50%;
-            color: white;
-            font-weight: bold;
-            margin-right: 8px;
-        }
-    
-        /* Màu sắc cho các hạng */
-        .rank-1 {
-            background-color: red;
-        }
-    
-        .rank-2 {
-            background-color: yellow;
-            color: black; /* Màu chữ đen để dễ đọc trên nền vàng */
-        }
-    
-        .rank-3 {
-            background-color: green;
-        }
-    </style>
-    
-    
-</body>
+  </body>
 </html>
