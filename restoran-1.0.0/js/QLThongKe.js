@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     });
-
+    
     // Lấy dữ liệu biểu đồ từ API
     async function fetchMenuData() {
         try {
