@@ -11,6 +11,49 @@ $(document).ready(function () {
         return price ? price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") : "0";
     }
 
+    /*-------------------------------------------------Animation & ovelay------------------------------------------------*/
+    function closeModal2() {
+    
+        $("#notificationModal").addClass("closing");
+        $("#confirmDeleteModal2").addClass("closing");
+        setTimeout(function () {
+    
+            $("#notificationModal").hide();;
+            $("#confirmDeleteModal2").hide();
+            $("#overlay").hide(); 
+
+            $("#notificationModal").removeClass("closing");
+            $("#confirmDeleteModal2").removeClass("closing");
+        }, 500); 
+    }
+    function closeModal() {
+        $("#editVoucherModal").addClass("closing");
+        $("#addVoucherModal").addClass("closing");
+        
+        setTimeout(function () {
+            $("#editVoucherModal").hide();
+            $("#addVoucherModal").hide();
+            $("#overlay").hide();
+            resetVoucherModal();
+            $("#addVoucherModal").removeClass("closing");
+            $("#editVoucherModal").removeClass("closing");
+        }, 900); 
+    }
+    $("#overlay").click(function (e) {
+        if ($(e.target).is("#overlay")) {
+            closeModal();
+            closeModal2()
+        }
+    });
+
+    function resetVoucherModal() {
+        $("#voucherType").val(""); // Xóa tên món ăn
+        $("#voucherPoint").val(""); // Reset phân loại
+        
+        
+    }
+    /*-------------------------------------------------Hiển thị danh sách------------------------------------------------*/
+
     function loadVouchers() {
         $.ajax({
             url: "https://resmant1111-001-site1.jtempurl.com/Voucher/List",
@@ -22,8 +65,11 @@ $(document).ready(function () {
                     var row = [
                         item.voucherType + " %",
                         formatPrice(item.voucherPoint),
-                        `<button class="btn-edit2" data-id="${item.voucherId}">Sửa</button>
-                         <button class="btn-delete2" data-id="${item.voucherId}">Xóa</button>`
+                        `<a id="btn-edit" class="btn-edit2" data-id="${item.voucherId}"><i class="fa-solid fa-eye"></i></a>
+
+                        <div class="divider"></div>
+
+                         <a id="btn-delete" class="btn-delete2" data-id="${item.voucherId}"><i class="fa-solid fa-trash"></i></a>`
                     ];
                     table.row.add(row).draw();
                 });
@@ -35,12 +81,13 @@ $(document).ready(function () {
     }
     loadVouchers();
 
-    // Xóa voucher
+    /*-------------------------------------------------Xóa------------------------------------------------*/
     let voucherIdToDelete;
 
     $(document).on('click', '.btn-delete2', function () {
         voucherIdToDelete = $(this).data('id');
         $("#confirmDeleteModal2").show();
+        $("#overlay").show();
     });
 
     $("#confirmDeleteBtn2").on("click", function () {
@@ -60,16 +107,17 @@ $(document).ready(function () {
     });
 
     $("#cancelDeleteBtn2").on("click", function () {
-        $("#confirmDeleteModal2").hide();
+        closeModal2();
     });
 
-    // Thêm voucher
+/*-------------------------------------------------Thêm------------------------------------------------*/
     $("#addVoucherBtn").click(function () {
         $("#addVoucherModal").show();
+        $("#overlay").show();
     });
 
     $("#cancelVoucherBtn").click(function () {
-        $("#addVoucherModal").hide();
+        closeModal();
     });
 
     $("#saveVoucherBtn").click(function () {
@@ -111,7 +159,7 @@ $(document).ready(function () {
         });
     });
 
-    // Chỉnh sửa voucher
+    /*-------------------------------------------------Sửa------------------------------------------------*/
     let VoucherId;
 
     $(document).on('click', '.btn-edit2', function () {
@@ -123,6 +171,7 @@ $(document).ready(function () {
                 $("#voucherTypeEdit").val(voucher.voucherType);
                 $("#voucherPointEdit").val(voucher.voucherPoint);
                 $("#editVoucherModal").show();
+                $("#overlay").show();
             },
             error: function (xhr, status, error) {
                 console.error("Không thể tải thông tin voucher:", error);
@@ -131,7 +180,7 @@ $(document).ready(function () {
     });
 
     $("#cancelEditVoucherBtn").click(function () {
-        $("#editVoucherModal").hide();
+        closeModal();
     });
 
     $("#saveEditVoucherBtn").click(function () {
@@ -180,6 +229,6 @@ $(document).ready(function () {
 
     // Khi nhấn nút Đóng trong modal thông báo
     $("#closeNotificationBtn").click(function () {
-        $("#notificationModal").hide(); // Ẩn modal thông báo
+        closeModal2(); 
     });
 });

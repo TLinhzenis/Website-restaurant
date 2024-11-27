@@ -30,7 +30,55 @@ $(document).ready(function () {
         });
     }
 
-    // Hàm load danh sách Nhân viên từ API
+    /*-------------------------------------------------Animation & ovelay------------------------------------------------*/
+    function closeModal2() {
+    
+        $("#notificationModal").addClass("closing");
+        $("#confirmDeleteModal3").addClass("closing");
+        setTimeout(function () {
+    
+            $("#notificationModal").hide();;
+            $("#confirmDeleteModal3").hide();
+            $("#overlay").hide(); 
+
+            $("#notificationModal").removeClass("closing");
+            $("#confirmDeleteModal3").removeClass("closing");
+        }, 500); 
+    }
+    function closeModal() {
+        $("#editStaffModal").addClass("closing");
+        $("#addStaffModal").addClass("closing");
+        
+        setTimeout(function () {
+            $("#editStaffModal").hide();
+            $("#addStaffModal").hide();
+            $("#overlay").hide();
+            resetStaffModal();
+            $("#addStaffModal").removeClass("closing");
+            $("#editStaffModal").removeClass("closing");
+        }, 900); 
+    }
+    $("#overlay").click(function (e) {
+        if ($(e.target).is("#overlay")) {
+            closeModal();
+            closeModal2()
+        }
+    });
+
+    function resetStaffModal() {
+        $("#staffName").val(""); // Xóa tên món ăn
+        $("#usernameStaff").val(""); // Reset phân loại
+        $("#passwordStaff").val(""); // Xóa giá
+        $("#role").val(""); // Xóa mô tả
+        $("#image1").val(""); // Xóa file ảnh
+        const imagePreview = $("#imagePreview1");
+        imagePreview.attr("src", ""); // Xóa ảnh xem trước
+        
+    }
+    
+
+
+/*-------------------------------------------------Hiển thị danh sách------------------------------------------------*/
     function loadStaffs() {
         $.ajax({
             url: "https://resmant1111-001-site1.jtempurl.com/staff/List",
@@ -48,8 +96,11 @@ $(document).ready(function () {
                         item.password,
                         item.role,
                         imageUrl ? `<img src="${imageUrl}" alt="Hình ảnh" style="width: 100px; height: 100px;" />` : 'Không có ảnh',
-                        `<button class="btn-edit3" data-id="${item.staffId}">Sửa</button>
-                         <button class="btn-delete3" data-id="${item.staffId}">Xóa</button>`
+                        `<a id="btn-edit" class="btn-edit3" data-id="${item.staffId}"><i class="fa-solid fa-eye"></i></a>
+                        
+                        <div class="divider"></div>
+
+                         <a id="btn-delete" class="btn-delete3" data-id="${item.staffId}"><i class="fa-solid fa-trash"></i></a>`
                     ];
                     table.row.add(row).draw(); // Thêm hàng mới
                 });
@@ -64,14 +115,15 @@ $(document).ready(function () {
     loadStaffs();
 
 
-    //Thêm
+/*-------------------------------------------------Thêm------------------------------------------------*/
 
     $("#addStaffBtn").click(function () {
         $("#addStaffModal").show(); // Hiển thị modal thêm món ăn
+        $("#overlay").show();
     });
 
     $("#cancelStaffBtn").click(function () {
-        $("#addStaffModal").hide(); // Ẩn modal
+        closeModal();
     });
     $("#image1").change(function () {
         var imageFile = $("#image1")[0].files[0];
@@ -188,12 +240,14 @@ $(document).ready(function () {
             }
         });
     });
-    // Xử lý sự kiện cho nút "Xóa"
+    /*-------------------------------------------------Xóa------------------------------------------------*/
     let staffIdToDelete;
 
     $(document).on('click', '.btn-delete3', function () {
         staffIdToDelete = $(this).data('id');
         $("#confirmDeleteModal3").show(); // Hiện modal xác nhận
+        $("#overlay").show();
+        
     });
 
     $("#confirmDeleteBtn3").on("click", function () {
@@ -229,10 +283,10 @@ $(document).ready(function () {
     
 
     $("#cancelDeleteBtn3").on("click", function () {
-        $("#confirmDeleteModal3").hide(); // Ẩn modal xác nhận
+        closeModal2();
     });
 
-    // Xử lý sự kiện cho nút "Sửa"
+    /*-------------------------------------------------Sửa------------------------------------------------*/
 
 
     let StaffId;
@@ -289,6 +343,7 @@ $("#imageUpload1").change(function () {
             $("#imageUpload1").val(''); // Đặt lại input file để không giữ file trước đó
 
             $("#editStaffModal").show(); // Hiện modal sửa nhân viên
+            $("#overlay").show();
             },
             error: function (xhr, status, error) {
                 console.error("Không thể tải thông tin nhân viên:", error);
@@ -297,7 +352,7 @@ $("#imageUpload1").change(function () {
     });
     
     $("#cancelEditStaffBtn").click(function () {
-        $("#editStaffModal").hide(); // Ẩn modal sửa nhân viên
+        closeModal();
     });
     
     $("#saveEditStaffBtn").click(function () {
@@ -396,7 +451,7 @@ $("#imageUpload1").change(function () {
 
     // Khi nhấn nút Đóng trong modal thông báo
     $("#closeNotificationBtn").click(function () {
-        $("#notificationModal").hide(); // Ẩn modal thông báo
+        closeModal(); 
     });
 
     $(document).ready(function () {

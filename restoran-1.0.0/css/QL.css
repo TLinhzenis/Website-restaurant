@@ -88,19 +88,65 @@ th {
   color: black;
 }
 /* CSS cho Modal Thêm  */
-.addModal {
-  display: none;
+
+/* Lớp overlay mờ */
+/* Lớp overlay mờ */
+.overlay {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Nền mờ */
+  z-index: 999; /* Đảm bảo nền mờ ở trên tất cả */
+  display: none; /* Ẩn lớp overlay ban đầu */
+}
+
+/* Modal Thêm Món ăn */
+.addModal {
+  position: absolute;
+  right: -400px;
   background: #fff;
   border: 1px solid #ccc;
   padding: 20px;
-  z-index: 1000;
+  z-index: 1001; /* Modal sẽ hiển thị trên overlay */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  border-radius: 8px; /* Bo góc cho modal */
-  width: 400px; /* Độ rộng của modal */
+  border-radius: 8px;
+  width: 400px;
+  height: 100%;
+  animation: slideIn 1s forwards;
+  display: none;
+}
+
+/* Animation trượt vào khi mở */
+@keyframes slideIn {
+  from { right: -400px; }
+  to { right: 0; }
+}
+
+/* Animation trượt vào khi đóng */
+@keyframes slideOut {
+  from { right: 0; }
+  to { right: -450px; }
+}
+
+/* Lớp để áp dụng animation khi đóng modal */
+.addModal.closing {
+  animation: slideOut 1s forwards;
+}
+
+
+
+
+
+.modal-footer {
+  position: absolute;
+  bottom: 50px; /* Căn cách phần dưới cùng */
+  left: 20px; /* Cách mép trái */
+  width: calc(100% - 40px); /* Đảm bảo chiều rộng phù hợp */
+  display: flex; /* Để các nút nằm trên cùng một hàng */
+  justify-content: flex-end; /* Đẩy nút về phía bên phải */
+  gap: 10px; /* Khoảng cách giữa các nút */
 }
 
 .addModal h2 {
@@ -156,17 +202,21 @@ th {
 
 .deleteModal {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: #fff;
   border: 1px solid #ccc;
   padding: 20px;
-  z-index: 1000;
+  z-index: 1001;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 8px; /* Bo góc cho modal */
   width: 400px; /* Độ rộng của modal */
+  animation: slideUp 0.5s ease-out;
+}
+.deleteModal.closing{
+  animation: slideDown 0.5s ease-out;
 }
 
 .deleteModal h2 {
@@ -188,70 +238,7 @@ th {
   color: #000;
 }
 
-/* CSS cho Modal Sửa  */
-.editModal {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 20px;
-  z-index: 1000;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  border-radius: 8px; /* Bo góc cho modal */
-  width: 400px; /* Độ rộng của modal */
-}
 
-.editModal h2 {
-  margin-bottom: 20px; /* Khoảng cách giữa tiêu đề và ô nhập */
-}
-
-.editModal label {
-  font-weight: bold; /* Chữ đậm cho nhãn */
-  margin-bottom: 5px; /* Khoảng cách dưới nhãn */
-  display: block; /* Đảm bảo nhãn nằm trên ô nhập */
-}
-
-.editModal input,
-.editModal textarea {
-  width: calc(100% - 22px); /* Giảm chiều rộng để có khoảng cách bên */
-  padding: 10px;
-  margin-bottom: 15px; /* Khoảng cách giữa các ô nhập */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Đổ bóng cho ô nhập */
-  transition: border-color 0.3s; /* Hiệu ứng chuyển tiếp cho đường viền */
-}
-
-.editModal input:focus,
-.editModal textarea:focus {
-  border-color: #007bff; /* Màu đường viền khi ô nhập được chọn */
-  outline: none; /* Tắt viền mặc định */
-}
-
-.editModal button {
-  background-color: #007bff; /* Màu nền cho nút */
-  color: #fff; /* Màu chữ */
-  border: none; /* Bỏ viền */
-  border-radius: 4px; /* Bo góc cho nút */
-  padding: 10px 15px; /* Khoảng cách bên trong nút */
-  cursor: pointer; /* Hiển thị con trỏ chuột khi hover */
-  transition: background-color 0.3s; /* Hiệu ứng chuyển tiếp cho màu nền */
-}
-
-.editModal button:hover {
-  background-color: #0056b3; /* Màu nền khi hover */
-}
-
-.editModal button.cancelBtn {
-  background-color: #dc3545; /* Màu nền cho nút hủy */
-}
-
-.editModal button.cancelBtn:hover {
-  background-color: #c82333; /* Màu nền khi hover cho nút hủy */
-}
 #MenuTable td:nth-child(4) {
   word-wrap: break-word;
   word-break: break-all;
@@ -259,18 +246,21 @@ th {
 }
 /* CSS cho Modal Sửa  */
 .editModal {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute;
+  right: -400px;
   background: #fff;
   border: 1px solid #ccc;
   padding: 20px;
-  z-index: 1000;
+  z-index: 1001; /* Modal sẽ hiển thị trên overlay */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  border-radius: 8px; /* Bo góc cho modal */
-  width: 400px; /* Độ rộng của modal */
+  border-radius: 8px;
+  width: 400px;
+  height: 100%;
+  animation: slideIn 1s forwards;
+  display: none;
+}
+.editModal.closing {
+  animation: slideOut 1s forwards;
 }
 
 .editModal h2 {
@@ -320,11 +310,11 @@ th {
   background-color: #0056b3; /* Màu nền khi hover */
 }
 
-.editModal button#cancelEditMenuBtn {
+.editModal button.cancelBtn {
   background-color: #dc3545; /* Màu nền cho nút hủy */
 }
 
-.editModal button#cancelEditMenuBtn:hover {
+.editModal button.cancelBtn:hover {
   background-color: #c82333; /* Màu nền khi hover cho nút hủy */
 }
 
@@ -332,20 +322,51 @@ th {
 
 /* CSS cho Modal Thông báo */
 
+/* Animation để modal đi từ dưới lên */
+@keyframes slideUp {
+  0% {
+    opacity: 0; /* Ẩn ban đầu */
+    transform: translate(-50%, 100%); /* Bắt đầu từ dưới màn hình */
+  }
+  100% {
+    opacity: 1; /* Hiện ra đầy đủ */
+    transform: translate(-50%, -50%); /* Kết thúc ở giữa màn hình */
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 1; /* Hiện ra đầy đủ */
+    transform: translate(-50%, -50%); /* Bắt đầu ở giữa màn hình */
+  }
+  100% {
+    opacity: 0; /* Ẩn dần */
+    transform: translate(-50%, 100%); /* Kết thúc ở dưới màn hình */
+  }
+}
+
+/* Notification Modal */
 .notificationModal {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: #fff;
   border: 1px solid #ccc;
   padding: 20px;
-  z-index: 1000;
+  z-index: 1001;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  border-radius: 8px; /* Bo góc cho modal */
-  width: 500px; /* Độ rộng của modal */
+  border-radius: 8px;
+  width: 500px;
+
+  animation: slideUp 0.5s ease-out; /* Thêm hiệu ứng animation */
 }
+.notificationModal.closing{
+  animation: slideDown 0.6s ease-out;
+}
+
+
 
 .notificationModal h2 {
   margin-bottom: 20px; /* Khoảng cách giữa tiêu đề và văn bản */
@@ -370,66 +391,51 @@ th {
   background-color: #fea116; /* Màu nền khi hover */
   color: #000;
 }
-/* QL.html */
-.stats-container {
+
+/* Wrapper chính */
+.stats-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  margin: 20px;
+  gap: 20px; /* Khoảng cách giữa hai container */
 }
-.stat-box {
-  position: relative;
-  border-width: 0;
-  margin-top: 20px;
-  border-radius: 20px;
-  background-color: #ffffff;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+/* Container bên trái */
+.stats-left {
+  flex: 3; /* Tỉ lệ chiều rộng so với container bên phải */
   display: flex;
   flex-direction: column;
-  height: 100%;
+  gap: 20px;
 }
-/* Phần tiêu đề với icon */
-.stat-box-heading {
+
+.stats-left .small-stats {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  gap: 20px; /* Khoảng cách giữa "Doanh số" và "Số lượng đơn hàng" */
 }
 
-.stat-box-heading-text {
-  font-family: "Nunito", sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-}
-.stat-box-footer {
-  position: absolute;
-  bottom: 0;
-  left: 20;
-  align-items: center;
-}
-.stat-box-footer-text {
-  font-family: "Nunito", sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-}
-.icon-container {
-  position: absolute;
-  background-color: #0f172b;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Container bên phải */
+.stats-right {
+  flex: 2; /* Chiếm ít không gian hơn */
 }
 
-.icon-container img {
-  width: 16px;
-  height: 16px;
+/* Hộp tổng quan */
+.stat-box {
+  background-color: #f5f5f5; /* Màu nền nhạt */
+  border: 1px solid #ddd; /* Viền */
+  border-radius: 8px; /* Bo tròn góc */
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  
 }
 
+/* Hộp Tổng quan lớn hơn */
+.stat-box.overview {
+  height: 150px; /* Chiều cao cố định để đồng đều */
+}
+
+/* Hộp nhỏ */
+.stat-box:not(.overview) {
+  flex: 1; /* Đảm bảo Doanh số và Đơn hàng có cùng kích thước */
+  text-align: center;
+}
 /* Cột chứa 3 phần tử */
 .col-12.col-md-6 {
   display: flex;
@@ -472,7 +478,7 @@ th {
 
 /* Định dạng vòng tròn xếp hạng */
 .rank-circle {
-  display: inline-block;
+
   width: 25px;
   height: 25px;
   line-height: 25px;
@@ -481,11 +487,13 @@ th {
   color: white;
   font-weight: bold;
   margin-right: 8px;
+  float: left;
 }
 
 /* Màu sắc cho các hạng */
 .rank-1 {
   background-color: red;
+  
 }
 
 .rank-2 {
@@ -497,3 +505,40 @@ th {
 .rank-3 {
   background-color: green;
 }
+
+.display {
+  border-radius: 10px; /* Bạn có thể điều chỉnh giá trị này theo ý muốn */
+  overflow: hidden; /* Đảm bảo nội dung không vượt ra ngoài góc bo tròn */
+  border: 1px solid #ddd; /* Thêm đường viền cho bảng */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff !important;
+}
+.dataTables_filter {
+ 
+  margin-bottom: 20px; /* Tạo khoảng cách phía dưới */
+}
+.divider {
+  width: 1px; /* Độ rộng của gạch dọc */
+  background-color: #ccc; /* Màu của gạch dọc */
+  height: 30px; /* Chiều cao của gạch dọc */
+  margin: 0 10px; /* Khoảng cách giữa các nút */
+  display: inline-block;
+  vertical-align: middle; /* Căn giữa với các nút */
+}
+#btn-edit:hover{
+  color:#fea116;
+}
+#btn-delete:hover{
+  color:#fea116;
+}
+#MenuTable .mo-ta {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* Dành cho trình duyệt hỗ trợ -webkit */
+  display: box; /* Dành cho trình duyệt không hỗ trợ -webkit */
+  box-orient: vertical; /* Dành cho trình duyệt không hỗ trợ -webkit */
+  line-clamp: 4; /* Phiên bản chuẩn */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Thêm dấu ba chấm khi bị cắt */
+}
+

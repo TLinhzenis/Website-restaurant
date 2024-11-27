@@ -37,14 +37,9 @@
       href="https://resmant1111-001-site1.jtempurl.com/uploads/Designer.jpeg"
       type="image/png"
     />
-    <!-- Bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
   </head>
 
-  <body>
+  <body class="body">
     <div class="sidebar">
       <div style="display: flex; flex-direction: row; align-items: center">
         <img
@@ -132,20 +127,11 @@
     </div>
 
     <!-- Modal Thêm Món ăn -->
-    <div
+  <div id="overlay" class="overlay">
+      <div
       id="addMenuModal"
       class="addModal"
-      style="
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #fff;
-        border: 1px solid #ccc;
-        padding: 20px;
-        z-index: 1000;
-      "
+      style="display: none;"
     >
       <h2>Thêm Món ăn</h2>
       <label for="itemName">Tên món ăn:</label>
@@ -170,21 +156,8 @@
         inputmode="numeric"
         placeholder="Nhập giá"
         required
-        oninput="formatCurrency(this)"
-      /><br />
-      <script>
-        function formatCurrency(input) {
-          // Lấy giá trị và loại bỏ các ký tự không phải số
-          let value = input.value.replace(/[^0-9]/g, "");
-          // Giới hạn độ dài tối đa là 8 chữ số
-          if (value.length > 8) {
-            value = value.substring(0, 8);
-          }
-          // Định dạng lại giá trị
-          input.value = new Intl.NumberFormat("vi-VN").format(value);
-        }
-      </script>
-
+        
+      /><br />      
       <label for="description">Mô tả:</label>
       <textarea id="description" placeholder="Mô tả"></textarea><br />
 
@@ -197,24 +170,17 @@
       <div class="error-message" style="color: red; display: none"></div>
       <br />
 
-      <button id="saveMenuBtn">Lưu</button>
-      <button id="cancelMenuBtn" class="cancelBtn">Hủy</button>
+      <div class="modal-footer">
+        <button id="saveMenuBtn">Lưu</button>
+        <button id="cancelMenuBtn" class="cancelBtn">Hủy</button>
+      </div>
     </div>
+  </div>
     <!-- Modal Thông Báo -->
+
     <div
       id="notificationModal"
       class="notificationModal"
-      style="
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #fff;
-        border: 1px solid #ccc;
-        padding: 20px;
-        z-index: 1000;
-      "
     >
       <h2>Thông báo</h2>
       <hr />
@@ -223,21 +189,14 @@
       <button id="closeNotificationBtn">Đóng</button>
     </div>
 
+
     <!-- Modal Sửa Món ăn -->
     <div
       id="editMenuModal"
       class="editModal"
-      style="
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #fff;
-        border: 1px solid #ccc;
-        padding: 20px;
-        z-index: 1000;
-      "
+      style="display: none;"
+      
+      
     >
       <h2>Sửa Món ăn</h2>
       <label for="itemNameEdit">Tên món ăn:</label>
@@ -258,7 +217,6 @@
         inputmode="numeric"
         placeholder="Nhập giá"
         required
-        oninput="formatCurrency(this)"
       /><br />
 
       <label for="descriptionEdit">Mô tả:</label>
@@ -276,10 +234,13 @@
 
       <div class="error-message2" style="color: red; display: none"></div>
       <br />
+      <div class="modal-footer">
       <button id="saveEditMenuBtn">Lưu</button>
       <button id="cancelEditMenuBtn" class="cancelBtn">Hủy</button>
+      </div>
     </div>
 
+    
     <!-- Modal để xác nhận xóa món ăn -->
     <div id="confirmDeleteModal" class="deleteModal" style="display: none">
       <h2>Xác Nhận Xóa</h2>
@@ -331,17 +292,6 @@
     <div
       id="editCustomerModal"
       class="editModal"
-      style="
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #fff;
-        border: 1px solid #ccc;
-        padding: 20px;
-        z-index: 1000;
-      "
     >
       <h2>Chỉnh sửa tài khoản</h2>
       <label for="UsernameEdit">Username:</label>
@@ -360,9 +310,10 @@
       <input type="text" id="DayEdit" readonly required /><br />
       <div class="error-message1" style="color: red; display: none"></div>
       <br />
-
+    <div class="modal-footer">
       <button id="saveEditCustomerBtn">Lưu</button>
       <button id="cancelEditCustomerBtn" class="cancelBtn">Hủy</button>
+    </div>
     </div>
 
     <!-------------------------------------------------------------- QL Voucher-------------------------------------------->
@@ -404,17 +355,7 @@
     <div
       id="addVoucherModal"
       class="addModal"
-      style="
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #fff;
-        border: 1px solid #ccc;
-        padding: 20px;
-        z-index: 1000;
-      "
+
     >
       <h2>Thêm voucher</h2>
       <label for="voucherType">Loại voucher:</label>
@@ -435,25 +376,19 @@
       /><br /><br />
       <div class="error-message3" style="color: red; display: none"></div>
       <br />
+      <div class="modal-footer">
+        <div class="modal-footer">
 
-      <button id="saveVoucherBtn">Lưu</button>
-      <button id="cancelVoucherBtn" class="cancelBtn">Hủy</button>
+       <button id="saveVoucherBtn">Lưu</button>
+       <button id="cancelVoucherBtn" class="cancelBtn">Hủy</button>
+        </div>
+      </div>
     </div>
     <!-- Modal Sửa voucher -->
     <div
       id="editVoucherModal"
       class="editModal"
-      style="
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #fff;
-        border: 1px solid #ccc;
-        padding: 20px;
-        z-index: 1000;
-      "
+
     >
       <h2>Chỉnh sửa tài khoản</h2>
       <label for="voucherTypeEdit">Loại voucher:</label>
@@ -468,8 +403,10 @@
 
       <div class="error-message4" style="color: red; display: none"></div>
       <br />
+      <div class="modal-footer">
       <button id="saveEditVoucherBtn">Lưu</button>
       <button id="cancelEditVoucherBtn" class="cancelBtn">Hủy</button>
+      </div>
     </div>
 
     <!-------------------------------------------------------------- QL Nhân viên-------------------------------------------->
@@ -515,17 +452,7 @@
     <div
       id="addStaffModal"
       class="addModal"
-      style="
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #fff;
-        border: 1px solid #ccc;
-        padding: 20px;
-        z-index: 1000;
-      "
+ 
     >
       <h2>Thêm nhân viên</h2>
       <label for="staffName">Tên nhân viên:</label>
@@ -570,25 +497,16 @@
       /><br />
       <div class="error-message5" style="color: red; display: none"></div>
       <br />
-
+      <div class="modal-footer">
       <button id="saveStaffBtn">Lưu</button>
       <button id="cancelStaffBtn" class="cancelBtn">Hủy</button>
+      </div>
     </div>
     <!-- Modal Sửa nhân viên -->
     <div
       id="editStaffModal"
       class="editModal"
-      style="
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #fff;
-        border: 1px solid #ccc;
-        padding: 20px;
-        z-index: 1000;
-      "
+
     >
       <h2>Chỉnh sửa thông tin nhân viên</h2>
       <label for="staffNameEdit">Tên nhân viên:</label>
@@ -622,74 +540,40 @@
 
       <div class="error-message6" style="color: red; display: none"></div>
       <br />
+      <div class="modal-footer">
       <button id="saveEditStaffBtn">Lưu</button>
       <button id="cancelEditStaffBtn" class="cancelBtn">Hủy</button>
+      </div>
     </div>
-    <!-------------------------------------------------------------- QL Nhân viên-------------------------------------------->
+    <!-------------------------------------------------------------- Thống kê-------------------------------------------->
     <div class="content" id="ThongKeContent">
       <!-- <h1>Thống kê</h1> -->
       <!-- Phần chứa 3 ô nhỏ -->
-      <div class="stats-container" style="width: 100%">
-        <div class="row" style="width: 100%">
-          <!-- Cột 1: 3 phần tử -->
-          <div class="col-12 col-md-6" style="padding-bottom: 20px">
-            <div class="row">
-              <div class="col-12" style="margin-bottom: 20px">
-                <div class="stat-box">
-                  <h3 class="stat-box-heading-text">Tổng quan</h3>
-                  <p>Thông tin tổng quan ở đây</p>
-                </div>
-              </div>
-              <div class="col-12 col-sm-6">
-                <div class="stat-box">
-                  <div class="stat-box-heading">
-                    <h3 class="stat-box-heading-text">Doanh số</h3>
-                    <span class="icon-container">
-                      <img src="icons/IconMoney.svg" alt="Money Icon" />
-                    </span>
-                  </div>
-                  <div class="stat-box-footer">
-                    <p class="stat-box-footer-text">
-                      Hằng ngày: <span id="dailyRevenue"></span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-sm-6">
-                <div class="stat-box">
-                  <div class="stat-box-heading">
-                    <h3 class="stat-box-heading-text">Số lượng đơn hàng</h3>
-                    <span class="icon-container">
-                      <img src="icons/IconMoney.svg" alt="Money Icon" />
-                    </span>
-                  </div>
-                  <div class="stat-box-footer">
-                    <p class="stat-box-footer-text">
-                      Hằng ngày: <span id="dailyOrders"></span>
-                    </p>
-                  </div>
-                </div>
-              </div>
+      <div class="stats-wrapper">
+        <!-- Container bên trái -->
+        <div class="stats-left">
+          <div class="stat-box overview">
+            <h3 class="stat-box-heading-text">Tổng quan <i class="fa-solid fa-list"></i></h3>
+            <p>Thông tin tổng quan ở đây</p>
+          </div>
+          <div class="row small-stats">
+            <div class="stat-box">
+              <h3 class="stat-box-heading-text">Doanh số <i class="fa-solid fa-coins"></i></h3>
+              <p>Hằng ngày: <span id="dailyRevenue"></span></p>
+            </div>
+            <div class="stat-box">
+              <h3 class="stat-box-heading-text">Số lượng đơn hàng <i class="fa-solid fa-cash-register"></i></h3>
+              <p>Hằng ngày: <span id="dailyOrders"></span></p>
             </div>
           </div>
-
-          <!-- Cột 2: 1 phần tử -->
-          <div class="col-12 col-md-6">
-            <div class="stat-box">
-              <h3 class="stat-box-heading-text">Khách hàng hàng đầu</h3>
-              <p>
-                <span class="rank-circle rank-1">1</span>:
-                <span id="top1Customer"></span>
-              </p>
-              <p>
-                <span class="rank-circle rank-2">2</span>:
-                <span id="top2Customer"></span>
-              </p>
-              <p>
-                <span class="rank-circle rank-3">3</span>:
-                <span id="top3Customer"></span>
-              </p>
-            </div>
+        </div>
+        <!-- Container bên phải -->
+        <div class="stats-right">
+          <div class="stat-box">
+            <h3 class="stat-box-heading-text">Khách hàng hàng đầu</h3>
+            <p><span class="rank-circle rank-1">1</span>: <span id="top1Customer"></span></p>
+            <p><span class="rank-circle rank-2">2</span>: <span id="top2Customer"></span></p>
+            <p><span class="rank-circle rank-3">3</span>: <span id="top3Customer"></span></p>
           </div>
         </div>
       </div>

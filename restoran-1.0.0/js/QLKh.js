@@ -22,8 +22,33 @@ $(document).ready(function () {
         const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Asia/Ho_Chi_Minh' };
         return vietnamTime.toLocaleString('vi-VN', options);
     }
+/*-------------------------------------------------Animation & ovelay------------------------------------------------*/
+    function closeModal2() {
+    
+        $("#notificationModal").addClass("closing");
+        $("#confirmDeleteModal1").addClass("closing");
+        setTimeout(function () {
+    
+            $("#notificationModal").hide();;
+            $("#confirmDeleteModal1").hide();
+            $("#overlay").hide(); 
 
-    // Hàm load danh sách khách hàng từ API
+            $("#notificationModal").removeClass("closing");
+            $("#confirmDeleteModal1").removeClass("closing");
+        }, 500); 
+    }
+    function closeModal() {
+        $("#editCustomerModal").addClass("closing");
+        
+        setTimeout(function () {
+            $("#editCustomerModal").hide();
+            $("#overlay").hide();
+             
+            $("#editCustomerModal").removeClass("closing");
+        }, 900); 
+    }
+
+/*-------------------------------------------------Hiển thị danh sách------------------------------------------------*/
     function loadCustomers() {
         $.ajax({
             url: "https://resmant1111-001-site1.jtempurl.com/Customer/List",
@@ -40,17 +65,20 @@ $(document).ready(function () {
                         item.phoneNumber,
                         formatDateToVietnameseTimezone(item.dateJoined), // Chuyển đổi và hiển thị ngày tham gia
                         formatPrice(item.point),
-                        `<button class="btn-edit1" data-id="${item.customerId}">Sửa</button>
-                         <button class="btn-delete1" data-id="${item.customerId}">Xóa</button>`
+                        `<a id="btn-edit" class="btn-edit1" data-id="${item.customerId}"><i class="fa-solid fa-eye"></i></a>
+                        
+                        <div class="divider"></div>
+                        
+                        <a id="btn-delete" class="btn-delete1" data-id="${item.customerId}"><i class="fa-solid fa-trash"></i></a>`
                     ];
                     table.row.add(row) // Thêm hàng mới
                 });
-                table.draw(); // Hoàn tất thêm các hàng
+                table.draw(); 
                 // Hạn chế quyền truy cập
-                const userRole = localStorage.getItem('role'); // 'admin' hoặc 'user'
+                const userRole = localStorage.getItem('role'); 
 
                 if (userRole !== 'admin') {
-                    // Vô hiệu hóa tất cả các nút "Sửa" cho user không phải admin
+                    
                     $('.btn-edit1').attr('disabled', true).css('color', 'gray').css('pointer-events', 'none');
                 }
                 
@@ -75,12 +103,14 @@ $(document).ready(function () {
     // Gọi hàm loadCustomers khi trang được tải
     loadCustomers();
 
-    // Xử lý sự kiện cho nút "Xóa"
+    /*-------------------------------------------------Xóa------------------------------------------------*/
+
     let customerIdToDelete;
 
     $(document).on('click', '.btn-delete1', function () {
         customerIdToDelete = $(this).data('id');
         $("#confirmDeleteModal1").show(); // Hiện modal xác nhận
+        $("#overlay").show();
     });
 
     $("#confirmDeleteBtn1").on("click", function () {
@@ -100,10 +130,14 @@ $(document).ready(function () {
     });
 
     $("#cancelDeleteBtn1").on("click", function () {
-        $("#confirmDeleteModal1").hide(); // Ẩn modal xác nhận
+        closeModal2();
     });
 
-    // Xử lý sự kiện cho nút "Sửa"
+
+
+    
+    /*-------------------------------------------------Sửa------------------------------------------------*/
+
     let CustomerId;
 
     $(document).on('click', '.btn-edit1', function () {
@@ -120,6 +154,7 @@ $(document).ready(function () {
                 $("#PointEdit").val(customer.point);
                 $("#DayEdit").val(formatDateToVietnameseTimezone(customer.dateJoined)); // Chuyển đổi ngày tham gia
                 $("#editCustomerModal").show(); // Hiện modal sửa món ăn
+                $("#overlay").show();
             },
             error: function (xhr, status, error) {
                 console.error("Không thể tải thông tin tài khoản:", error);
@@ -128,7 +163,8 @@ $(document).ready(function () {
     });
 
     $("#cancelEditCustomerBtn").click(function () {
-        $("#editCustomerModal").hide(); // Ẩn modal sửa món ăn
+        closeModal(); 
+
     });
 
     $("#saveEditCustomerBtn").click(function () {
@@ -200,6 +236,7 @@ $(document).ready(function () {
             success: function (response) {
                 loadCustomers();
                 $("#editCustomerModal").hide();
+                
                 showNotification("Tài khoản đã được cập nhật thành công!");
             },
             error: function (xhr, status, error) {
@@ -216,6 +253,6 @@ $(document).ready(function () {
 
     // Khi nhấn nút Đóng trong modal thông báo
     $("#closeNotificationBtn").click(function () {
-        $("#notificationModal").hide(); // Ẩn modal thông báo
+        closeModal2(); 
     });
 });
