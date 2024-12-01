@@ -118,7 +118,7 @@ document.querySelector('.login100-form-btn').addEventListener('click', function 
         return; // Ngừng thực hiện nếu mật khẩu trống
     }
 
-    fetch(`https://resmant1111-001-site1.jtempurl.com/Customer/Login?username=${username}&password=${password}`, {
+    fetch(`https://resmant11111-001-site1.anytempurl.com/Customer/Login?username=${username}&password=${password}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

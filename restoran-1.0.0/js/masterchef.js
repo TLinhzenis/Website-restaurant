@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     function fetchStaffs() {
         $.ajax({
-            url: 'https://resmant1111-001-site1.jtempurl.com/Staff/List', // API lấy danh sách voucher
+            url: 'https://resmant11111-001-site1.anytempurl.com/Staff/List', // API lấy danh sách voucher
             method: 'GET',
             success: function(data) {
                 renderVoucherList(data);
@@ -28,7 +28,7 @@ $(document).ready(function() {
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="team-item text-center rounded overflow-hidden">
                             <div class="rounded-circle overflow-hidden m-4">
-                                <img class="img-fluid" src="https://resmant1111-001-site1.jtempurl.com/uploads/${staff.image}" alt="${staff.fullName}" style="height: 252px;">
+                                <img class="img-fluid" src="https://resmant11111-001-site1.anytempurl.com/uploads/${staff.image}" alt="${staff.fullName}" style="height: 252px;">
                             </div>
                             <h5 class="mb-0">${staff.fullName}</h5>
                             <small>${staff.role}</small>

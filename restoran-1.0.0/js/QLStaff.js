@@ -81,14 +81,14 @@ $(document).ready(function () {
 /*-------------------------------------------------Hiển thị danh sách------------------------------------------------*/
     function loadStaffs() {
         $.ajax({
-            url: "https://resmant1111-001-site1.jtempurl.com/staff/List",
+            url: "https://resmant11111-001-site1.anytempurl.com/staff/List",
             method: "GET",
             success: function (response) {
                 console.log(response); // Kiểm tra phản hồi API
                 table.clear(); // Xóa dữ liệu cũ
 
                 response.forEach(function (item) {
-                    var imageUrl = item.image ? `https://resmant1111-001-site1.jtempurl.com/uploads/${item.image}` : '';
+                    var imageUrl = item.image ? `https://resmant11111-001-site1.anytempurl.com/uploads/${item.image}` : '';
 
                     var row = [
                         item.fullName,
@@ -186,7 +186,7 @@ $(document).ready(function () {
         formData.append("file", imageFile);
         
         $.ajax({
-            url: "https://resmant1111-001-site1.jtempurl.com/controller/upload-image", // URL đến API upload ảnh
+            url: "https://resmant11111-001-site1.anytempurl.com/controller/upload-image", // URL đến API upload ảnh
             type: "POST",
             data: formData,
             contentType: false,
@@ -204,7 +204,7 @@ $(document).ready(function () {
             };
 
             $.ajax({
-                url: "https://resmant1111-001-site1.jtempurl.com/Staff/Insert",
+                url: "https://resmant11111-001-site1.anytempurl.com/Staff/Insert",
                 method: "POST",
                 contentType: "application/json",
                 data: JSON.stringify(newStaffItem),
@@ -252,7 +252,7 @@ $(document).ready(function () {
 
     $("#confirmDeleteBtn3").on("click", function () {
         $.ajax({
-            url: `https://resmant1111-001-site1.jtempurl.com/staff/Delete?id=${staffIdToDelete}`,
+            url: `https://resmant11111-001-site1.anytempurl.com/staff/Delete?id=${staffIdToDelete}`,
             method: "POST",
             success: function (response) {
                 loadStaffs();
@@ -268,7 +268,7 @@ $(document).ready(function () {
 
     function deleteImage(imageName1) {
         $.ajax({
-            url: `https://resmant1111-001-site1.jtempurl.com/controller/delete-image`,
+            url: `https://resmant11111-001-site1.anytempurl.com/controller/delete-image`,
             method: "POST",
             data: { imageName1: imageName1 },
             success: function (response) {
@@ -313,7 +313,7 @@ $("#imageUpload1").change(function () {
     $(document).on('click', '.btn-edit3', function () {
         StaffId = $(this).data('id'); // Lưu ID nhân viên cần sửa
         $.ajax({
-            url: `https://resmant1111-001-site1.jtempurl.com/Staff/GetById?id=${StaffId}`,
+            url: `https://resmant11111-001-site1.anytempurl.com/Staff/GetById?id=${StaffId}`,
             method: "GET",
             success: function (staff) {
                 $("#staffNameEdit").val(staff.fullName);
@@ -333,7 +333,7 @@ $("#imageUpload1").change(function () {
                 // Nếu nhân viên có ảnh
             if (staff.image) {
                 $("#imageNameEdit1").text(staff.image); // Cập nhật tên file ảnh
-                $("#currentImage1").attr("src", `https://resmant1111-001-site1.jtempurl.com/uploads/${staff.image}`).show();
+                $("#currentImage1").attr("src", `https://resmant11111-001-site1.anytempurl.com/uploads/${staff.image}`).show();
             } else {
                 $("#imageNameEdit1").text("Không có ảnh");
                 $("#currentImage1").hide();
@@ -389,7 +389,7 @@ $("#imageUpload1").change(function () {
     
             // Upload ảnh mới
             $.ajax({
-                url: "https://resmant1111-001-site1.jtempurl.com/controller/upload-image",
+                url: "https://resmant11111-001-site1.anytempurl.com/controller/upload-image",
                 method: "POST",
                 data: formData,
                 contentType: false,
@@ -426,7 +426,7 @@ $("#imageUpload1").change(function () {
 
         function updatedStaff1(updatedStaff) {
         $.ajax({
-            url: "https://resmant1111-001-site1.jtempurl.com/Staff/Update",
+            url: "https://resmant11111-001-site1.anytempurl.com/Staff/Update",
             method: "PUT",
             contentType: "application/json",
             data: JSON.stringify(updatedStaff),

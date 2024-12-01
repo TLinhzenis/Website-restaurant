@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     function fetchMenuItems() {
         $.ajax({
-            url: 'https://resmant1111-001-site1.jtempurl.com/Menu/List', // Địa chỉ API để lấy danh sách món ăn
+            url: 'https://resmant11111-001-site1.anytempurl.com/Menu/List', // Địa chỉ API để lấy danh sách món ăn
             method: 'GET',
             success: function(data) {
                 console.log(data); // Kiểm tra dữ liệu nhận được từ API
@@ -27,7 +27,7 @@ $(document).ready(function() {
                         <div class="menu-item">
                             <div class="col-lg-6">
                                 <div class="d-flex align-items-center" style="width: 1200px;">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="https://resmant1111-001-site1.jtempurl.com/uploads/${item.image}" alt="${item.itemName}" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded" src="https://resmant11111-001-site1.anytempurl.com/uploads/${item.image}" alt="${item.itemName}" style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>${item.itemName}</span>

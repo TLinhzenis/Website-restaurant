@@ -51,7 +51,7 @@ $(document).ready(function () {
 /*-------------------------------------------------Hiển thị danh sách------------------------------------------------*/
     function loadCustomers() {
         $.ajax({
-            url: "https://resmant1111-001-site1.jtempurl.com/Customer/List",
+            url: "https://resmant11111-001-site1.anytempurl.com/Customer/List",
             method: "GET",
             success: function (response) {
                 table.clear(); // Xóa dữ liệu cũ
@@ -115,7 +115,7 @@ $(document).ready(function () {
 
     $("#confirmDeleteBtn1").on("click", function () {
         $.ajax({
-            url: `https://resmant1111-001-site1.jtempurl.com/Customer/Delete?id=${customerIdToDelete}`,
+            url: `https://resmant11111-001-site1.anytempurl.com/Customer/Delete?id=${customerIdToDelete}`,
             method: "POST",
             success: function (response) {
                 loadCustomers();
@@ -143,7 +143,7 @@ $(document).ready(function () {
     $(document).on('click', '.btn-edit1', function () {
         CustomerId = $(this).data('id'); // Lưu ID món ăn cần sửa
         $.ajax({
-            url: `https://resmant1111-001-site1.jtempurl.com/Customer/GetById?id=${CustomerId}`,
+            url: `https://resmant11111-001-site1.anytempurl.com/Customer/GetById?id=${CustomerId}`,
             method: "GET",
             success: function (customer) {
                 $("#UsernameEdit").val(customer.username);
@@ -229,7 +229,7 @@ $(document).ready(function () {
         };
     
         $.ajax({
-            url: "https://resmant1111-001-site1.jtempurl.com/Customer/Update",
+            url: "https://resmant11111-001-site1.anytempurl.com/Customer/Update",
             method: "PUT",
             contentType: "application/json",
             data: JSON.stringify(updatedCustomer),

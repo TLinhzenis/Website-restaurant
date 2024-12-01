@@ -117,7 +117,7 @@ document.querySelector('.login100-form-btn').addEventListener('click', function 
         return;
     }
 
-    fetch(`https://resmant1111-001-site1.jtempurl.com/staff/Login?username=${username}&password=${password}`, {
+    fetch(`https://resmant11111-001-site1.anytempurl.com/staff/Login?username=${username}&password=${password}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

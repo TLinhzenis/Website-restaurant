@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Lấy dữ liệu biểu đồ từ API
     async function fetchMenuData() {
         try {
-            const response = await fetch('https://resmant1111-001-site1.jtempurl.com/Statistics/YearlyRevenue');
+            const response = await fetch('https://resmant11111-001-site1.anytempurl.com/Statistics/YearlyRevenue');
             if (!response.ok) throw new Error('Không thể lấy dữ liệu từ API.');
 
             const menuItems = await response.json();

@@ -72,7 +72,7 @@ $(document).ready(function() {
     const avatarURL = localStorage.getItem('image');
     const role = localStorage.getItem('role');
     console.log(avatarURL);
-    var imageUrl = `https://resmant1111-001-site1.jtempurl.com/uploads/${avatarURL}` ;
+    var imageUrl = `https://resmant11111-001-site1.anytempurl.com/uploads/${avatarURL}` ;
 
     document.getElementById('avatar').src = imageUrl;
     document.getElementById('userName').innerText = `${fullName}`;

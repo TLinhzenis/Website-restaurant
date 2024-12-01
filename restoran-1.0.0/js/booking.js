@@ -13,7 +13,7 @@ function checkAvailableTables() {
 
     if (date && time) {
         const reservationDateTime = `${date}T${time}:00`;
-        const url = `https://resmant1111-001-site1.jtempurl.com/Reservation/AvailableTables?reservationDateTime=${encodeURIComponent(reservationDateTime)}`;
+        const url = `https://resmant11111-001-site1.anytempurl.com/Reservation/AvailableTables?reservationDateTime=${encodeURIComponent(reservationDateTime)}`;
         
         fetch(url)
             .then(response => {
@@ -61,10 +61,15 @@ document.getElementById("bookNowBtn").addEventListener("click", function(event) 
     const now = new Date();
     const reservationDate = new Date(reservationDateTime);
 
-    if ( !customerId) {
-        showNotification("Bạn chưa đăng nhập, vui lòng đăng nhập để tiếp tục.");
+    if (!customerId) {
+        showNotification(
+            "Bạn chưa đăng nhập, vui lòng đăng nhập để tiếp tục.",
+            "Đăng nhập",  // Text của đường dẫn
+            "LoginUser.html"       // Địa chỉ trang đích
+        );
         return;
     }
+    
 
     if ( !reservationDateTime || !tableId) {
         showNotification("Vui lòng điền đầy đủ thông tin.");
@@ -90,7 +95,7 @@ document.getElementById("bookNowBtn").addEventListener("click", function(event) 
         SpecialRequest: specialRequest
     };
 
-    fetch('https://resmant1111-001-site1.jtempurl.com/Reservation/Insert', {
+    fetch('https://resmant11111-001-site1.anytempurl.com/Reservation/Insert', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -113,11 +118,24 @@ document.getElementById("bookNowBtn").addEventListener("click", function(event) 
     .catch(error => console.error('Error:', error));
 });
 
-function showNotification(message) {
+function showNotification(message, linkText = null, linkHref = null) {
+    // Nếu có liên kết, hiển thị nó
+    if (linkText && linkHref) {
+        $("#notificationLink")
+            .text(linkText) // Nội dung liên kết
+            .attr("href", linkHref) // Địa chỉ liên kết
+            .show(); // Hiển thị liên kết
+    } else {
+        $("#notificationLink").hide(); // Ẩn nếu không có liên kết
+    }
+
+    // Hiển thị thông báo
     $("#notificationMessage").text(message);
     $("#notificationModal").show();
 }
 
+// Ẩn modal khi đóng
 $("#closeNotificationBtn").click(function () {
     $("#notificationModal").hide();
 });
+

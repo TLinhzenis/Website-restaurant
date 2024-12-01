@@ -7,7 +7,7 @@ $(document).ready(function() {
   // Hàm lấy danh sách feedback từ API
   function fetchFeedbacks() {
     $.ajax({
-      url: 'https://resmant1111-001-site1.jtempurl.com/Feedback/List', // API lấy danh sách feedback
+      url: 'https://resmant11111-001-site1.anytempurl.com/Feedback/List', // API lấy danh sách feedback
       method: 'GET',
       success: function(data) {
         renderFeedbackList(data); // Gọi hàm render để hiển thị danh sách feedback
@@ -21,7 +21,7 @@ $(document).ready(function() {
   // Hàm lấy tên khách hàng từ API Customer
   function fetchCustomerName(customerId, callback) {
     $.ajax({
-      url: `https://resmant1111-001-site1.jtempurl.com/Customer/GetById?id=${customerId}`, // Endpoint API lấy thông tin khách hàng
+      url: `https://resmant11111-001-site1.anytempurl.com/Customer/GetById?id=${customerId}`, // Endpoint API lấy thông tin khách hàng
       method: 'GET',
       success: function(customerData) {
         if (customerData && customerData.fullName) {

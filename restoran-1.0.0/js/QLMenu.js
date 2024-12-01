@@ -44,14 +44,14 @@ $(document).ready(function () {
 
     function loadMenuItems() {
         $.ajax({
-            url: "https://resmant1111-001-site1.jtempurl.com/Menu/List",
+            url: "https://resmant11111-001-site1.anytempurl.com/Menu/List",
             method: "GET",
             success: function (response) {
                 table.clear(); // Xóa dữ liệu cũ
     
                 response.forEach(function (item) {
                     // Kiểm tra nếu có hình ảnh thì hiển thị, nếu không thì để trống
-                    var imageUrl = item.image ? `https://resmant1111-001-site1.jtempurl.com/uploads/${item.image}` : '';
+                    var imageUrl = item.image ? `https://resmant11111-001-site1.anytempurl.com/uploads/${item.image}` : '';
 
                     var description = `<div class="mo-ta">${item.description}</div>`;
     
@@ -251,7 +251,7 @@ $("#image").change(function () {
 
         // Tải ảnh lên server trước
         $.ajax({
-            url: "https://resmant1111-001-site1.jtempurl.com/controller/upload-image", // URL đến API upload ảnh
+            url: "https://resmant11111-001-site1.anytempurl.com/controller/upload-image", // URL đến API upload ảnh
             type: "POST",
             data: formData,
             contentType: false,
@@ -269,7 +269,7 @@ $("#image").change(function () {
                 };
 
                 $.ajax({
-                    url: "https://resmant1111-001-site1.jtempurl.com/Menu/Insert",
+                    url: "https://resmant11111-001-site1.anytempurl.com/Menu/Insert",
                     method: "POST",
                     contentType: "application/json",
                     data: JSON.stringify(newMenuItem),
@@ -306,7 +306,7 @@ $("#image").change(function () {
 
     $("#confirmDeleteBtn").on("click", function () {
         $.ajax({
-            url: `https://resmant1111-001-site1.jtempurl.com/Menu/Delete?id=${menuItemIdToDelete}`,
+            url: `https://resmant11111-001-site1.anytempurl.com/Menu/Delete?id=${menuItemIdToDelete}`,
             method: "POST",
             success: function (response) {
                 loadMenuItems();
@@ -322,7 +322,7 @@ $("#image").change(function () {
     });
     function deleteImage(imageName) {
         $.ajax({
-            url: `https://resmant1111-001-site1.jtempurl.com/controller/delete-image`,
+            url: `https://resmant11111-001-site1.anytempurl.com/controller/delete-image`,
             method: "POST",
             data: { imageName: imageName },
             success: function (response) {
@@ -367,7 +367,7 @@ $("#imageUpload").change(function () {
 $(document).on('click', '.btn-edit', function () {
     menuItemId = $(this).data('id'); // Lưu ID món ăn cần sửa
     $.ajax({
-        url: `https://resmant1111-001-site1.jtempurl.com/Menu/GetById?id=${menuItemId}`,
+        url: `https://resmant11111-001-site1.anytempurl.com/Menu/GetById?id=${menuItemId}`,
         method: "GET",
         success: function (menuItem) {
             // Khôi phục tất cả các trường trong modal
@@ -380,7 +380,7 @@ $(document).on('click', '.btn-edit', function () {
             // Nếu món ăn có ảnh
             if (menuItem.image) {
                 $("#imageNameEdit").text(menuItem.image); // Cập nhật tên file ảnh
-                $("#currentImage").attr("src", `https://resmant1111-001-site1.jtempurl.com/uploads/${menuItem.image}`).show();
+                $("#currentImage").attr("src", `https://resmant11111-001-site1.anytempurl.com/uploads/${menuItem.image}`).show();
             } else {
                 $("#imageNameEdit").text("Không có ảnh");
                 $("#currentImage").hide();
@@ -433,7 +433,7 @@ $(document).on('click', '.btn-edit', function () {
     
             // Upload ảnh mới
             $.ajax({
-                url: "https://resmant1111-001-site1.jtempurl.com/controller/upload-image",
+                url: "https://resmant11111-001-site1.anytempurl.com/controller/upload-image",
                 method: "POST",
                 data: formData,
                 contentType: false,
@@ -471,7 +471,7 @@ $(document).on('click', '.btn-edit', function () {
     
     function updateMenuItem(updatedMenuItem) {
         $.ajax({
-            url: "https://resmant1111-001-site1.jtempurl.com/Menu/Update",
+            url: "https://resmant11111-001-site1.anytempurl.com/Menu/Update",
             method: "PUT",
             contentType: "application/json",
             data: JSON.stringify(updatedMenuItem),

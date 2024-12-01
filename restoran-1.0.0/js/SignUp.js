@@ -165,7 +165,7 @@ $(document).ready(function () {
     $(".error-message").hide();
 
     $.ajax({
-      url: "https://resmant1111-001-site1.jtempurl.com/Customer/Insert",
+      url: "https://resmant11111-001-site1.anytempurl.com/Customer/Insert",
       method: "POST",
       contentType: "application/json",
       data: JSON.stringify(newCustomerItem),

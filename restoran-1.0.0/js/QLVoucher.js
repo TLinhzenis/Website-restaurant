@@ -56,7 +56,7 @@ $(document).ready(function () {
 
     function loadVouchers() {
         $.ajax({
-            url: "https://resmant1111-001-site1.jtempurl.com/Voucher/List",
+            url: "https://resmant11111-001-site1.anytempurl.com/Voucher/List",
             method: "GET",
             success: function (response) {
                 table.clear();
@@ -92,7 +92,7 @@ $(document).ready(function () {
 
     $("#confirmDeleteBtn2").on("click", function () {
         $.ajax({
-            url: `https://resmant1111-001-site1.jtempurl.com/Voucher/Delete?id=${voucherIdToDelete}`,
+            url: `https://resmant11111-001-site1.anytempurl.com/Voucher/Delete?id=${voucherIdToDelete}`,
             method: "POST",
             success: function (response) {
                 loadVouchers();
@@ -143,7 +143,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: "https://resmant1111-001-site1.jtempurl.com/Voucher/Insert",
+            url: "https://resmant11111-001-site1.anytempurl.com/Voucher/Insert",
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(newVoucherItem),
@@ -165,7 +165,7 @@ $(document).ready(function () {
     $(document).on('click', '.btn-edit2', function () {
         VoucherId = $(this).data('id');
         $.ajax({
-            url: `https://resmant1111-001-site1.jtempurl.com/Voucher/GetById?id=${VoucherId}`,
+            url: `https://resmant11111-001-site1.anytempurl.com/Voucher/GetById?id=${VoucherId}`,
             method: "GET",
             success: function (voucher) {
                 $("#voucherTypeEdit").val(voucher.voucherType);
@@ -207,7 +207,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: "https://resmant1111-001-site1.jtempurl.com/Voucher/Update",
+            url: "https://resmant11111-001-site1.anytempurl.com/Voucher/Update",
             method: "PUT",
             contentType: "application/json",
             data: JSON.stringify(updatedVoucher),

@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     function fetchVouchers() {
         $.ajax({
-            url: 'https://resmant1111-001-site1.jtempurl.com/Voucher/List', // API lấy danh sách voucher
+            url: 'https://resmant11111-001-site1.anytempurl.com/Voucher/List', // API lấy danh sách voucher
             method: 'GET',
             success: function(data) {
                 renderVoucherList(data);
