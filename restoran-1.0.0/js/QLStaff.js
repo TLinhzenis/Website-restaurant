@@ -451,7 +451,7 @@ $("#imageUpload1").change(function () {
 
     // Khi nhấn nút Đóng trong modal thông báo
     $("#closeNotificationBtn").click(function () {
-        closeModal(); 
+        closeModal2(); 
     });
 
     $(document).ready(function () {
