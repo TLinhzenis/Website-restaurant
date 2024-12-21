@@ -110,12 +110,26 @@ document.getElementById("bookNowBtn").addEventListener("click", function(event) 
     })
     .then(data => {
         showNotification("Đặt bàn thành công!");
-        $("#closeNotificationBtn").off('click').on('click', function () {
-            $("#notificationModal").hide();
-            location.reload(); // Tải lại trang
-        });
     })
     .catch(error => console.error('Error:', error));
+});
+
+function closeModal2() {
+    $("#notificationModal").addClass("closing");
+
+    // Đảm bảo thời gian khớp với animation trong CSS
+    setTimeout(function () {
+        $("#notificationModal").hide();
+        $("#overlay").hide();
+        $("#notificationModal").removeClass("closing");
+        location.reload(); // Tải lại trang
+    }, 500); // Thời gian trùng với slideDown
+}
+
+$("#overlay").click(function (e) {
+    if ($(e.target).is("#overlay")) {
+        closeModal2();
+    }
 });
 
 function showNotification(message, linkText = null, linkHref = null) {
@@ -132,10 +146,12 @@ function showNotification(message, linkText = null, linkHref = null) {
     // Hiển thị thông báo
     $("#notificationMessage").text(message);
     $("#notificationModal").show();
+    $("#overlay").show();
 }
 
 // Ẩn modal khi đóng
 $("#closeNotificationBtn").click(function () {
-    $("#notificationModal").hide();
+    closeModal2();
+    
 });
 

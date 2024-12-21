@@ -1,0 +1,137 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Nền mờ */
+    z-index: 999; /* Đảm bảo nền mờ ở trên tất cả */
+    display: none; /* Ẩn lớp overlay ban đầu */
+    }
+    
+    .notificationModal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 1000;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        width: 500px;
+        animation: slideUp 0.5s ease-out;
+      }
+      
+      .notificationModal.closing {
+        animation: slideDown 0.6s ease-out;
+      }
+    @keyframes slideUp {
+    0% {
+    opacity: 0; /* Ẩn ban đầu */
+    transform: translate(-50%, 100%); /* Bắt đầu từ dưới màn hình */
+    }
+    100% {
+    opacity: 1; /* Hiện ra đầy đủ */
+    transform: translate(-50%, -50%); /* Kết thúc ở giữa màn hình */
+    }
+    }
+    
+    @keyframes slideDown {
+    0% {
+    opacity: 1; /* Hiện ra đầy đủ */
+    transform: translate(-50%, -50%); /* Bắt đầu ở giữa màn hình */
+    }
+    100% {
+    opacity: 0; /* Ẩn dần */
+    transform: translate(-50%, 100%); /* Kết thúc ở dưới màn hình */
+    }
+    }
+    .notificationModal h2 {
+        margin-bottom: 20px;
+        /* Khoảng cách giữa tiêu đề và văn bản */
+        font-size: 25px;
+      }
+  
+      .notificationModal h3 {
+        font-weight: normal;
+        font-size: 17px;
+      }
+  
+      .notificationModal button {
+        background-color: #000;
+        /* Màu nền cho nút */
+        color: white;
+        /* Màu chữ */
+        border: none;
+        /* Bỏ viền */
+        border-radius: 4px;
+        /* Bo góc cho nút */
+        padding: 10px 15px;
+        /* Khoảng cách cho nút */
+        cursor: pointer;
+        /* Con trỏ chuột khi hover */
+        transition: background-color 0.3s;
+        /* Hiệu ứng chuyển tiếp cho màu nền */
+      }
+  
+      .notificationModal button:hover {
+        background-color: #fea116;
+        /* Màu nền khi hover */
+        color: #000;
+      }
+
+      .confirmModal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 1000;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        width: 500px;
+        animation: slideUp 0.5s ease-out;
+      }
+      
+      .confirmModal.closing {
+        animation: slideDown 0.6s ease-out;
+      }
+    .confirmModal h2 {
+        margin-bottom: 20px;
+        /* Khoảng cách giữa tiêu đề và văn bản */
+        font-size: 25px;
+      }
+    
+      .confirmModal h3 {
+        font-weight: normal;
+        font-size: 17px;
+      }
+    
+      .confirmModal button {
+        background-color: #000;
+        /* Màu nền cho nút */
+        color: white;
+        /* Màu chữ */
+        border: none;
+        /* Bỏ viền */
+        border-radius: 4px;
+        /* Bo góc cho nút */
+        padding: 10px 15px;
+        /* Khoảng cách cho nút */
+        cursor: pointer;
+        /* Con trỏ chuột khi hover */
+        transition: background-color 0.3s;
+        /* Hiệu ứng chuyển tiếp cho màu nền */
+      }
+    
+      .confirmModal button:hover {
+        background-color: #fea116;
+        /* Màu nền khi hover */
+        color: #000;
+      }

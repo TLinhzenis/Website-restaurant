@@ -203,6 +203,7 @@ function closeModal2() {
         $("#notificationModal").hide();
         $("#overlay").hide();
         $("#notificationModal").removeClass("closing");
+        location.reload(); // Tải lại trang
     }, 500); // Thời gian trùng với slideDown
 }
 
