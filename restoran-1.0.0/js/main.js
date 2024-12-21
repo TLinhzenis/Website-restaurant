@@ -119,10 +119,12 @@
 
 $(document).ready(function() {
     // Kiểm tra xem người dùng đã đăng nhập chưa
-    const fullName = localStorage.getItem('fullNameU');  
+    const fullName = localStorage.getItem('fullNameU');
+    const point = localStorage.getItem('point');
 
     // Nếu không có tên người dùng, đặt giá trị mặc định là "User"
     document.getElementById('welcomeMessage').innerText = fullName ? fullName : 'Login';
+    // document.getElementById('welcomeMessage1').innerText = point;
 
      // Xử lý sự kiện click cho liên kết người dùng
      $('#userLink').on('click', function(e) {

@@ -130,6 +130,7 @@ document.querySelector('.login100-form-btn').addEventListener('click', function 
         if (data.message === "Đăng nhập thành công") {
             localStorage.setItem('fullNameU', data.fullName);
             localStorage.setItem('customerId', data.customerId);
+            localStorage.setItem('point', data.point);
             window.location.href = 'index.html';
         } else {
             // Hiển thị thông báo lỗi dưới ô nhập liệu
