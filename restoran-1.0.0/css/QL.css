@@ -120,24 +120,28 @@ th {
 
 /* Animation trượt vào khi mở */
 @keyframes slideIn {
-  from { right: -400px; }
-  to { right: 0; }
+  from {
+    right: -400px;
+  }
+  to {
+    right: 0;
+  }
 }
 
 /* Animation trượt vào khi đóng */
 @keyframes slideOut {
-  from { right: 0; }
-  to { right: -450px; }
+  from {
+    right: 0;
+  }
+  to {
+    right: -450px;
+  }
 }
 
 /* Lớp để áp dụng animation khi đóng modal */
 .addModal.closing {
   animation: slideOut 1s forwards;
 }
-
-
-
-
 
 .modal-footer {
   position: absolute;
@@ -215,7 +219,7 @@ th {
   width: 400px; /* Độ rộng của modal */
   animation: slideUp 0.5s ease-out;
 }
-.deleteModal.closing{
+.deleteModal.closing {
   animation: slideDown 0.5s ease-out;
 }
 
@@ -237,7 +241,6 @@ th {
   background-color: #fea116; /* Màu nền khi hover */
   color: #000;
 }
-
 
 #MenuTable td:nth-child(4) {
   word-wrap: break-word;
@@ -362,11 +365,9 @@ th {
 
   animation: slideUp 0.5s ease-out; /* Thêm hiệu ứng animation */
 }
-.notificationModal.closing{
+.notificationModal.closing {
   animation: slideDown 0.6s ease-out;
 }
-
-
 
 .notificationModal h2 {
   margin-bottom: 20px; /* Khoảng cách giữa tiêu đề và văn bản */
@@ -429,7 +430,7 @@ th {
   margin: 0; /* Loại bỏ khoảng cách bên ngoài của các đoạn văn */
   display: flex; /* Sử dụng Flexbox để dễ căn chỉnh các phần tử con */
   align-items: center; /* Căn giữa các phần tử theo chiều dọc */
-  margin-bottom:20px ;
+  margin-bottom: 20px;
 }
 
 /* Hộp Tổng quan lớn hơn */
@@ -484,7 +485,6 @@ th {
 
 /* Định dạng vòng tròn xếp hạng */
 .rank-circle {
-
   width: 25px;
   height: 25px;
   line-height: 25px;
@@ -493,14 +493,11 @@ th {
   color: white;
   font-weight: bold;
   margin-right: 8px;
-
-
 }
 
 /* Màu sắc cho các hạng */
 .rank-1 {
   background-color: red;
-  
 }
 
 .rank-2 {
@@ -527,7 +524,6 @@ th {
   background-color: #ffffff !important;
 }
 .dataTables_filter {
- 
   margin-bottom: 20px; /* Tạo khoảng cách phía dưới */
 }
 .divider {
@@ -538,11 +534,11 @@ th {
   display: inline-block;
   vertical-align: middle; /* Căn giữa với các nút */
 }
-#btn-edit:hover{
-  color:#fea116;
+#btn-edit:hover {
+  color: #fea116;
 }
-#btn-delete:hover{
-  color:#fea116;
+#btn-delete:hover {
+  color: #fea116;
 }
 #MenuTable .mo-ta {
   display: -webkit-box;
@@ -554,4 +550,12 @@ th {
   overflow: hidden;
   text-overflow: ellipsis; /* Thêm dấu ba chấm khi bị cắt */
 }
-
+.blocked-row {
+  background-color: #ec5959 !important; /* Màu nền cho các hàng Blocked */
+  color: #ffffff; /* Màu chữ cho các hàng Blocked */
+}
+.blocked-row td:nth-child(1), /* Cột Table Number trong hàng */
+.blocked-header {
+  background-color: #ec5959 !important; /* Màu nền cho cột Table Number */
+  color: #ffffff; /* Màu chữ cho cột Table Number */
+}
