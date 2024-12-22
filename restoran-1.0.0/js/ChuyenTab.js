@@ -13,6 +13,7 @@ $(document).ready(function() {
     $('#VoucherContent').hide();
     $('#StaffContent').hide();
     $('#MenuContent').hide();
+    $('#InventoryContent').hide();
 
 
     // Xử lý sự kiện khi nhấn vào "Quản lý Menu"
@@ -22,6 +23,7 @@ $(document).ready(function() {
         $('#VoucherContent').hide();
         $('#StaffContent').hide();
         $('#ThongKeContent').hide();
+        $('#InventoryContent').hide();
         setActiveMenu(this); // Làm nổi bật mục được chọn
     });
     
@@ -33,6 +35,7 @@ $(document).ready(function() {
         $('#VoucherContent').hide();
         $('#StaffContent').hide();
         $('#ThongKeContent').hide();
+        $('#InventoryContent').hide();
         setActiveMenu(this); // Làm nổi bật mục được chọn
     });
 
@@ -43,6 +46,7 @@ $(document).ready(function() {
         $('#VoucherContent').show();
         $('#StaffContent').hide();
         $('#ThongKeContent').hide();
+        $('#InventoryContent').hide();
         setActiveMenu(this); // Làm nổi bật mục được chọn
     });
 
@@ -53,6 +57,7 @@ $(document).ready(function() {
         $('#VoucherContent').hide();
         $('#StaffContent').show();
         $('#ThongKeContent').hide();
+        $('#InventoryContent').hide();
         setActiveMenu(this); // Làm nổi bật mục được chọn
     });
 
@@ -63,8 +68,20 @@ $(document).ready(function() {
         $('#VoucherContent').hide();
         $('#StaffContent').hide();
         $('#ThongKeContent').show();
+        $('#InventoryContent').hide();
         setActiveMenu(this); // Làm nổi bật mục được chọn
     });
+    // Xử lý sự kiện khi nhấn vào "Quản lý kho"
+    $('#manageInventory').click(function() {
+        $('#MenuContent').hide(); 
+        $('#CustomerContent').hide();
+        $('#VoucherContent').hide();
+        $('#StaffContent').hide();
+        $('#ThongKeContent').hide();
+        $('#InventoryContent').show();
+        setActiveMenu(this); // Làm nổi bật mục được chọn
+    });
+
     $('#manageThongKe').click();
 
     // Lấy fullname từ localStorage và hiển thị

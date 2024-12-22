@@ -21,6 +21,7 @@
     <script src="js/QLStaff.js"></script>
     <script src="js/ChuyenTab.js"></script>
     <script src="js/QLThongKe.js"></script>
+    <script src="js/QLInventory.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -88,6 +89,11 @@
       <a href="#" id="manageVoucher" style="font-family: 'Nunito', sans-serif">
         <i class="fa-solid fa-ticket" style="margin-right: 5px"></i> Quản lý
         voucher
+      </a>
+
+      <a href="#" id="manageInventory" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-warehouse" style="margin-right: 5px"></i> Quản lý
+        kho
       </a>
 
       <a href="#" id="logoutButton" style="font-family: 'Nunito', sans-serif">
@@ -545,6 +551,111 @@
       <button id="cancelEditStaffBtn" class="cancelBtn">Hủy</button>
       </div>
     </div>
+    <!-------------------------------------------------------------- QL Inventory-------------------------------------------->
+    <div class="content" id="InventoryContent">
+      <h1>Danh sách hàng hóa</h1>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        "
+      >
+        <button id="addInvenBtn" class="btn-add">Thêm hàng hóa</button>
+      </div>
+
+      <table id="InventoryTable"  class="display">
+        <thead>
+          <tr>
+            <th>Loại hàng hóa</th>
+            <th>Số lượng</th>
+            <th>Nhà phân phối</th>
+            <th>Chức năng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dữ liệu sẽ được chèn vào đây -->
+        </tbody>
+      </table>
+    </div>
+    <!-- Modal để xác nhận xóa -->
+    <div id="confirmDeleteModalInven" class="deleteModal" style="display: none">
+      <h2>Xác Nhận Xóa</h2>
+      <hr />
+      <p>Bạn có chắc chắn muốn xóa hàng hóa này không ?</p>
+      <br />
+      <button id="confirmDeleteBtnInven">Có</button>
+      <button id="cancelDeleteBtnInven">Không</button>
+    </div>
+    <!-- Modal Thêm  -->
+    <div
+      id="addInvenModal"
+      class="addModal"
+
+    >
+      <h2>Thêm hàng hóa</h2>
+      <label for="itemType">Loại hàng hóa:</label>
+      <input
+        type="text"
+        id="itemType"
+        placeholder="Nhập loại hàng hóa"
+        required
+      /><br /><br />
+
+      <label for="itemQuantity">Số lượng:</label>
+      <input
+        type="number"
+        id="itemQuantity"
+        step="0.01"
+        placeholder="Nhập số lượng"
+        required
+      /><br /><br />
+      <label for="suplierInven">Nhà cung cấp:</label>
+      <select id="suplierInven" required>
+        <!-- Các tùy chọn sẽ được thêm vào đây từ API -->
+      </select>
+      <br /><br />
+      
+      <div class="error-message-inven" style="color: red; display: none"></div>
+      <br />
+      <div class="modal-footer">
+        <div class="modal-footer">
+
+       <button id="saveInvenBtn">Lưu</button>
+       <button id="cancelInvenBtn" class="cancelBtn">Hủy</button>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Sửa  -->
+    <div
+      id="editInvenModal"
+      class="editModal"
+
+    >
+      <h2>Chỉnh sửa hàng hóa</h2>
+      <label for="itemTypeEdit">Loại hàng hóa:</label>
+      <input type="text" id="itemTypeEdit" required /><br /><br />
+      <label for="itemQuantityEdit">Số lượng:</label>
+      <input
+        type="number"
+        id="itemQuantityEdit"
+        step="0.01"
+        required
+      /><br /><br />
+      <label for="suplierInvenEdit">Nhà cung cấp:</label>
+      <select id="suplierInvenEdit" required>
+        <!-- Các tùy chọn sẽ được thêm vào đây từ API -->
+      </select>
+      <br /><br />
+
+      <div class="error-message-inven-edit" style="color: red; display: none"></div>
+      <br />
+      <div class="modal-footer">
+      <button id="saveEditInvenBtn">Lưu</button>
+      <button id="cancelEditInvenBtn" class="cancelBtn">Hủy</button>
+      </div>
+    </div>
+    
     <!-------------------------------------------------------------- Thống kê-------------------------------------------->
     <div class="content" id="ThongKeContent">
       <!-- <h1>Thống kê</h1> -->
@@ -559,11 +670,15 @@
           <div class="row small-stats">
             <div class="stat-box">
               <h3 class="stat-box-heading-text">Doanh số <i class="fa-solid fa-coins"></i></h3>
-              <p>Hằng ngày: <span id="dailyRevenue"></span></p>
+              <p>Hôm nay: <span id="dailyRevenue"></span></p>
+              <p>7 ngày gần nhất: <span id="7daysRevenue"></span></p>
+              <p>30 ngày gần nhất: <span id="30daysRevenue"></span></p>
             </div>
             <div class="stat-box">
               <h3 class="stat-box-heading-text">Số lượng đơn hàng <i class="fa-solid fa-cash-register"></i></h3>
-              <p>Hằng ngày: <span id="dailyOrders"></span></p>
+              <p>Hôm nay: <span id="dailyOrders"> </span></p>
+              <p>7 ngày gần nhất: <span id="7daysOrders"> </span></p>
+              <p>30 ngày gần nhất: <span id="30daysOrders"> </span></p>
             </div>
           </div>
         </div>
@@ -571,9 +686,9 @@
         <div class="stats-right">
           <div class="stat-box">
             <h3 class="stat-box-heading-text">Khách hàng hàng đầu</h3>
-            <p><span class="rank-circle rank-1">1</span>: <span id="top1Customer"></span></p>
-            <p><span class="rank-circle rank-2">2</span>: <span id="top2Customer"></span></p>
-            <p><span class="rank-circle rank-3">3</span>: <span id="top3Customer"></span></p>
+            <p><span class="rank-circle rank-1">1</span> <span id="top1Customer"></span></p>
+            <p><span class="rank-circle rank-2">2</span> <span id="top2Customer"></span></p>
+            <p><span class="rank-circle rank-3">3</span> <span id="top3Customer"></span></p>
           </div>
         </div>
       </div>
@@ -585,20 +700,15 @@
       </div>
 
       <!-- Bảng xếp hạng 5 món ăn bán chạy nhất -->
-      <div class="top-dishes">
-        <h3 style="padding-left: 500px">Top 5 Món ăn bán chạy nhất</h3>
-        <table id="topDishesTable">
-          <thead>
-            <tr>
-              <th>Hạng</th>
-              <th>Tên Món</th>
-              <th>Số lượng bán</th>
-            </tr>
-          </thead>
-          <tbody id="topDishesBody">
-            <!-- Dữ liệu món ăn sẽ được thêm vào đây -->
-          </tbody>
-        </table>
+      <div class="stats-right">
+        <div class="stat-box">
+          <h3 class="stat-box-heading-text">Món ăn bán chạy nhất</h3>
+          <p><span class="rank-circle rank-1">1</span> <span id="top1Menu"></span></p>
+          <p><span class="rank-circle rank-2">2</span> <span id="top2Menu"></span></p>
+          <p><span class="rank-circle rank-3">3</span> <span id="top3Menu"></span></p>
+          <p><span class="rank-circle rank-4">4</span> <span id="top4Menu"></span></p>
+          <p><span class="rank-circle rank-5">5</span> <span id="top5Menu"></span></p>
+        </div>
       </div>
     </div>
   </body>

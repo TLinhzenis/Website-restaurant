@@ -423,7 +423,13 @@ th {
   border-radius: 8px; /* Bo tròn góc */
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  
+  text-align: left;
+}
+.stat-box p {
+  margin: 0; /* Loại bỏ khoảng cách bên ngoài của các đoạn văn */
+  display: flex; /* Sử dụng Flexbox để dễ căn chỉnh các phần tử con */
+  align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+  margin-bottom:20px ;
 }
 
 /* Hộp Tổng quan lớn hơn */
@@ -487,7 +493,8 @@ th {
   color: white;
   font-weight: bold;
   margin-right: 8px;
-  float: left;
+
+
 }
 
 /* Màu sắc cho các hạng */
@@ -504,6 +511,12 @@ th {
 
 .rank-3 {
   background-color: green;
+}
+.rank-4 {
+  background-color: purple;
+}
+.rank-5 {
+  background-color: blue;
 }
 
 .display {

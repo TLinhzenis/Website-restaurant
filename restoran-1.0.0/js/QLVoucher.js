@@ -5,6 +5,7 @@ $(document).ready(function () {
             { title: "Số điểm cần", width: "200px" },
             { title: "Chức năng", width: "100px" }
         ]
+        
     });
 
     function formatPrice(price) {

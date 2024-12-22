@@ -97,8 +97,14 @@ $(document).ready(function () {
                 
             },
             error: function (error) {
-                console.error("Lỗi khi mua voucher:", error);
-                alert("Có lỗi xảy ra khi mua voucher. Vui lòng thử lại.");
+                const errorMessage = error.responseJSON?.message;
+    
+                if (errorMessage === "Bạn không đủ điểm để mua voucher") {
+                    showNotification("Bạn không đủ điểm để đổi voucher này");
+                } else {
+                    console.error("Lỗi khi mua voucher:", error);
+                    showNotification("Có lỗi xảy ra khi mua voucher. Vui lòng thử lại.");
+                }
             }
         });
     }
