@@ -19,6 +19,7 @@
     <script src="js/QLKh.js"></script>
     <script src="js/QLVoucher.js"></script>
     <script src="js/QLStaff.js"></script>
+    <script src="js/QLTables.js"></script>
     <script src="js/ChuyenTab.js"></script>
     <script src="js/QLThongKe.js"></script>
     <script src="js/QLInventory.js"></script>
@@ -74,6 +75,9 @@
       <a href="#" id="manageThongKe" style="font-family: 'Nunito', sans-serif">
         <i class="fa-solid fa-chart-pie" style="margin-right: 5px"></i> Thống kê
       </a>
+      <a href="#" id="manageTable" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-couch" style="margin-right: 5px"></i> Quản lý bàn
+      </a>
       <a href="#" id="manageMenu" style="font-family: 'Nunito', sans-serif">
         <i class="fa-solid fa-clipboard-list" style="margin-right: 5px"></i>
         Quản lý Menu
@@ -91,7 +95,11 @@
         voucher
       </a>
 
-      <a href="#" id="manageInventory" style="font-family: 'Nunito', sans-serif">
+      <a
+        href="#"
+        id="manageInventory"
+        style="font-family: 'Nunito', sans-serif"
+      >
         <i class="fa-solid fa-warehouse" style="margin-right: 5px"></i> Quản lý
         kho
       </a>
@@ -133,61 +141,53 @@
     </div>
 
     <!-- Modal Thêm Món ăn -->
-  <div id="overlay" class="overlay">
-      <div
-      id="addMenuModal"
-      class="addModal"
-      style="display: none;"
-    >
-      <h2>Thêm Món ăn</h2>
-      <label for="itemName">Tên món ăn:</label>
-      <input
-        type="text"
-        id="itemName"
-        placeholder="Nhập tên món ăn"
-        required
-      /><br />
+    <div id="overlay" class="overlay">
+      <div id="addMenuModal" class="addModal" style="display: none">
+        <h2>Thêm Món ăn</h2>
+        <label for="itemName">Tên món ăn:</label>
+        <input
+          type="text"
+          id="itemName"
+          placeholder="Nhập tên món ăn"
+          required
+        /><br />
 
-      <label for="category">Phân loại:</label>
-      <select id="category" required>
-        <option value="">Chọn phân loại</option>
-        <option value="1">Khai vị</option>
-        <option value="2">Món chính</option>
-        <option value="3">Tráng miệng</option></select
-      ><br />
-      <label for="price">Giá:</label>
-      <input
-        type="text"
-        id="price"
-        inputmode="numeric"
-        placeholder="Nhập giá"
-        required
-        
-      /><br />      
-      <label for="description">Mô tả:</label>
-      <textarea id="description" placeholder="Mô tả"></textarea><br />
+        <label for="category">Phân loại:</label>
+        <select id="category" required>
+          <option value="">Chọn phân loại</option>
+          <option value="1">Khai vị</option>
+          <option value="2">Món chính</option>
+          <option value="3">Tráng miệng</option></select
+        ><br />
+        <label for="price">Giá:</label>
+        <input
+          type="text"
+          id="price"
+          inputmode="numeric"
+          placeholder="Nhập giá"
+          required
+        /><br />
+        <label for="description">Mô tả:</label>
+        <textarea id="description" placeholder="Mô tả"></textarea><br />
 
-      <label for="image">Hình ảnh:</label>
-      <input type="file" id="image" accept="image/*" /><br />
-      <img
-        id="imagePreview"
-        style="max-width: 150px; max-height: 150px"
-      /><br />
-      <div class="error-message" style="color: red; display: none"></div>
-      <br />
+        <label for="image">Hình ảnh:</label>
+        <input type="file" id="image" accept="image/*" /><br />
+        <img
+          id="imagePreview"
+          style="max-width: 150px; max-height: 150px"
+        /><br />
+        <div class="error-message" style="color: red; display: none"></div>
+        <br />
 
-      <div class="modal-footer">
-        <button id="saveMenuBtn">Lưu</button>
-        <button id="cancelMenuBtn" class="cancelBtn">Hủy</button>
+        <div class="modal-footer">
+          <button id="saveMenuBtn">Lưu</button>
+          <button id="cancelMenuBtn" class="cancelBtn">Hủy</button>
+        </div>
       </div>
     </div>
-  </div>
     <!-- Modal Thông Báo -->
 
-    <div
-      id="notificationModal"
-      class="notificationModal"
-    >
+    <div id="notificationModal" class="notificationModal">
       <h2>Thông báo</h2>
       <hr />
       <p id="notificationMessage"></p>
@@ -195,15 +195,8 @@
       <button id="closeNotificationBtn">Đóng</button>
     </div>
 
-
     <!-- Modal Sửa Món ăn -->
-    <div
-      id="editMenuModal"
-      class="editModal"
-      style="display: none;"
-      
-      
-    >
+    <div id="editMenuModal" class="editModal" style="display: none">
       <h2>Sửa Món ăn</h2>
       <label for="itemNameEdit">Tên món ăn:</label>
       <input type="text" id="itemNameEdit" required /><br />
@@ -241,12 +234,11 @@
       <div class="error-message2" style="color: red; display: none"></div>
       <br />
       <div class="modal-footer">
-      <button id="saveEditMenuBtn">Lưu</button>
-      <button id="cancelEditMenuBtn" class="cancelBtn">Hủy</button>
+        <button id="saveEditMenuBtn">Lưu</button>
+        <button id="cancelEditMenuBtn" class="cancelBtn">Hủy</button>
       </div>
     </div>
 
-    
     <!-- Modal để xác nhận xóa món ăn -->
     <div id="confirmDeleteModal" class="deleteModal" style="display: none">
       <h2>Xác Nhận Xóa</h2>
@@ -295,10 +287,7 @@
       <button id="cancelDeleteBtn1">Không</button>
     </div>
     <!-- Modal Sửa tài khoản -->
-    <div
-      id="editCustomerModal"
-      class="editModal"
-    >
+    <div id="editCustomerModal" class="editModal">
       <h2>Chỉnh sửa tài khoản</h2>
       <label for="UsernameEdit">Username:</label>
       <input type="text" id="UsernameEdit" readonly required /><br />
@@ -316,10 +305,10 @@
       <input type="text" id="DayEdit" readonly required /><br />
       <div class="error-message1" style="color: red; display: none"></div>
       <br />
-    <div class="modal-footer">
-      <button id="saveEditCustomerBtn">Lưu</button>
-      <button id="cancelEditCustomerBtn" class="cancelBtn">Hủy</button>
-    </div>
+      <div class="modal-footer">
+        <button id="saveEditCustomerBtn">Lưu</button>
+        <button id="cancelEditCustomerBtn" class="cancelBtn">Hủy</button>
+      </div>
     </div>
 
     <!-------------------------------------------------------------- QL Voucher-------------------------------------------->
@@ -358,11 +347,7 @@
       <button id="cancelDeleteBtn2">Không</button>
     </div>
     <!-- Modal Thêm Voucher -->
-    <div
-      id="addVoucherModal"
-      class="addModal"
-
-    >
+    <div id="addVoucherModal" class="addModal">
       <h2>Thêm voucher</h2>
       <label for="voucherType">Loại voucher:</label>
       <input
@@ -384,18 +369,13 @@
       <br />
       <div class="modal-footer">
         <div class="modal-footer">
-
-       <button id="saveVoucherBtn">Lưu</button>
-       <button id="cancelVoucherBtn" class="cancelBtn">Hủy</button>
+          <button id="saveVoucherBtn">Lưu</button>
+          <button id="cancelVoucherBtn" class="cancelBtn">Hủy</button>
         </div>
       </div>
     </div>
     <!-- Modal Sửa voucher -->
-    <div
-      id="editVoucherModal"
-      class="editModal"
-
-    >
+    <div id="editVoucherModal" class="editModal">
       <h2>Chỉnh sửa tài khoản</h2>
       <label for="voucherTypeEdit">Loại voucher:</label>
       <input type="text" id="voucherTypeEdit" required /><br /><br />
@@ -410,8 +390,8 @@
       <div class="error-message4" style="color: red; display: none"></div>
       <br />
       <div class="modal-footer">
-      <button id="saveEditVoucherBtn">Lưu</button>
-      <button id="cancelEditVoucherBtn" class="cancelBtn">Hủy</button>
+        <button id="saveEditVoucherBtn">Lưu</button>
+        <button id="cancelEditVoucherBtn" class="cancelBtn">Hủy</button>
       </div>
     </div>
 
@@ -455,11 +435,7 @@
       <button id="cancelDeleteBtn3">Không</button>
     </div>
     <!-- Modal Thêm Nhân viên -->
-    <div
-      id="addStaffModal"
-      class="addModal"
- 
-    >
+    <div id="addStaffModal" class="addModal">
       <h2>Thêm nhân viên</h2>
       <label for="staffName">Tên nhân viên:</label>
       <input
@@ -504,16 +480,12 @@
       <div class="error-message5" style="color: red; display: none"></div>
       <br />
       <div class="modal-footer">
-      <button id="saveStaffBtn">Lưu</button>
-      <button id="cancelStaffBtn" class="cancelBtn">Hủy</button>
+        <button id="saveStaffBtn">Lưu</button>
+        <button id="cancelStaffBtn" class="cancelBtn">Hủy</button>
       </div>
     </div>
     <!-- Modal Sửa nhân viên -->
-    <div
-      id="editStaffModal"
-      class="editModal"
-
-    >
+    <div id="editStaffModal" class="editModal">
       <h2>Chỉnh sửa thông tin nhân viên</h2>
       <label for="staffNameEdit">Tên nhân viên:</label>
       <input type="text" id="staffNameEdit" required /><br /><br />
@@ -547,8 +519,8 @@
       <div class="error-message6" style="color: red; display: none"></div>
       <br />
       <div class="modal-footer">
-      <button id="saveEditStaffBtn">Lưu</button>
-      <button id="cancelEditStaffBtn" class="cancelBtn">Hủy</button>
+        <button id="saveEditStaffBtn">Lưu</button>
+        <button id="cancelEditStaffBtn" class="cancelBtn">Hủy</button>
       </div>
     </div>
     <!-------------------------------------------------------------- QL Inventory-------------------------------------------->
@@ -564,7 +536,7 @@
         <button id="addInvenBtn" class="btn-add">Thêm hàng hóa</button>
       </div>
 
-      <table id="InventoryTable"  class="display">
+      <table id="InventoryTable" class="display">
         <thead>
           <tr>
             <th>Loại hàng hóa</th>
@@ -588,11 +560,7 @@
       <button id="cancelDeleteBtnInven">Không</button>
     </div>
     <!-- Modal Thêm  -->
-    <div
-      id="addInvenModal"
-      class="addModal"
-
-    >
+    <div id="addInvenModal" class="addModal">
       <h2>Thêm hàng hóa</h2>
       <label for="itemType">Loại hàng hóa:</label>
       <input
@@ -615,23 +583,18 @@
         <!-- Các tùy chọn sẽ được thêm vào đây từ API -->
       </select>
       <br /><br />
-      
+
       <div class="error-message-inven" style="color: red; display: none"></div>
       <br />
       <div class="modal-footer">
         <div class="modal-footer">
-
-       <button id="saveInvenBtn">Lưu</button>
-       <button id="cancelInvenBtn" class="cancelBtn">Hủy</button>
+          <button id="saveInvenBtn">Lưu</button>
+          <button id="cancelInvenBtn" class="cancelBtn">Hủy</button>
         </div>
       </div>
     </div>
     <!-- Modal Sửa  -->
-    <div
-      id="editInvenModal"
-      class="editModal"
-
-    >
+    <div id="editInvenModal" class="editModal">
       <h2>Chỉnh sửa hàng hóa</h2>
       <label for="itemTypeEdit">Loại hàng hóa:</label>
       <input type="text" id="itemTypeEdit" required /><br /><br />
@@ -648,14 +611,169 @@
       </select>
       <br /><br />
 
-      <div class="error-message-inven-edit" style="color: red; display: none"></div>
+      <div
+        class="error-message-inven-edit"
+        style="color: red; display: none"
+      ></div>
       <br />
       <div class="modal-footer">
-      <button id="saveEditInvenBtn">Lưu</button>
-      <button id="cancelEditInvenBtn" class="cancelBtn">Hủy</button>
+        <button id="saveEditInvenBtn">Lưu</button>
+        <button id="cancelEditInvenBtn" class="cancelBtn">Hủy</button>
       </div>
     </div>
-    
+    <!-------------------------------------------------------------- QL Tables-------------------------------------------->
+    <div class="content" id="TablesContent">
+      <h1>Tables</h1>
+      <!-- Phần thêm bàn mới -->
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        "
+      >
+        <button id="addTableBtn" class="btn-add">Thêm bàn</button>
+      </div>
+
+      <!-- Bảng hiển thị danh sách bàn -->
+      <table id="TablesTable" class="display">
+        <thead>
+          <tr>
+            <th>Table Number</th>
+            <th>Capacity</th>
+            <th>Status</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Chức năng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dữ liệu sẽ được chèn vào đây bởi JavaScript -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal xác nhận xóa bàn -->
+    <div id="confirmDeleteModal4" class="deleteModal" style="display: none">
+      <h2>Xác Nhận Xóa</h2>
+      <hr />
+      <p>Bạn có chắc chắn muốn xóa BÀN này không ?</p>
+      <br />
+      <button id="confirmDeleteTableBtn">Có</button>
+      <button id="cancelDeleteTableBtn">Không</button>
+    </div>
+
+    <!-- Modal thêm bàn -->
+    <div id="addTableModal" class="addModal">
+      <h2>Thêm bàn</h2>
+      <!-- Nhập số bàn -->
+      <label for="TableNumberInsert">Số bàn:</label>
+      <input
+        type="text"
+        id="TableNumberInsert"
+        placeholder="Nhập số bàn"
+        required
+      /><br />
+
+      <!-- Nhập số lượng ghế -->
+      <label for="CapacityInsert">Số lượng ghế:</label>
+      <input
+        type="number"
+        id="CapacityInsert"
+        placeholder="Nhập số lượng ghế"
+        required
+      /><br />
+      <label for="StatusInsert">Trạng thái:</label>
+      <select id="StatusInsert" required>
+        <option value="" disabled selected>Chọn trạng thái</option>
+        <option value="Available">Trang trống</option>
+        <option value="Occupied">Đã đặt</option>
+        <option value="Reserved">Đã đặt trước</option>
+        <option value="Blocked">Đang bảo trì</option>
+      </select>
+      <!-- Nhập thông tin đăng nhập (hiển thị khi cần) -->
+      <label for="usernameTableInsert">Username:</label>
+      <input
+        type="text"
+        id="usernameTableInsert"
+        placeholder="Nhập tên đăng nhập"
+      /><br />
+
+      <label for="passwordTableInsert">Password:</label>
+      <input
+        type="text"
+        id="passwordTableInsert"
+        placeholder="Nhập mật khẩu"
+      /><br />
+      <br />
+
+      <!-- Hiển thị lỗi (nếu có) -->
+      <div class="error-message5" style="color: red; display: none"></div>
+      <br />
+
+      <!-- Nút lưu hoặc hủy -->
+      <div class="modal-footer">
+        <button id="saveTableBtn">Lưu</button>
+        <button id="cancelTableBtn" class="cancelBtn">Hủy</button>
+      </div>
+    </div>
+
+    <!-- Modal sửa thông tin bàn -->
+    <div id="editTableModal" class="editModal">
+      <h2>Chỉnh sửa thông tin bàn</h2>
+      <!-- Nhập số bàn -->
+      <label for="TableNumberEdit">Số bàn:</label>
+      <input
+        type="text"
+        id="TableNumberEdit"
+        placeholder="Nhập số bàn"
+        required
+      /><br />
+
+      <!-- Nhập số lượng ghế -->
+      <label for="CapacityEdit">Số lượng ghế:</label>
+
+      <input
+        type="number"
+        id="CapacityEdit"
+        placeholder="Nhập số lượng ghế"
+        required
+      /><br />
+      <label for="StatusEdit">Trạng thái:</label>
+      <select id="StatusEdit" required>
+        <option value="" disabled selected>Chọn trạng thái</option>
+        <option value="Available">Trang trống</option>
+        <option value="Occupied">Đã đặt</option>
+        <option value="Reserved">Đã đặt trước</option>
+        <option value="Blocked">Đang bảo trì</option>
+      </select>
+      <br />
+      <!-- Nhập thông tin đăng nhập (hiển thị khi cần) -->
+      <label for="usernameTableEdit">Username:</label>
+      <input
+        type="text"
+        id="usernameTableEdit"
+        placeholder="Nhập tên đăng nhập"
+      /><br />
+
+      <label for="passwordTableEdit">Password:</label>
+      <input
+        type="text"
+        id="passwordTableEdit"
+        placeholder="Nhập mật khẩu"
+      /><br />
+
+      <!-- Hiển thị lỗi (nếu có) -->
+      <div class="error-message7" style="color: red; display: none"></div>
+      <br />
+
+      <!-- Nút lưu hoặc hủy -->
+      <div class="modal-footer">
+        <button id="saveEditTableBtn">Lưu</button>
+        <button id="cancelEditTableBtn" class="cancelBtn">Hủy</button>
+      </div>
+    </div>
+
     <!-------------------------------------------------------------- Thống kê-------------------------------------------->
     <div class="content" id="ThongKeContent">
       <!-- <h1>Thống kê</h1> -->
@@ -664,18 +782,24 @@
         <!-- Container bên trái -->
         <div class="stats-left">
           <div class="stat-box overview">
-            <h3 class="stat-box-heading-text">Tổng quan <i class="fa-solid fa-list"></i></h3>
+            <h3 class="stat-box-heading-text">
+              Tổng quan <i class="fa-solid fa-list"></i>
+            </h3>
             <p>Thông tin tổng quan ở đây</p>
           </div>
           <div class="row small-stats">
             <div class="stat-box">
-              <h3 class="stat-box-heading-text">Doanh số <i class="fa-solid fa-coins"></i></h3>
+              <h3 class="stat-box-heading-text">
+                Doanh số <i class="fa-solid fa-coins"></i>
+              </h3>
               <p>Hôm nay: <span id="dailyRevenue"></span></p>
               <p>7 ngày gần nhất: <span id="7daysRevenue"></span></p>
               <p>30 ngày gần nhất: <span id="30daysRevenue"></span></p>
             </div>
             <div class="stat-box">
-              <h3 class="stat-box-heading-text">Số lượng đơn hàng <i class="fa-solid fa-cash-register"></i></h3>
+              <h3 class="stat-box-heading-text">
+                Số lượng đơn hàng <i class="fa-solid fa-cash-register"></i>
+              </h3>
               <p>Hôm nay: <span id="dailyOrders"> </span></p>
               <p>7 ngày gần nhất: <span id="7daysOrders"> </span></p>
               <p>30 ngày gần nhất: <span id="30daysOrders"> </span></p>
@@ -686,9 +810,18 @@
         <div class="stats-right">
           <div class="stat-box">
             <h3 class="stat-box-heading-text">Khách hàng hàng đầu</h3>
-            <p><span class="rank-circle rank-1">1</span> <span id="top1Customer"></span></p>
-            <p><span class="rank-circle rank-2">2</span> <span id="top2Customer"></span></p>
-            <p><span class="rank-circle rank-3">3</span> <span id="top3Customer"></span></p>
+            <p>
+              <span class="rank-circle rank-1">1</span>
+              <span id="top1Customer"></span>
+            </p>
+            <p>
+              <span class="rank-circle rank-2">2</span>
+              <span id="top2Customer"></span>
+            </p>
+            <p>
+              <span class="rank-circle rank-3">3</span>
+              <span id="top3Customer"></span>
+            </p>
           </div>
         </div>
       </div>
@@ -703,11 +836,26 @@
       <div class="stats-right">
         <div class="stat-box">
           <h3 class="stat-box-heading-text">Món ăn bán chạy nhất</h3>
-          <p><span class="rank-circle rank-1">1</span> <span id="top1Menu"></span></p>
-          <p><span class="rank-circle rank-2">2</span> <span id="top2Menu"></span></p>
-          <p><span class="rank-circle rank-3">3</span> <span id="top3Menu"></span></p>
-          <p><span class="rank-circle rank-4">4</span> <span id="top4Menu"></span></p>
-          <p><span class="rank-circle rank-5">5</span> <span id="top5Menu"></span></p>
+          <p>
+            <span class="rank-circle rank-1">1</span>
+            <span id="top1Menu"></span>
+          </p>
+          <p>
+            <span class="rank-circle rank-2">2</span>
+            <span id="top2Menu"></span>
+          </p>
+          <p>
+            <span class="rank-circle rank-3">3</span>
+            <span id="top3Menu"></span>
+          </p>
+          <p>
+            <span class="rank-circle rank-4">4</span>
+            <span id="top4Menu"></span>
+          </p>
+          <p>
+            <span class="rank-circle rank-5">5</span>
+            <span id="top5Menu"></span>
+          </p>
         </div>
       </div>
     </div>
