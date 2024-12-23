@@ -1,0 +1,145 @@
+$(document).ready(function () {
+    var table = $('#ShiftTable').DataTable({
+        columns: [
+            { title: "Tên nhân viên" },
+            { title: "Số ngày làm", width: "200px" },
+            { title: "Lương", width: "100px" },
+            { title: "Chi tiết", width: "100px" },
+        ],
+        autoWidth: false
+    });
+
+    // Hàm format giá trị lương
+    function formatPrice(price) {
+        return price ? price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") : "0";
+    }
+/*-------------------------------------------------Animation & ovelay------------------------------------------------*/
+    function closeModal2() {
+    
+        $("#notificationModal").addClass("closing");
+
+        setTimeout(function () {
+    
+            $("#notificationModal").hide();;
+
+            $("#overlay").hide(); 
+
+            $("#notificationModal").removeClass("closing");
+
+        }, 500); 
+    }
+    function closeModal() {
+        $("#viewWorkDaysModal").addClass("closing");
+
+        
+        setTimeout(function () {
+            $("#viewWorkDaysModal").hide();
+
+            $("#overlay").hide();
+            $("#viewWorkDaysModal").removeClass("closing");
+
+        }, 900); 
+    }
+    $("#overlay").click(function (e) {
+        if ($(e.target).is("#overlay")) {
+            closeModal();
+            closeModal2();
+        }
+    });
+
+
+
+    /*-------------------------------------------------Hiển thị danh sách------------------------------------------------*/
+    function loadShift(month) {
+        $.ajax({
+            url: `https://resmant11111-001-site1.anytempurl.com/Shift/MonthlyData?month=${month}`,
+            method: "GET",
+            success: function (response) {
+                table.clear();
+
+                if (response.length === 0) {
+                    $('#errorMessage').text('Không có dữ liệu cho tháng này.');
+                    return;
+                }
+
+                response.forEach(function (item) {
+                    var row = [
+                        item.fullName,
+                        item.workDays,
+                        formatPrice(item.salary) + " VNĐ",
+                        `<a id="btn-edit" class="btn-edit-shift" data-id="${item.staffId}" onclick="viewWorkDays(${item.staffId}, ${month})"><i class="fa-solid fa-eye"></i></a>`
+                    ];
+                    table.row.add(row).draw();
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("Không thể tải danh sách ca làm việc:", error);
+                $('#errorMessage').text('Lỗi khi tải dữ liệu. Vui lòng thử lại sau.');
+            }
+        });
+    }
+
+var currentMonth = new Date().getMonth() + 1;
+$('#monthSelect').val(currentMonth);
+loadShift(currentMonth);
+
+    
+
+    // Thêm sự kiện thay đổi giá trị tháng
+    $('#monthSelect').on('change', function () {
+        var selectedMonth = $(this).val();
+        loadShift(selectedMonth);
+    });
+    $("#cancelVWDBtn").on("click", function () {
+        closeModal();
+    });
+    
+});
+
+
+// Hàm hiển thị ngày làm việc của nhân viên
+function viewWorkDays(staffId, month) {
+    fetch(`https://resmant11111-001-site1.anytempurl.com/Shift/WorkDays?staffId=${staffId}&month=${month}`)
+        .then(response => response.json())
+        .then(data => {
+            const staffName = $(`a[data-id="${staffId}"]`).closest('tr').find('td:first').text();
+
+            // Hiển thị tháng và tên nhân viên
+            $("#mothVWD").text(`Chi tiết ngày làm việc tháng ${month}`);
+            $("#staffVWD").text(` ${staffName}`);
+            // Tạo lịch cho tháng đã chọn
+            const currentDate = new Date();
+            const year = currentDate.getFullYear();
+            const daysInMonth = new Date(year, month, 0).getDate();  // Số ngày trong tháng
+            $("#overlay").show();
+
+            // Tạo mảng ngày làm việc của nhân viên
+            const workDays = new Set(data); // Dùng Set để loại bỏ các ngày trùng lặp
+
+            // Tạo HTML cho lịch tháng
+            let calendarHTML = '<table class="calendar-table"><tr>';
+            for (let day = 1; day <= daysInMonth; day++) {
+                const isWorkDay = workDays.has(day);
+                calendarHTML += `<td class="${isWorkDay ? 'work-day' : ''}">${day}</td>`;
+                if (day % 7 === 0) calendarHTML += '</tr><tr>';  // Chia mỗi tuần ra một dòng
+            }
+            calendarHTML += '</tr></table>';
+
+            // Hiển thị lịch trong modal
+            document.getElementById('calendar').innerHTML = calendarHTML;
+
+            // Mở modal
+            document.getElementById('viewWorkDaysModal').style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Lỗi khi lấy ngày làm việc:', error);
+            alert('Không có ngày làm việc nào cho nhân viên này trong tháng.');
+            
+        });
+
+
+
+}
+
+
+

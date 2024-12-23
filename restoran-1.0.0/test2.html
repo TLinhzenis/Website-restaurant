@@ -1,98 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thống kê doanh số</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      line-height: 1.6;
-    }
-    h1 {
-      color: #333;
-    }
-    .stats-container {
-      max-width: 600px;
-      margin: 0 auto;
-      border: 1px solid #ccc;
-      padding: 20px;
-      border-radius: 8px;
-      background-color: #f9f9f9;
-    }
-    .stat-box {
-      margin-bottom: 20px;
-    }
-    .stat-box h2 {
-      color: #555;
-      margin-bottom: 10px;
-    }
-    .stat-box p {
-      margin: 5px 0;
-    }
-    .highlight {
-      font-weight: bold;
-      color: #007BFF;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Shift Data</title>
+    <style>
+        /* Toàn bộ body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Header */
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin: 20px 0;
+        }
+
+        /* Phần chọn tháng */
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Thông báo lỗi */
+        .error {
+            text-align: center;
+            color: red;
+            font-weight: bold;
+        }
+
+        /* Bảng */
+        table {
+            width: 90%;
+            margin: 0 auto 20px;
+            border-collapse: collapse;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f1f9f1;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        /* Nút xem ngày làm việc */
+        button {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin: 20px 0;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Thống kê doanh số</h1>
-  <div class="stats-container">
-    <div class="stat-box">
-      <h2>Hôm nay</h2>
-      <p>Ngày: <span id="today-date" class="highlight">Đang tải...</span></p>
-      <p>Doanh thu: <span id="today-revenue" class="highlight">Đang tải...</span></p>
+    <h1>Monthly Shift Data</h1>
+
+    <div class="controls">
+        <label for="monthSelect">Select Month:</label>
+        <select id="monthSelect" onchange="fetchMonthlyData()">
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10" selected>October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+        </select>
     </div>
-    <div class="stat-box">
-      <h2>7 ngày gần nhất</h2>
-      <p>Bắt đầu: <span id="7days-start" class="highlight">Đang tải...</span></p>
-      <p>Kết thúc: <span id="7days-end" class="highlight">Đang tải...</span></p>
-      <p>Doanh thu: <span id="7days-revenue" class="highlight">Đang tải...</span></p>
-    </div>
-    <div class="stat-box">
-      <h2>30 ngày gần nhất</h2>
-      <p>Bắt đầu: <span id="30days-start" class="highlight">Đang tải...</span></p>
-      <p>Kết thúc: <span id="30days-end" class="highlight">Đang tải...</span></p>
-      <p>Doanh thu: <span id="30days-revenue" class="highlight">Đang tải...</span></p>
-    </div>
-  </div>
 
-  <script>
-    async function fetchRevenue() {
-      try {
-        const response = await fetch('https://resmant11111-001-site1.anytempurl.com/Statistics/Revenue');
-        if (!response.ok) throw new Error('Không thể lấy dữ liệu doanh số.');
+    <p id="errorMessage" class="error"></p>
 
-        const data = await response.json();
-        console.log(data); // Kiểm tra dữ liệu trả về từ API
+    <table>
+        <thead>
+            <tr>
+                <th>Staff ID</th>
+                <th>Full Name</th>
+                <th>Work Days</th>
+                <th>Salary</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="dataTable">
+            <!-- Data rows will be inserted here -->
+        </tbody>
+    </table>
 
-        // Định dạng lại ngày
-        const formatDate = (dateString) => {
-          const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-          return new Date(dateString).toLocaleDateString('vi-VN', options);
-        };
+    <footer>
+        © 2024 Monthly Shift Tracker. All rights reserved.
+    </footer>
 
-        // Cập nhật dữ liệu vào HTML
-        document.getElementById('today-date').textContent = formatDate(data.today.date);
-        document.getElementById('today-revenue').textContent = `${data.today.totalRevenue.toLocaleString()} VND`;
+    <script>
+        // Hàm fetch dữ liệu từ API
+        function fetchMonthlyData() {
+            const month = document.getElementById('monthSelect').value;
+            const dataTable = document.getElementById('dataTable');
+            const errorMessage = document.getElementById('errorMessage');
 
-        document.getElementById('7days-start').textContent = formatDate(data.last7Days.startDate);
-        document.getElementById('7days-end').textContent = formatDate(data.last7Days.endDate);
-        document.getElementById('7days-revenue').textContent = `${data.last7Days.totalRevenue.toLocaleString()} VND`;
+            // Xóa dữ liệu cũ
+            dataTable.innerHTML = '';
+            errorMessage.textContent = '';
 
-        document.getElementById('30days-start').textContent = formatDate(data.last30Days.startDate);
-        document.getElementById('30days-end').textContent = formatDate(data.last30Days.endDate);
-        document.getElementById('30days-revenue').textContent = `${data.last30Days.totalRevenue.toLocaleString()} VND`;
-      } catch (error) {
-        console.error('Lỗi:', error);
-        alert('Không thể tải dữ liệu doanh số.');
-      }
-    }
+            // Gửi request tới API
+            fetch(`https://resmant11111-001-site1.anytempurl.com/Shift/MonthlyData?month=${month}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch data from the API.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.length === 0) {
+                        errorMessage.textContent = 'No data available for the selected month.';
+                        return;
+                    }
 
-    // Gọi hàm khi tải trang
-    fetchRevenue();
-  </script>
+                    // Hiển thị dữ liệu trong bảng
+                    data.forEach(item => {
+                        const row = `
+                            <tr>
+                                <td>${item.staffId || 'N/A'}</td>
+                                <td>${item.fullName || 'N/A'}</td>
+                                <td>${item.workDays || 0}</td>
+                                <td>${item.salary ? item.salary.toLocaleString() + ' VND' : '0 VND'}</td>
+                                <td>
+                                    <a onclick="viewWorkDays(${item.staffId}, ${month})">Xem ngày làm việc</a>
+                                </td>
+                            </tr>
+                        `;
+                        dataTable.innerHTML += row;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    errorMessage.textContent = 'Error fetching data. Please try again later.';
+                });
+        }
+
+        // Hàm hiển thị ngày làm việc của nhân viên
+        function viewWorkDays(staffId, month) {
+            fetch(`https://resmant11111-001-site1.anytempurl.com/Shift/WorkDays?staffId=${staffId}&month=${month}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch work days.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert(`Nhân viên ${staffId} đi làm vào các ngày: ${data.join(', ')}`);
+                })
+                .catch(error => {
+                    console.error('Error fetching work days:', error);
+                    alert('Không có ngày làm việc nào cho nhân viên này trong tháng.');
+                });
+        }
+
+        // Tự động tải dữ liệu tháng 10 khi mở trang
+        window.onload = fetchMonthlyData;
+    </script>
 </body>
 </html>

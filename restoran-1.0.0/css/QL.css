@@ -559,3 +559,44 @@ th {
   background-color: #ec5959 !important; /* Màu nền cho cột Table Number */
   color: #ffffff; /* Màu chữ cho cột Table Number */
 }
+
+/* CSS cho bảng lịch */
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar-table td {
+  width: 14.28%;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.calendar-table .work-day {
+  background-color: red;
+  color: white;
+}
+
+.calendar-table td:hover {
+  background-color: #f1f1f1;
+}
+
+
+
+#cancelVWDBtn {
+  position: absolute;
+  bottom: 50px;
+  right: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#cancelVWDBtn:hover {
+  background-color: #45a049;
+}
+

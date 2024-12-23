@@ -14,6 +14,8 @@ $(document).ready(function () {
   $("#MenuContent").hide();
   $("#InventoryContent").hide();
   $("#TablesContent").hide();
+  $("#ShiftContent").hide();
+  $("#SupplierContent").hide();
 
   // Xử lý sự kiện khi nhấn vào "Quản lý tables"
   $("#manageTable").click(function () {
@@ -24,6 +26,8 @@ $(document).ready(function () {
     $("#StaffContent").hide();
     $("#ThongKeContent").hide();
     $("#InventoryContent").hide();
+    $("#ShiftContent").hide();
+    $("#SupplierContent").hide();
     setActiveMenu(this); // Làm nổi bật mục được chọn
   });
 
@@ -36,6 +40,8 @@ $(document).ready(function () {
     $("#StaffContent").hide();
     $("#ThongKeContent").hide();
     $("#InventoryContent").hide();
+    $("#ShiftContent").hide();
+    $("#SupplierContent").hide();
     setActiveMenu(this); // Làm nổi bật mục được chọn
   });
 
@@ -48,6 +54,8 @@ $(document).ready(function () {
     $("#StaffContent").hide();
     $("#ThongKeContent").hide();
     $("#InventoryContent").hide();
+    $("#ShiftContent").hide();
+    $("#SupplierContent").hide();
     setActiveMenu(this); // Làm nổi bật mục được chọn
   });
 
@@ -60,6 +68,8 @@ $(document).ready(function () {
     $("#StaffContent").hide();
     $("#ThongKeContent").hide();
     $("#InventoryContent").hide();
+    $("#ShiftContent").hide();
+    $("#SupplierContent").hide();
     setActiveMenu(this); // Làm nổi bật mục được chọn
   });
 
@@ -72,6 +82,8 @@ $(document).ready(function () {
     $("#StaffContent").show();
     $("#ThongKeContent").hide();
     $("#InventoryContent").hide();
+    $("#ShiftContent").hide();
+    $("#SupplierContent").hide();
     setActiveMenu(this); // Làm nổi bật mục được chọn
   });
 
@@ -84,6 +96,8 @@ $(document).ready(function () {
     $("#StaffContent").hide();
     $("#ThongKeContent").show();
     $("#InventoryContent").hide();
+    $("#ShiftContent").hide();
+    $("#SupplierContent").hide();
     setActiveMenu(this); // Làm nổi bật mục được chọn
   });
   // Xử lý sự kiện khi nhấn vào "Quản lý kho"
@@ -95,6 +109,36 @@ $(document).ready(function () {
     $("#StaffContent").hide();
     $("#ThongKeContent").hide();
     $("#InventoryContent").show();
+    $("#ShiftContent").hide();
+    $("#SupplierContent").hide();
+    setActiveMenu(this); // Làm nổi bật mục được chọn
+  });
+
+  // Xử lý sự kiện khi nhấn vào "Ca làm việc"
+  $("#manageShift").click(function () {
+    $("#MenuContent").hide();
+    $("#TablesContent").hide();
+    $("#CustomerContent").hide();
+    $("#VoucherContent").hide();
+    $("#StaffContent").hide();
+    $("#ThongKeContent").hide();
+    $("#InventoryContent").hide();
+    $("#ShiftContent").show();
+    $("#SupplierContent").hide();
+    setActiveMenu(this); // Làm nổi bật mục được chọn
+  });
+
+  // Xử lý sự kiện khi nhấn vào "Quản lý nhà cung cấp"
+  $("#manageSupplier").click(function () {
+    $("#MenuContent").hide();
+    $("#TablesContent").hide();
+    $("#CustomerContent").hide();
+    $("#VoucherContent").hide();
+    $("#StaffContent").hide();
+    $("#ThongKeContent").hide();
+    $("#InventoryContent").hide();
+    $("#ShiftContent").hide();
+    $("#SupplierContent").show();
     setActiveMenu(this); // Làm nổi bật mục được chọn
   });
 

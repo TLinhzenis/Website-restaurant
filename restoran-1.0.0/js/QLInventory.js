@@ -57,7 +57,7 @@ $(document).ready(function () {
 
     function loadInventory() {
         $.ajax({
-            url: "http://localhost:5134/Inventory/List",
+            url: "https://resmant11111-001-site1.anytempurl.com/Inventory/List",
             method: "GET",
             success: function (response) {
                 table.clear();
@@ -94,7 +94,7 @@ $(document).ready(function () {
 
     $("#confirmDeleteBtnInven").on("click", function () {
         $.ajax({
-            url: `http://localhost:5134/Inventory/Delete?id=${InvenIdToDelete}`,
+            url: `https://resmant11111-001-site1.anytempurl.com/Inventory/Delete?id=${InvenIdToDelete}`,
             method: "POST",
             success: function (response) {
                 loadInventory();
@@ -117,7 +117,7 @@ $(document).ready(function () {
 // Hàm load danh sách nhà cung cấp vào dropdown
 function loadSuppliers() {
     $.ajax({
-        url: "http://localhost:5134/Supplier/List", // API lấy danh sách nhà cung cấp
+        url: "https://resmant11111-001-site1.anytempurl.com/Supplier/List", // API lấy danh sách nhà cung cấp
         method: "GET",
         success: function (response) {
             var supplierDropdown = $("#suplierInven");
@@ -177,7 +177,7 @@ $("#saveInvenBtn").click(function () {
 
     // Gửi yêu cầu POST để thêm hàng hóa
     $.ajax({
-        url: "http://localhost:5134/Inventory/Insert",
+        url: "https://resmant11111-001-site1.anytempurl.com/Inventory/Insert",
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(newInvenItem),
@@ -204,7 +204,7 @@ $("#saveInvenBtn").click(function () {
     $(document).on('click', '.btn-edit-Inven', function () {
         ItemId = $(this).data('id');
         $.ajax({
-            url: `http://localhost:5134/Inventory/GetById?id=${ItemId}`,
+            url: `https://resmant11111-001-site1.anytempurl.com/Inventory/GetById?id=${ItemId}`,
             method: "GET",
             success: function (inventory) {
                 // Điền dữ liệu vào form modal
@@ -224,7 +224,7 @@ $("#saveInvenBtn").click(function () {
     // Hàm load danh sách nhà cung cấp vào dropdown cho modal sửa
     function loadSuppliersForEdit(selectedSupplierId) {
         $.ajax({
-            url: "http://localhost:5134/Supplier/List", // API lấy danh sách nhà cung cấp
+            url: "https://resmant11111-001-site1.anytempurl.com/Supplier/List", // API lấy danh sách nhà cung cấp
             method: "GET",
             success: function (response) {
                 var supplierDropdown = $("#suplierInvenEdit");
@@ -275,7 +275,7 @@ $("#saveInvenBtn").click(function () {
         };
     
         $.ajax({
-            url: "http://localhost:5134/Inventory/Update",
+            url: "https://resmant11111-001-site1.anytempurl.com/Inventory/Update",
             method: "PUT",
             contentType: "application/json",
             data: JSON.stringify(updatedInvenItem),

@@ -23,6 +23,8 @@
     <script src="js/ChuyenTab.js"></script>
     <script src="js/QLThongKe.js"></script>
     <script src="js/QLInventory.js"></script>
+    <script src="js/QLShift"></script>
+    <script src="js/QLSuplier.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -102,6 +104,15 @@
       >
         <i class="fa-solid fa-warehouse" style="margin-right: 5px"></i> Quản lý
         kho
+      </a>
+      <a href="#" id="manageShift" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-check-to-slot" style="margin-right: 5px"></i> Ca làm việc
+        
+      </a>
+
+      <a href="#" id="manageSupplier" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-cart-shopping" style="margin-right: 5px"></i> Quản lý nhà cung cấp
+        
       </a>
 
       <a href="#" id="logoutButton" style="font-family: 'Nunito', sans-serif">
@@ -523,6 +534,84 @@
         <button id="cancelEditStaffBtn" class="cancelBtn">Hủy</button>
       </div>
     </div>
+        <!-------------------------------------------------------------- QL Supplier-------------------------------------------->
+        <div class="content" id="SupplierContent">
+          <h1>Danh Sách voucher</h1>
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 10px;
+            "
+          >
+            <button id="addSupplierBtn" class="btn-add">Thêm nhà cung cấp</button>
+          </div>
+    
+          <table id="SupplierTable" class="display">
+            <thead>
+              <tr>
+                <th>Tên nhà cung cấp</th>
+                <th>Thông tin liên hệ</th>
+                <th>Chức năng</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dữ liệu sẽ được chèn vào đây -->
+            </tbody>
+          </table>
+        </div>
+        <!-- Modal để xác nhận xóa Supplier -->
+        <div id="confirmDeleteModalSupplier" class="deleteModal" style="display: none">
+          <h2>Xác Nhận Xóa</h2>
+          <hr />
+          <p>Bạn có chắc chắn muốn xóa nhà cung cấp này không ?</p>
+          <br />
+          <button id="confirmDeleteBtnSupplier">Có</button>
+          <button id="cancelDeleteBtnSupplier">Không</button>
+        </div>
+        <!-- Modal Thêm Supplier -->
+        <div id="addSupplierModal" class="addModal">
+          <h2>Thêm nhà cung cấp</h2>
+          <label for="supplierName">Tên nhà cung cấp:</label>
+          <input
+            type="text"
+            id="supplierName"
+            placeholder="Nhập tên nhà cung cấp"
+            required
+          /><br /><br />
+
+          <label for="contactInfo">Thông tin liên hệ:</label>
+          <input
+            type="text"
+            id="contactInfo"
+            placeholder="Thông tin liên hệ"
+            required
+          /><br /><br />
+    
+          <div class="error-messageSupplier" style="color: red; display: none"></div>
+          <br />
+          <div class="modal-footer">
+            <div class="modal-footer">
+              <button id="saveSupplierBtn">Lưu</button>
+              <button id="cancelSupplierBtn" class="cancelBtn">Hủy</button>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Sửa Supplier -->
+        <div id="editSupplierModal" class="editModal">
+          <h2>Chỉnh sửa tài khoản</h2>
+          <label for="supplierNameEdit">Tên nhà cung cấp:</label>
+          <input type="text" id="supplierNameEdit" required /><br /><br />
+          <label for="contactInfoEdit">Thông tin liên hệ:</label>
+          <input type="text" id="contactInfoEdit" required /><br /><br />
+    
+          <div class="error-messageSupplier2" style="color: red; display: none"></div>
+          <br />
+          <div class="modal-footer">
+            <button id="saveEditSupplierBtn">Lưu</button>
+            <button id="cancelEditSupplierBtn" class="cancelBtn">Hủy</button>
+          </div>
+        </div>
     <!-------------------------------------------------------------- QL Inventory-------------------------------------------->
     <div class="content" id="InventoryContent">
       <h1>Danh sách hàng hóa</h1>
@@ -578,8 +667,8 @@
         placeholder="Nhập số lượng"
         required
       /><br /><br />
-      <label for="suplierInven">Nhà cung cấp:</label>
-      <select id="suplierInven" required>
+      <label for="SupplierInven">Nhà cung cấp:</label>
+      <select id="SupplierInven" required>
         <!-- Các tùy chọn sẽ được thêm vào đây từ API -->
       </select>
       <br /><br />
@@ -605,8 +694,8 @@
         step="0.01"
         required
       /><br /><br />
-      <label for="suplierInvenEdit">Nhà cung cấp:</label>
-      <select id="suplierInvenEdit" required>
+      <label for="SupplierInvenEdit">Nhà cung cấp:</label>
+      <select id="SupplierInvenEdit" required>
         <!-- Các tùy chọn sẽ được thêm vào đây từ API -->
       </select>
       <br /><br />
@@ -773,6 +862,64 @@
         <button id="cancelEditTableBtn" class="cancelBtn">Hủy</button>
       </div>
     </div>
+
+        <!-------------------------------------------------------------- QL Shift-------------------------------------------->
+        <div class="content" id="ShiftContent">
+          <h1>Ca làm việc</h1>
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 10px;
+            "
+          >
+
+          <div class="controls" style="
+          display: flex;
+          justify-content: center;
+          margin-bottom: 20px;
+          ">
+              <label for="monthSelect">Chọn tháng:</label>
+              <select id="monthSelect" style="margin-left: 10px;width: 100px;height: 30px;" onchange="fetchMonthlyData()">
+                <option value="1">Tháng 1</option>
+                <option value="2">Tháng 2</option>
+                <option value="3">Tháng 3</option>
+                <option value="4">Tháng 4</option>
+                <option value="5">Tháng 5</option>
+                <option value="6">Tháng 6</option>
+                <option value="7">Tháng 7</option>
+                <option value="8">Tháng 8</option>
+                <option value="9">Tháng 9</option>
+                <option value="10">Tháng 10</option>
+                <option value="11">Tháng 11</option>
+                <option value="12">Tháng 12</option>
+                
+              </select>
+          </div>
+          </div>
+    
+          <table id="ShiftTable" class="display">
+            <thead>
+              <tr>
+                <th>Tên nhân viên</th>
+                <th>Số ngày làm</th>
+                <th>Lương</th>
+                <th>Chi tiết</th>
+              </tr>
+            </thead>
+            <tbody >
+              <!-- Dữ liệu sẽ được chèn vào đây -->
+            </tbody>
+          </table>
+        </div>
+        <div id="viewWorkDaysModal" class="editModal">
+          <h2 id="mothVWD"></h2>
+          <h2> Nhân viên: <span id="staffVWD" style="color: #fea116;"></span></h2>
+          <div id="calendar"></div> <!-- Lịch tháng sẽ được hiển thị ở đây -->
+          <button id="cancelVWDBtn" class="cancelBtn">Đóng</button>
+        </div>
+        
+            
 
     <!-------------------------------------------------------------- Thống kê-------------------------------------------->
     <div class="content" id="ThongKeContent">
