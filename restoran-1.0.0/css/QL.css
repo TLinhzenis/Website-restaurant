@@ -426,16 +426,51 @@ th {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   text-align: left;
 }
+/* Căn chỉnh nội dung trong p */
 .stat-box p {
-  margin: 0; /* Loại bỏ khoảng cách bên ngoài của các đoạn văn */
-  display: flex; /* Sử dụng Flexbox để dễ căn chỉnh các phần tử con */
-  align-items: center; /* Căn giữa các phần tử theo chiều dọc */
-  margin-bottom: 20px;
+  margin: 0; /* Loại bỏ khoảng cách bên ngoài */
+  display: flex; /* Sử dụng Flexbox */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: space-between; /* Đẩy các phần tử sang hai bên */
+  margin-bottom: 20px; /* Khoảng cách giữa các dòng */
 }
+
+/* Tên khách hàng nằm bên trái */
+.topCustomerName {
+  font-weight: bold; /* Làm nổi bật tên khách hàng */
+  color: #333; /* Màu chữ */
+  margin-right: auto; /* Đẩy sang bên trái */
+  text-align: left;
+}
+
+/* Số tiền nằm bên phải */
+.topCustomer {
+  color: #076d7d; /* Màu sắc cho phần tiền */
+  font-weight: bold; /* In đậm */
+  margin-left: auto; /* Đẩy sang bên phải */
+  text-align: right;
+}
+
+.topMenuName {
+  font-weight: bold; /* Làm nổi bật tên khách hàng */
+  color: #333; /* Màu chữ */
+  margin-right: auto; /* Đẩy sang bên trái */
+  text-align: left;
+}
+
+/* Số tiền nằm bên phải */
+.topMenu {
+  color: #076d7d; /* Màu sắc cho phần tiền */
+  font-weight: bold; /* In đậm */
+  margin-left: auto; /* Đẩy sang bên phải */
+  text-align: right;
+}
+
+
 
 /* Hộp Tổng quan lớn hơn */
 .stat-box.overview {
-  height: 150px; /* Chiều cao cố định để đồng đều */
+  height: 200px; /* Chiều cao cố định để đồng đều */
 }
 
 /* Hộp nhỏ */
@@ -599,4 +634,7 @@ th {
 #cancelVWDBtn:hover {
   background-color: #45a049;
 }
+
+
+
 

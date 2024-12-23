@@ -102,11 +102,19 @@ function viewWorkDays(staffId, month) {
     fetch(`https://resmant11111-001-site1.anytempurl.com/Shift/WorkDays?staffId=${staffId}&month=${month}`)
         .then(response => response.json())
         .then(data => {
-            const staffName = $(`a[data-id="${staffId}"]`).closest('tr').find('td:first').text();
+            // Lấy tên nhân viên từ dữ liệu trả về API
+            const staffName = data.staffName;
+
+            // Kiểm tra nếu không có tên nhân viên
+            if (!staffName) {
+                alert('Không tìm thấy tên nhân viên.');
+                return;
+            }
 
             // Hiển thị tháng và tên nhân viên
             $("#mothVWD").text(`Chi tiết ngày làm việc tháng ${month}`);
-            $("#staffVWD").text(` ${staffName}`);
+            $("#staffVWD").text(`${staffName}`);
+
             // Tạo lịch cho tháng đã chọn
             const currentDate = new Date();
             const year = currentDate.getFullYear();
@@ -114,7 +122,7 @@ function viewWorkDays(staffId, month) {
             $("#overlay").show();
 
             // Tạo mảng ngày làm việc của nhân viên
-            const workDays = new Set(data); // Dùng Set để loại bỏ các ngày trùng lặp
+            const workDays = new Set(data.workDays); // Dùng Set để loại bỏ các ngày trùng lặp
 
             // Tạo HTML cho lịch tháng
             let calendarHTML = '<table class="calendar-table"><tr>';
@@ -134,12 +142,9 @@ function viewWorkDays(staffId, month) {
         .catch(error => {
             console.error('Lỗi khi lấy ngày làm việc:', error);
             alert('Không có ngày làm việc nào cho nhân viên này trong tháng.');
-            
         });
-
-
-
 }
+
 
 
 

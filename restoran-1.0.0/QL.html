@@ -77,24 +77,29 @@
       <a href="#" id="manageThongKe" style="font-family: 'Nunito', sans-serif">
         <i class="fa-solid fa-chart-pie" style="margin-right: 5px"></i> Thống kê
       </a>
-      <a href="#" id="manageTable" style="font-family: 'Nunito', sans-serif">
-        <i class="fa-solid fa-couch" style="margin-right: 5px"></i> Quản lý bàn
-      </a>
-      <a href="#" id="manageMenu" style="font-family: 'Nunito', sans-serif">
-        <i class="fa-solid fa-clipboard-list" style="margin-right: 5px"></i>
-        Quản lý Menu
-      </a>
+
       <a href="#" id="manageCustomer" style="font-family: 'Nunito', sans-serif">
         <i class="fa-solid fa-user icon" style="margin-right: 5px"></i> Quản lý
         khách hàng
       </a>
+
       <a href="#" id="manageStaff" style="font-family: 'Nunito', sans-serif">
         <i class="fa-solid fa-users" style="margin-right: 5px"></i> Quản lý nhân
         viên
       </a>
-      <a href="#" id="manageVoucher" style="font-family: 'Nunito', sans-serif">
-        <i class="fa-solid fa-ticket" style="margin-right: 5px"></i> Quản lý
-        voucher
+
+      <a href="#" id="manageShift" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-check-to-slot" style="margin-right: 5px"></i> Ca làm việc
+        
+      </a>
+
+      <a href="#" id="manageTable" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-couch" style="margin-right: 5px"></i> Quản lý bàn
+      </a>
+
+      <a href="#" id="manageMenu" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-clipboard-list" style="margin-right: 5px"></i>
+        Quản lý Menu
       </a>
 
       <a
@@ -105,14 +110,16 @@
         <i class="fa-solid fa-warehouse" style="margin-right: 5px"></i> Quản lý
         kho
       </a>
-      <a href="#" id="manageShift" style="font-family: 'Nunito', sans-serif">
-        <i class="fa-solid fa-check-to-slot" style="margin-right: 5px"></i> Ca làm việc
-        
-      </a>
+      
 
       <a href="#" id="manageSupplier" style="font-family: 'Nunito', sans-serif">
         <i class="fa-solid fa-cart-shopping" style="margin-right: 5px"></i> Quản lý nhà cung cấp
         
+      </a>
+
+      <a href="#" id="manageVoucher" style="font-family: 'Nunito', sans-serif">
+        <i class="fa-solid fa-ticket" style="margin-right: 5px"></i> Quản lý
+        voucher
       </a>
 
       <a href="#" id="logoutButton" style="font-family: 'Nunito', sans-serif">
@@ -880,7 +887,7 @@
           margin-bottom: 20px;
           ">
               <label for="monthSelect">Chọn tháng:</label>
-              <select id="monthSelect" style="margin-left: 10px;width: 100px;height: 30px;" onchange="fetchMonthlyData()">
+              <select id="monthSelect" style="margin-left: 10px;width: 100px;height: 30px;">
                 <option value="1">Tháng 1</option>
                 <option value="2">Tháng 2</option>
                 <option value="3">Tháng 3</option>
@@ -965,15 +972,18 @@
             <h3 class="stat-box-heading-text">Khách hàng hàng đầu</h3>
             <p>
               <span class="rank-circle rank-1">1</span>
-              <span id="top1Customer"></span>
+              <span class="topCustomerName" id="top1CustomerName"></span>
+              <span class="topCustomer" id="top1Customer"></span>
             </p>
             <p>
               <span class="rank-circle rank-2">2</span>
-              <span id="top2Customer"></span>
+              <span class="topCustomerName" id="top2CustomerName"></span>
+              <span class="topCustomer" id="top2Customer"></span>
             </p>
             <p>
               <span class="rank-circle rank-3">3</span>
-              <span id="top3Customer"></span>
+              <span class="topCustomerName" id="top3CustomerName"></span>
+              <span class="topCustomer" id="top3Customer"></span>
             </p>
           </div>
         </div>
@@ -991,23 +1001,28 @@
           <h3 class="stat-box-heading-text">Món ăn bán chạy nhất</h3>
           <p>
             <span class="rank-circle rank-1">1</span>
-            <span id="top1Menu"></span>
+            <span class="topMenuName" id="top1MenuName"></span>
+            <span class="topMenu" id="top1Menu"></span>
           </p>
           <p>
             <span class="rank-circle rank-2">2</span>
-            <span id="top2Menu"></span>
+            <span class="topMenuName" id="top2MenuName"></span>
+            <span class="topMenu" id="top2Menu"></span>
           </p>
           <p>
             <span class="rank-circle rank-3">3</span>
-            <span id="top3Menu"></span>
+            <span class="topMenuName" id="top3MenuName"></span>
+            <span class="topMenu" id="top3Menu"></span>
           </p>
           <p>
             <span class="rank-circle rank-4">4</span>
-            <span id="top4Menu"></span>
+            <span class="topMenuName" id="top4MenuName"></span>
+            <span class="topMenu" id="top4Menu"></span>
           </p>
           <p>
             <span class="rank-circle rank-5">5</span>
-            <span id="top5Menu"></span>
+            <span class="topMenuName" id="top5MenuName"></span>
+            <span class="topMenu" id="top5Menu"></span>
           </p>
         </div>
       </div>
