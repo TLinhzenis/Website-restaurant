@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Biểu đồ
+    
     const labels = [];
     const data = [];
     const ctx = document.getElementById('revenueChart').getContext('2d');
@@ -80,12 +81,12 @@ async function fetchRevenue() {
       // Cập nhật dữ liệu vào HTML
 
       document.getElementById('dailyRevenue').innerHTML = `<span style="color: #fea116;padding-left:10px;">${data.today.totalRevenue.toLocaleString()}</span> VND`;
+      document.getElementById('dailyRevenue1').innerHTML = `<span style="color: #fea116;padding-left:10px;">${data.today.totalRevenue.toLocaleString()}</span> VND`;
       document.getElementById('7daysRevenue').innerHTML = `<span style="color: #fea116;padding-left:10px;">${data.last7Days.totalRevenue.toLocaleString()}</span> VND`;
       document.getElementById('30daysRevenue').innerHTML = `<span style="color: #fea116;padding-left:10px;">${data.last30Days.totalRevenue.toLocaleString()}</span> VND`;
       
     } catch (error) {
-      console.error('Lỗi:', error);
-      alert('Không thể tải dữ liệu doanh số.');
+      console.error('Không thể tải dữ liệu doanh số.', error);
     }
   }
 
@@ -104,12 +105,13 @@ async function fetchRevenue() {
       // Cập nhật dữ liệu vào HTML
 
       document.getElementById('dailyOrders').innerHTML = `<span style="color: #fea116;padding-left:10px;">${data.today.orderCount.toLocaleString()}</span> `;
+      document.getElementById('dailyOrders1').innerHTML = `<span style="color: #fea116;padding-left:10px;">${data.today.orderCount.toLocaleString()}</span> `;
       document.getElementById('7daysOrders').innerHTML = `<span style="color: #fea116;padding-left:10px;">${data.last7Days.orderCount.toLocaleString()}</span> `;
       document.getElementById('30daysOrders').innerHTML = `<span style="color: #fea116;padding-left:10px;">${data.last30Days.orderCount.toLocaleString()}</span> `;
       
     } catch (error) {
-      console.error('Lỗi:', error);
-      alert('Không thể tải dữ liệu doanh số.');
+      console.error('Không thể tải dữ liệu đơn hàng', error);
+
     }
   }
 
@@ -133,13 +135,14 @@ async function fetchRevenue() {
         // Cập nhật thông tin vào giao diện HTML
         document.getElementById('top1Customer').innerHTML = 
             `${data[0].fullName} <span style="color: #fea116;padding-left:10px;">(${data[0].totalSpent.toLocaleString()} VND)</span>`;
+        document.getElementById('top1Customer1').innerHTML = 
+            `<span style="padding-left:10px;">${data[0].fullName}</span> <span style="color: #fea116;padding-left:10px;">(${data[0].totalSpent.toLocaleString()} VND)</span>`;
         document.getElementById('top2Customer').innerHTML = 
             `${data[1].fullName} <span style="color: #fea116;padding-left:10px;">(${data[1].totalSpent.toLocaleString()} VND)</span>`;
         document.getElementById('top3Customer').innerHTML = 
             `${data[2].fullName} <span style="color: #fea116;padding-left:10px;">(${data[2].totalSpent.toLocaleString()} VND)</span>`;
     } catch (error) {
-        console.error('Lỗi:', error);
-        alert('Không thể tải dữ liệu khách hàng hàng đầu.');
+        console.error('Không thể tải dữ liệu khách hàng hàng đầu.', error);
     }
 }
 
@@ -172,8 +175,8 @@ async function fetchRevenue() {
         document.getElementById('top5Menu').innerHTML = 
             `${data[4].itemName} <span style="color: #fea116;padding-left:10px;">(${data[4].totalQuantity.toLocaleString()} phần)</span>`;
     } catch (error) {
-        console.error('Lỗi:', error);
-        alert('Không thể tải dữ liệu khách hàng hàng đầu.');
+        console.error('Không thể tải dữ liệu món ăn hàng đầu.', error);
+ 
     }
 }
 

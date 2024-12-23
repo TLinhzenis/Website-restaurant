@@ -99,8 +99,14 @@ $(document).ready(function () {
                 $("#confirmDeleteModalSupplier").hide();
             },
             error: function (xhr, status, error) {
-                console.error("Không thể xóa Nhà cung cấp:", error);
-                alert("Có lỗi xảy ra khi xóa Nhà cung cấp.");
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    // Hiển thị thông báo lỗi trả về từ API
+                    $("#confirmDeleteModalSupplier").hide();
+                    showNotification(xhr.responseJSON.message);
+                } else {
+                    console.error("Không thể xóa Nhà cung cấp:", error);
+                    alert("Có lỗi xảy ra khi xóa Nhà cung cấp.");
+                }
             }
         });
     });
