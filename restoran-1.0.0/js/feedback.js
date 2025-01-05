@@ -100,7 +100,7 @@ $("#sendFeedback").click(function (e) {
   var rating = $("#rating").val().trim();
   var feedback = $("#feedback").val().trim();
 
-  if (!rating || !feedback) {
+  if (!rating) {
       showNotification("Vui lòng điền đầy đủ thông tin!");
       $("#overlay").show();
       return;
