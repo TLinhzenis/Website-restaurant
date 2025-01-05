@@ -35,7 +35,7 @@ $(document).ready(function () {
             $("#editInvenModal").hide();
             $("#addInvenModal").hide();
             $("#overlay").hide();
-            resetVoucherModal();
+            resetInvenModal();
             $("#addInvenModal").removeClass("closing");
             $("#editInvenModal").removeClass("closing");
         }, 900); 
@@ -47,10 +47,13 @@ $(document).ready(function () {
         }
     });
 
-    function resetVoucherModal() {
-        $("#voucherType").val(""); 
-        $("#voucherPoint").val(""); 
-        
+    function resetInvenModal() {
+        $("#itemType").val(""); 
+        $("#itemQuantity").val(""); 
+        $("#suplierInven").val(""); 
+        $("#error-message-inven").val("");
+        document.querySelector('.error-message-inven').style.display = 'none';
+
         
     }
     /*-------------------------------------------------Hiển thị danh sách------------------------------------------------*/

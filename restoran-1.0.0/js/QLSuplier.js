@@ -33,7 +33,7 @@ $(document).ready(function () {
             $("#editSupplierModal").hide();
             $("#addSupplierModal").hide();
             $("#overlay").hide();
-            resetVoucherModal();
+            resetSuppModal();
             $("#addSupplierModal").removeClass("closing");
             $("#editSupplierModal").removeClass("closing");
         }, 900); 
@@ -45,9 +45,9 @@ $(document).ready(function () {
         }
     });
 
-    function resetVoucherModal() {
-        $("#voucherType").val(""); // Xóa tên món ăn
-        $("#voucherPoint").val(""); // Reset phân loại
+    function resetSuppModal() {
+        $("#supplierName").val(""); // Xóa tên món ăn
+        $("#contactInfo").val(""); // Reset phân loại
         
         
     }

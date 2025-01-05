@@ -43,7 +43,7 @@ $(document).ready(function () {
       $("#editTableModal").hide();
       $("#addTableModal").hide();
       $("#overlay").hide();
-      resetStaffModal();
+      resetTableModal();
       $("#addTableModal").removeClass("closing");
       $("#editTableModal").removeClass("closing");
     }, 900);
@@ -55,11 +55,12 @@ $(document).ready(function () {
     }
   });
 
-  function resetStaffModal() {
-    $("#TableNumber").val(""); // Xóa tên món ăn
-    $("#Capacity").val(""); // Xóa tên món ăn
-    $("#usernameTable").val(""); // Reset phân loại
-    $("#passwordTable").val(""); // Xóa giá
+  function resetTableModal() {
+    $("#TableNumberInsert").val(""); // Xóa tên món ăn
+    $("#CapacityInsert").val(""); // Xóa tên món ăn
+    $("#StatusInsert").val(""); // Reset phân loại
+    $("#passwordTableInsert").val(""); // Xóa giá
+    $("#usernameTableInsert").val(""); // Xóa giá
   }
 
   /*-------------------------------------------------Hiển thị danh sách------------------------------------------------*/
