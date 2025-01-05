@@ -47,10 +47,10 @@ $(document).ready(function () {
             url: "https://resmant11111-001-site1.anytempurl.com/Menu/List",
             method: "GET",
             success: function (response) {
-                table.clear(); // Xóa dữ liệu cũ
+                table.clear(); 
     
                 response.forEach(function (item) {
-                    // Kiểm tra nếu có hình ảnh thì hiển thị, nếu không thì để trống
+                   
                     var imageUrl = item.image ? `https://resmant11111-001-site1.anytempurl.com/uploads/${item.image}` : '';
 
                     var description = `<div class="mo-ta">${item.description}</div>`;
@@ -67,7 +67,7 @@ $(document).ready(function () {
                             categoryName = "Tráng miệng";
                             break;
                         default:
-                            categoryName = "Khác"; // Nếu không thuộc loại nào
+                            categoryName = "Khác"; 
                     }
                     var row = [
                         item.itemName,
@@ -81,7 +81,7 @@ $(document).ready(function () {
                          
                         <a id="btn-delete" class="btn-delete" data-id="${item.menuItemId}"><i class="fa-solid fa-trash"></i></a>`
                     ];
-                    table.row.add(row).draw(); // Thêm hàng mới
+                    table.row.add(row).draw(); 
                 });
     
             },
@@ -96,13 +96,13 @@ $(document).ready(function () {
 
 /*-------------------------------------------------Animation & ovelay------------------------------------------------*/
 function resetMenuModal() {
-    $("#itemName").val(""); // Xóa tên món ăn
-    $("#category").val(""); // Reset phân loại
-    $("#price").val(""); // Xóa giá
-    $("#description").val(""); // Xóa mô tả
-    $("#image").val(""); // Xóa file ảnh
+    $("#itemName").val(""); 
+    $("#category").val(""); 
+    $("#price").val(""); 
+    $("#description").val(""); 
+    $("#image").val(""); 
     const imagePreview = $("#imagePreview");
-    imagePreview.attr("src", ""); // Xóa ảnh xem trước
+    imagePreview.attr("src", ""); 
     
 }
 
@@ -172,11 +172,11 @@ $("#image").change(function () {
     if (imageFile) {
         var maxSize = 5 * 1024 * 1024; 
         if (imageFile.size > maxSize) {
-            document.querySelector('.error-message').innerText = "Ảnh được chọn có dung lượng quá lớn"; // Thông báo cho ô username
-            document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
-            $("#image").val(""); // Xóa file đã chọn
-            $("#imageName").text(""); // Xóa tên file hiển thị
-            $("#imagePreview").attr("src", ""); // Xóa ảnh preview
+            document.querySelector('.error-message').innerText = "Ảnh được chọn có dung lượng quá lớn"; 
+            document.querySelector('.error-message').style.display = 'block'; 
+            $("#image").val(""); 
+            $("#imageName").text(""); 
+            $("#imagePreview").attr("src", ""); 
             return;
         }
 
@@ -251,21 +251,21 @@ $("#image").change(function () {
 
         // Tải ảnh lên server trước
         $.ajax({
-            url: "https://resmant11111-001-site1.anytempurl.com/controller/upload-image", // URL đến API upload ảnh
+            url: "https://resmant11111-001-site1.anytempurl.com/controller/upload-image", 
             type: "POST",
             data: formData,
             contentType: false,
             processData: false,
             success: function (response) {
-                var imageName = response.imagePath.split('/').pop(); // Lấy tên file ảnh từ đường dẫn
+                var imageName = response.imagePath.split('/').pop(); 
 
-                // Sau khi tải ảnh xong, gửi yêu cầu thêm món ăn
+                
                 var newMenuItem = {
                     itemName: itemName,
                     category: category,
                     price: price,
                     description: description,
-                    image: imageName // Lưu tên file ảnh
+                    image: imageName 
                 };
 
                 $.ajax({
@@ -274,8 +274,8 @@ $("#image").change(function () {
                     contentType: "application/json",
                     data: JSON.stringify(newMenuItem),
                     success: function (response) {
-                        loadMenuItems(); // Hàm tải lại danh sách món ăn
-                        $("#addMenuModal").hide(); // Ẩn modal sau khi thêm thành công
+                        loadMenuItems(); 
+                        $("#addMenuModal").hide(); 
                         
                         showNotification("Món ăn đã được thêm thành công!");
                         
@@ -299,7 +299,7 @@ $("#image").change(function () {
 
     $(document).on('click', '.btn-delete', function () {
         menuItemIdToDelete = $(this).data('id');
-        $("#confirmDeleteModal").show(); // Hiện modal xác nhận
+        $("#confirmDeleteModal").show(); 
         $("#overlay").show();
 
     });
@@ -311,7 +311,7 @@ $("#image").change(function () {
             success: function (response) {
                 loadMenuItems();
                 showNotification("Món ăn đã được xóa thành công!");
-                $("#confirmDeleteModal").hide(); // Ẩn modal xác nhận
+                $("#confirmDeleteModal").hide(); 
 
             },
             error: function (xhr, status, error) {
@@ -343,9 +343,9 @@ $("#image").change(function () {
     /*-------------------------------------------------Sửa------------------------------------------------*/
     let menuItemId;
 
-// Khi người dùng chọn file ảnh mới
+
 $("#imageUpload").change(function () {
-    var imageFile = $("#imageUpload")[0].files[0]; // Lấy file ảnh mới
+    var imageFile = $("#imageUpload")[0].files[0]; 
 
     if (imageFile) {
         // Hiển thị tên file ảnh
@@ -354,42 +354,42 @@ $("#imageUpload").change(function () {
         // Hiển thị ảnh preview
         var reader = new FileReader();
         reader.onload = function (e) {
-            $("#currentImage").attr("src", e.target.result).show(); // Hiện ảnh mới
+            $("#currentImage").attr("src", e.target.result).show(); 
         };
         reader.readAsDataURL(imageFile);
     } else {
         $("#imageNameEdit").text("Không có ảnh");
-        $("#currentImage").hide(); // Ẩn ảnh nếu không có file nào được chọn
+        $("#currentImage").hide(); 
     }
 });
 
 // Khi nhấn nút "Sửa" món ăn
 $(document).on('click', '.btn-edit', function () {
-    menuItemId = $(this).data('id'); // Lưu ID món ăn cần sửa
+    menuItemId = $(this).data('id'); 
     $.ajax({
         url: `https://resmant11111-001-site1.anytempurl.com/Menu/GetById?id=${menuItemId}`,
         method: "GET",
         success: function (menuItem) {
-            // Khôi phục tất cả các trường trong modal
+
             $("#itemNameEdit").val(menuItem.itemName);
 
             $("#categoryEdit").val(menuItem.category);
             $("#priceEdit").val(formatPrice(menuItem.price));
             $("#descriptionEdit").val(menuItem.description);
 
-            // Nếu món ăn có ảnh
+
             if (menuItem.image) {
-                $("#imageNameEdit").text(menuItem.image); // Cập nhật tên file ảnh
+                $("#imageNameEdit").text(menuItem.image); 
                 $("#currentImage").attr("src", `https://resmant11111-001-site1.anytempurl.com/uploads/${menuItem.image}`).show();
             } else {
                 $("#imageNameEdit").text("Không có ảnh");
                 $("#currentImage").hide();
             }
 
-            // Reset input file cho hình ảnh mới
-            $("#imageUpload").val(''); // Đặt lại input file để không giữ file trước đó
 
-            $("#editMenuModal").show(); // Hiện modal sửa món ăn
+            $("#imageUpload").val('');
+
+            $("#editMenuModal").show();
             $("#overlay").show();
             
         },
@@ -410,21 +410,21 @@ $(document).on('click', '.btn-edit', function () {
         var category = $("#categoryEdit").val();
         var price = parseFloat($("#priceEdit").val().replace(/\./g, ""));
         var description = $("#descriptionEdit").val().trim();
-        var imageInput = $("#imageUpload")[0];  // Đối tượng input file
-        var imageFile = imageInput.files.length > 0 ? imageInput.files[0] : null;  // Kiểm tra xem có file nào được chọn không
-        var currentImage = $("#currentImage").attr("src").split('/').pop(); // Lấy tên ảnh hiện tại
+        var imageInput = $("#imageUpload")[0];  
+        var imageFile = imageInput.files.length > 0 ? imageInput.files[0] : null;  
+        var currentImage = $("#currentImage").attr("src").split('/').pop(); 
     
         if (!itemName || !category || !price ) {
-            document.querySelector('.error-message2').innerText = "Vui lòng điền đầy đủ thông tin"; // Thông báo cho ô username
-            document.querySelector('.error-message2').style.display = 'block'; // Hiển thị phần tử thông báo
-            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
-            return; // Ngừng thực hiện nếu tài khoản trống
+            document.querySelector('.error-message2').innerText = "Vui lòng điền đầy đủ thông tin"; 
+            document.querySelector('.error-message2').style.display = 'block'; 
+            loadingIcon.style.display = 'none'; 
+            return; 
         }
         if (price <= 0 || !Number.isInteger(price)) {
-            document.querySelector('.error-message2').innerText = "Giá phải là số nguyên lớn hơn 0"; // Thông báo cho ô username
-            document.querySelector('.error-message2').style.display = 'block'; // Hiển thị phần tử thông báo
-            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
-            return; // Ngừng thực hiện nếu tài khoản trống
+            document.querySelector('.error-message2').innerText = "Giá phải là số nguyên lớn hơn 0"; 
+            document.querySelector('.error-message2').style.display = 'block'; 
+            loadingIcon.style.display = 'none'; 
+            return; 
         }
     
         if (imageFile) {
@@ -445,7 +445,7 @@ $(document).on('click', '.btn-edit', function () {
                         category: category,
                         price: price,
                         description: description,
-                        image: response.imagePath.split('/').pop() // Chỉ lấy tên file ảnh mới
+                        image: response.imagePath.split('/').pop() 
                     };
     
                     updateMenuItem(updatedMenuItem);
@@ -455,14 +455,14 @@ $(document).on('click', '.btn-edit', function () {
                 }
             });
         } else {
-            // Nếu không có ảnh mới, giữ lại tên ảnh hiện tại
+            
             var updatedMenuItem = {
                 menuItemId: menuItemId,
                 itemName: itemName,
                 category: category,
                 price: price,
                 description: description,
-                image: currentImage // Giữ lại ảnh cũ
+                image: currentImage 
             };
     
             updateMenuItem(updatedMenuItem);
@@ -489,7 +489,7 @@ $(document).on('click', '.btn-edit', function () {
 
     function showNotification(message) {
         $("#notificationMessage").text(message);
-        $("#notificationModal").show(); // Hiển thị modal thông báo
+        $("#notificationModal").show(); 
     }
 
     // Khi nhấn nút Đóng trong modal thông báo

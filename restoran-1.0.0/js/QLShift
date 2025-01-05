@@ -102,10 +102,10 @@ function viewWorkDays(staffId, month) {
     fetch(`https://resmant11111-001-site1.anytempurl.com/Shift/WorkDays?staffId=${staffId}&month=${month}`)
         .then(response => response.json())
         .then(data => {
-            // Lấy tên nhân viên từ dữ liệu trả về API
+            
             const staffName = data.staffName;
 
-            // Kiểm tra nếu không có tên nhân viên
+            
             if (!staffName) {
                 alert('Không tìm thấy tên nhân viên.');
                 return;
@@ -118,18 +118,18 @@ function viewWorkDays(staffId, month) {
             // Tạo lịch cho tháng đã chọn
             const currentDate = new Date();
             const year = currentDate.getFullYear();
-            const daysInMonth = new Date(year, month, 0).getDate();  // Số ngày trong tháng
+            const daysInMonth = new Date(year, month, 0).getDate();  
             $("#overlay").show();
 
             // Tạo mảng ngày làm việc của nhân viên
-            const workDays = new Set(data.workDays); // Dùng Set để loại bỏ các ngày trùng lặp
+            const workDays = new Set(data.workDays); 
 
             // Tạo HTML cho lịch tháng
             let calendarHTML = '<table class="calendar-table"><tr>';
             for (let day = 1; day <= daysInMonth; day++) {
                 const isWorkDay = workDays.has(day);
                 calendarHTML += `<td class="${isWorkDay ? 'work-day' : ''}">${day}</td>`;
-                if (day % 7 === 0) calendarHTML += '</tr><tr>';  // Chia mỗi tuần ra một dòng
+                if (day % 7 === 0) calendarHTML += '</tr><tr>';  
             }
             calendarHTML += '</tr></table>';
 

@@ -98,24 +98,24 @@ document.querySelector('.login100-form-btn').addEventListener('click', function 
     
 
     const loadingIcon = document.querySelector('.loading-icon');
-    loadingIcon.style.display = 'inline'; // Hiển thị biểu tượng loading
-    document.querySelector('.error-message').style.display = 'none'; // Ẩn thông báo lỗi
+    loadingIcon.style.display = 'inline'; 
+    document.querySelector('.error-message').style.display = 'none'; 
 
     // Kiểm tra ô tài khoản và mật khẩu
     if (!username) {
-        usernameInput.focus(); // Đặt tiêu điểm vào ô username
-        document.querySelector('.error-message').innerText = "Tài khoản không được để trống"; // Thông báo cho ô username
-        document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
-        loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
-        return; // Ngừng thực hiện nếu tài khoản trống
+        usernameInput.focus(); 
+        document.querySelector('.error-message').innerText = "Tài khoản không được để trống"; 
+        document.querySelector('.error-message').style.display = 'block'; 
+        loadingIcon.style.display = 'none'; 
+        return; 
     }
 
     if (!password) {
-        passwordInput.focus(); // Đặt tiêu điểm vào ô password
-        document.querySelector('.error-message').innerText = "Mật khẩu không được để trống"; // Thông báo cho ô password
-        document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
-        loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
-        return; // Ngừng thực hiện nếu mật khẩu trống
+        passwordInput.focus(); 
+        document.querySelector('.error-message').innerText = "Mật khẩu không được để trống"; 
+        document.querySelector('.error-message').style.display = 'block'; 
+        loadingIcon.style.display = 'none'; 
+        return; 
     }
 
     fetch(`https://resmant11111-001-site1.anytempurl.com/Customer/Login?username=${username}&password=${password}`, {
@@ -126,20 +126,20 @@ document.querySelector('.login100-form-btn').addEventListener('click', function 
     })
     .then(response => response.json())
     .then(data => {
-        loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+        loadingIcon.style.display = 'none'; 
         if (data.message === "Đăng nhập thành công") {
             localStorage.setItem('fullNameU', data.fullName);
             localStorage.setItem('customerId', data.customerId);
             localStorage.setItem('point', data.point);
             window.location.href = 'index.html';
         } else {
-            // Hiển thị thông báo lỗi dưới ô nhập liệu
-            document.querySelector('.error-message').innerText = "Sai tài khoản hoặc mật khẩu"; // Hiển thị thông báo
-            document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
+            
+            document.querySelector('.error-message').innerText = "Sai tài khoản hoặc mật khẩu"; 
+            document.querySelector('.error-message').style.display = 'block'; 
         }
     })
     .catch(error => {
-        loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
+        loadingIcon.style.display = 'none'; 
         console.error('Error:', error);
     });
 

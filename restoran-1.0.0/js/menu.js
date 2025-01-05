@@ -1,28 +1,28 @@
 $(document).ready(function() {
 
     function formatPrice(price) {
-        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Định dạng số
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); 
     }
     fetchMenuItems();
 
     function fetchMenuItems() {
         $.ajax({
-            url: 'https://resmant11111-001-site1.anytempurl.com/Menu/List', // Địa chỉ API để lấy danh sách món ăn
+            url: 'https://resmant11111-001-site1.anytempurl.com/Menu/List',
             method: 'GET',
             success: function(data) {
-                console.log(data); // Kiểm tra dữ liệu nhận được từ API
+                console.log(data); 
                 console.log('Dữ liệu nhận được từ API:', data);
 
                 let menuContainer1 = $('#menuContainer');
                 let menuContainer2 = $('#menuContainer2');
                 let menuContainer3 = $('#menuContainer3');
 
-                menuContainer1.empty(); // Xóa nội dung cũ
-                menuContainer2.empty(); // Xóa nội dung cũ
-                menuContainer3.empty(); // Xóa nội dung cũ
+                menuContainer1.empty(); 
+                menuContainer2.empty(); 
+                menuContainer3.empty(); 
 
                 data.forEach(item => {
-                    console.log(item); // Kiểm tra từng món ăn
+                    console.log(item); 
                     const menuItemHtml = `
                         <div class="menu-item">
                             <div class="col-lg-6">
@@ -53,8 +53,8 @@ $(document).ready(function() {
                             menuContainer3.append(menuItemHtml);
                             break;
                         default:
-                            console.warn('Không xác định category:', item.category); // Cảnh báo nếu category không hợp lệ
-                            break; // Nếu không thuộc category nào, không làm gì cả
+                            console.warn('Không xác định category:', item.category); 
+                            break; 
                     }
                 });
             },

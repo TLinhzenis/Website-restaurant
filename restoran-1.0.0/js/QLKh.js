@@ -13,7 +13,7 @@ $(document).ready(function () {
     });
 
     function formatPrice(price) {
-        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Định dạng số
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
     function formatDateToVietnameseTimezone(utcDateString) {
@@ -54,7 +54,7 @@ $(document).ready(function () {
             url: "https://resmant11111-001-site1.anytempurl.com/Customer/List",
             method: "GET",
             success: function (response) {
-                table.clear(); // Xóa dữ liệu cũ
+                table.clear(); 
 
                 response.forEach(function (item) {
                     var row = [
@@ -63,7 +63,7 @@ $(document).ready(function () {
                         '*'.repeat(item.password.length),
                         item.email,
                         item.phoneNumber,
-                        formatDateToVietnameseTimezone(item.dateJoined), // Chuyển đổi và hiển thị ngày tham gia
+                        formatDateToVietnameseTimezone(item.dateJoined),
                         formatPrice(item.point),
                         `<a id="btn-edit" class="btn-edit1" data-id="${item.customerId}"><i class="fa-solid fa-eye"></i></a>
                         
@@ -71,7 +71,7 @@ $(document).ready(function () {
                         
                         <a id="btn-delete" class="btn-delete1" data-id="${item.customerId}"><i class="fa-solid fa-trash"></i></a>`
                     ];
-                    table.row.add(row) // Thêm hàng mới
+                    table.row.add(row) 
                 });
                 table.draw(); 
                 // Hạn chế quyền truy cập
@@ -100,7 +100,7 @@ $(document).ready(function () {
     });
 
 
-    // Gọi hàm loadCustomers khi trang được tải
+
     loadCustomers();
 
     /*-------------------------------------------------Xóa------------------------------------------------*/
@@ -109,7 +109,7 @@ $(document).ready(function () {
 
     $(document).on('click', '.btn-delete1', function () {
         customerIdToDelete = $(this).data('id');
-        $("#confirmDeleteModal1").show(); // Hiện modal xác nhận
+        $("#confirmDeleteModal1").show(); 
         $("#overlay").show();
     });
 
@@ -120,7 +120,7 @@ $(document).ready(function () {
             success: function (response) {
                 loadCustomers();
                 showNotification("Tài khoản đã được xóa thành công!");
-                $("#confirmDeleteModal1").hide(); // Ẩn modal xác nhận
+                $("#confirmDeleteModal1").hide(); 
             },
             error: function (xhr, status, error) {
                 console.error("Không thể xóa tài khoản:", error);
@@ -141,7 +141,7 @@ $(document).ready(function () {
     let CustomerId;
 
     $(document).on('click', '.btn-edit1', function () {
-        CustomerId = $(this).data('id'); // Lưu ID món ăn cần sửa
+        CustomerId = $(this).data('id'); 
         $.ajax({
             url: `https://resmant11111-001-site1.anytempurl.com/Customer/GetById?id=${CustomerId}`,
             method: "GET",
@@ -152,8 +152,8 @@ $(document).ready(function () {
                 $("#EmailEdit").val(customer.email);
                 $("#PhoneEdit").val(customer.phoneNumber);
                 $("#PointEdit").val(customer.point);
-                $("#DayEdit").val(formatDateToVietnameseTimezone(customer.dateJoined)); // Chuyển đổi ngày tham gia
-                $("#editCustomerModal").show(); // Hiện modal sửa món ăn
+                $("#DayEdit").val(formatDateToVietnameseTimezone(customer.dateJoined)); 
+                $("#editCustomerModal").show(); 
                 $("#overlay").show();
             },
             error: function (xhr, status, error) {
@@ -174,7 +174,7 @@ $(document).ready(function () {
         var email = $("#EmailEdit").val();
         var phoneNumber = $("#PhoneEdit").val();
         var point = parseFloat($("#PointEdit").val(), 10);
-        var dayJoined = $("#DayEdit").val(); // Lấy giá trị hiển thị của dayJoined
+        var dayJoined = $("#DayEdit").val(); 
 
         const validateEmail = (email) => {
             return email.match(
@@ -184,37 +184,37 @@ $(document).ready(function () {
     
         // Kiểm tra các điều kiện
         if (!password) {
-            document.querySelector('.error-message1').innerText = "Vui lòng nhập password"; // Thông báo cho ô username
-            document.querySelector('.error-message1').style.display = 'block'; // Hiển thị phần tử thông báo
-            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
-            return; // Ngừng thực hiện nếu tài khoản trống
+            document.querySelector('.error-message1').innerText = "Vui lòng nhập password"; 
+            document.querySelector('.error-message1').style.display = 'block'; 
+            loadingIcon.style.display = 'none';
+            return; 
         }
     
         if (!email || !validateEmail(email)) {
-            document.querySelector('.error-message1').innerText = "Vui lòng nhập email đúng định dạng"; // Thông báo cho ô username
-            document.querySelector('.error-message1').style.display = 'block'; // Hiển thị phần tử thông báo
-            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
-            return; // Ngừng thực hiện nếu tài khoản trống
+            document.querySelector('.error-message1').innerText = "Vui lòng nhập email đúng định dạng"; 
+            document.querySelector('.error-message1').style.display = 'block'; 
+            loadingIcon.style.display = 'none'; 
+            return; 
         }
     
         if (!fullName) {
-            document.querySelector('.error-message1').innerText = "Vui lòng điền đầy đủ tên"; // Thông báo cho ô username
-            document.querySelector('.error-message1').style.display = 'block'; // Hiển thị phần tử thông báo
-            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
-            return; // Ngừng thực hiện nếu tài khoản trống
+            document.querySelector('.error-message1').innerText = "Vui lòng điền đầy đủ tên"; 
+            document.querySelector('.error-message1').style.display = 'block'; 
+            loadingIcon.style.display = 'none';
+            return; 
         }
         if (point < 0 || !Number.isInteger(point)) {
-            document.querySelector('.error-message1').innerText = "Điểm phải là số nguyên dương "; // Thông báo cho ô username
-            document.querySelector('.error-message1').style.display = 'block'; // Hiển thị phần tử thông báo
-            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
-            return; // Ngừng thực hiện nếu tài khoản trống
+            document.querySelector('.error-message1').innerText = "Điểm phải là số nguyên dương "; 
+            document.querySelector('.error-message1').style.display = 'block'; 
+            loadingIcon.style.display = 'none'; 
+            return; 
         }
     
         if (!phoneNumber) {
-            document.querySelector('.error-message').innerText = "Vui lòng nhập số điện thoại"; // Thông báo cho ô username
-            document.querySelector('.error-message').style.display = 'block'; // Hiển thị phần tử thông báo
-            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
-            return; // Ngừng thực hiện nếu tài khoản trống
+            document.querySelector('.error-message').innerText = "Vui lòng nhập số điện thoại"; 
+            document.querySelector('.error-message').style.display = 'block'; 
+            loadingIcon.style.display = 'none'; 
+            return; 
         }
     
         var updatedCustomer = {
@@ -225,7 +225,7 @@ $(document).ready(function () {
             phoneNumber: phoneNumber,
             email: email,
             point: point,
-            dayJoined: dayJoined, // Giữ nguyên giá trị dayJoined từ input
+            dayJoined: dayJoined,
         };
     
         $.ajax({
@@ -248,7 +248,7 @@ $(document).ready(function () {
 
     function showNotification(message) {
         $("#notificationMessage").text(message);
-        $("#notificationModal").show(); // Hiển thị modal thông báo
+        $("#notificationModal").show(); 
     }
 
     // Khi nhấn nút Đóng trong modal thông báo

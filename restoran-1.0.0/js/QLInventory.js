@@ -48,8 +48,8 @@ $(document).ready(function () {
     });
 
     function resetVoucherModal() {
-        $("#voucherType").val(""); // Xóa tên món ăn
-        $("#voucherPoint").val(""); // Reset phân loại
+        $("#voucherType").val(""); 
+        $("#voucherPoint").val(""); 
         
         
     }
@@ -117,11 +117,11 @@ $(document).ready(function () {
 // Hàm load danh sách nhà cung cấp vào dropdown
 function loadSuppliers() {
     $.ajax({
-        url: "https://resmant11111-001-site1.anytempurl.com/Supplier/List", // API lấy danh sách nhà cung cấp
+        url: "https://resmant11111-001-site1.anytempurl.com/Supplier/List", 
         method: "GET",
         success: function (response) {
             var supplierDropdown = $("#suplierInven");
-            supplierDropdown.empty(); // Xóa các tùy chọn cũ
+            supplierDropdown.empty(); 
 
             // Thêm tùy chọn mặc định
             supplierDropdown.append('<option value="">-- Chọn nhà cung cấp --</option>');
@@ -143,12 +143,12 @@ function loadSuppliers() {
 $("#addInvenBtn").click(function () {
     loadSuppliers();
     $("#addInvenModal").show();
-    $("#overlay").show(); // Hiển thị overlay khi mở modal
+    $("#overlay").show(); 
 });
 
 // Đóng modal
 $("#cancelInvenBtn").click(function () {
-    closeModal(); // Đảm bảo bạn đã có hàm này để đóng modal
+    closeModal(); 
 });
 
 // Lưu thông tin thêm hàng hóa
@@ -157,16 +157,16 @@ $("#saveInvenBtn").click(function () {
     var itemQuantity = parseFloat($("#itemQuantity").val());
     var suplierInven = $("#suplierInven").val().trim();
 
-    // Kiểm tra thông tin nhập vào
+    
     if (!itemType || !itemQuantity || !suplierInven) {
         document.querySelector('.error-message-inven').innerText = "Vui lòng điền đầy đủ thông tin"; 
-        document.querySelector('.error-message-inven').style.display = 'block'; // Hiển thị thông báo lỗi
-        return; // Dừng lại nếu có lỗi
+        document.querySelector('.error-message-inven').style.display = 'block';
+        return; 
     }
     if (!itemQuantity || !Number.isInteger(itemQuantity) || itemQuantity <= 0) {
         document.querySelector('.error-message-inven').innerText = "Số lượng phải là một số nguyên lớn hơn 0";
-        document.querySelector('.error-message-inven').style.display = 'block'; // Hiển thị thông báo lỗi
-        return; // Dừng lại nếu có lỗi
+        document.querySelector('.error-message-inven').style.display = 'block'; 
+        return; 
     }
 
     var newInvenItem = {
@@ -175,15 +175,15 @@ $("#saveInvenBtn").click(function () {
         supplierId: suplierInven
     };
 
-    // Gửi yêu cầu POST để thêm hàng hóa
+    
     $.ajax({
         url: "https://resmant11111-001-site1.anytempurl.com/Inventory/Insert",
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(newInvenItem),
         success: function (response) {
-            loadInventory(); // Cập nhật lại danh sách hàng hóa
-            $("#addInvenModal").hide(); // Ẩn modal sau khi thêm thành công
+            loadInventory(); 
+            $("#addInvenModal").hide(); 
             
             showNotification("Hàng hóa đã được thêm thành công!");
         },
@@ -207,10 +207,10 @@ $("#saveInvenBtn").click(function () {
             url: `https://resmant11111-001-site1.anytempurl.com/Inventory/GetById?id=${ItemId}`,
             method: "GET",
             success: function (inventory) {
-                // Điền dữ liệu vào form modal
+                
                 $("#itemTypeEdit").val(inventory.itemName);
                 $("#itemQuantityEdit").val(inventory.quantity);
-                // Giả sử nhà cung cấp đã được tải ở phần trước
+               
                 loadSuppliersForEdit(inventory.supplierId);
                 $("#editInvenModal").show();
                 $("#overlay").show();
@@ -224,11 +224,11 @@ $("#saveInvenBtn").click(function () {
     // Hàm load danh sách nhà cung cấp vào dropdown cho modal sửa
     function loadSuppliersForEdit(selectedSupplierId) {
         $.ajax({
-            url: "https://resmant11111-001-site1.anytempurl.com/Supplier/List", // API lấy danh sách nhà cung cấp
+            url: "https://resmant11111-001-site1.anytempurl.com/Supplier/List", 
             method: "GET",
             success: function (response) {
                 var supplierDropdown = $("#suplierInvenEdit");
-                supplierDropdown.empty(); // Xóa các tùy chọn cũ
+                supplierDropdown.empty(); 
                 supplierDropdown.append('<option value="">-- Chọn nhà cung cấp --</option>');
     
                 response.forEach(function (supplier) {
@@ -244,7 +244,7 @@ $("#saveInvenBtn").click(function () {
         });
     }
     
-    // Đóng modal khi nhấn nút hủy
+
     $("#cancelEditInvenBtn").click(function () {
         closeModal();
     });
@@ -280,7 +280,7 @@ $("#saveInvenBtn").click(function () {
             contentType: "application/json",
             data: JSON.stringify(updatedInvenItem),
             success: function (response) {
-                loadInventory();  // Hàm load lại danh sách hàng hóa
+                loadInventory();  
                 $("#editInvenModal").hide();
                 showNotification("Hàng hóa đã được cập nhật thành công!");
             },
@@ -293,7 +293,7 @@ $("#saveInvenBtn").click(function () {
     
     function showNotification(message) {
         $("#notificationMessage").text(message);
-        $("#notificationModal").show(); // Hiển thị modal thông báo
+        $("#notificationModal").show(); 
     }
 
     // Khi nhấn nút Đóng trong modal thông báo

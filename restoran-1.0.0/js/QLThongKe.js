@@ -173,7 +173,7 @@ async function fetchCustomer() {
 
     // Chuyển đổi JSON thành dữ liệu JavaScript
     const data = await response.json();
-    console.log(data); // Kiểm tra dữ liệu trả về từ API trong console
+    console.log(data); 
 
     // Kiểm tra nếu dữ liệu không hợp lệ hoặc trống
     if (!data || !Array.isArray(data) || data.length < 3) {
@@ -224,7 +224,7 @@ async function fetchMenu() {
 
     // Chuyển đổi JSON thành dữ liệu JavaScript
     const data = await response.json();
-    console.log(data); // Kiểm tra dữ liệu trả về từ API trong console
+    console.log(data); 
 
     // Kiểm tra nếu dữ liệu không hợp lệ hoặc trống
     if (!data || !Array.isArray(data) || data.length < 3) {

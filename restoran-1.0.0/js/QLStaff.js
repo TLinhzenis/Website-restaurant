@@ -19,7 +19,7 @@ $(document).ready(function () {
     });
     
     // Hạn chế quyền truy cập
-    const userRole = localStorage.getItem('role'); // 'admin' hoặc 'user', tùy thuộc vào hệ thống của bạn
+    const userRole = localStorage.getItem('role'); 
 
     // Kiểm tra vai trò người dùng
     if (userRole !== 'admin') {
@@ -66,13 +66,13 @@ $(document).ready(function () {
     });
 
     function resetStaffModal() {
-        $("#staffName").val(""); // Xóa tên món ăn
-        $("#usernameStaff").val(""); // Reset phân loại
-        $("#passwordStaff").val(""); // Xóa giá
-        $("#role").val(""); // Xóa mô tả
-        $("#image1").val(""); // Xóa file ảnh
+        $("#staffName").val(""); 
+        $("#usernameStaff").val(""); 
+        $("#passwordStaff").val(""); 
+        $("#role").val(""); 
+        $("#image1").val(""); 
         const imagePreview = $("#imagePreview1");
-        imagePreview.attr("src", ""); // Xóa ảnh xem trước
+        imagePreview.attr("src", ""); 
         
     }
     
@@ -84,8 +84,8 @@ $(document).ready(function () {
             url: "https://resmant11111-001-site1.anytempurl.com/staff/List",
             method: "GET",
             success: function (response) {
-                console.log(response); // Kiểm tra phản hồi API
-                table.clear(); // Xóa dữ liệu cũ
+                console.log(response); 
+                table.clear(); 
 
                 response.forEach(function (item) {
                     var imageUrl = item.image ? `https://resmant11111-001-site1.anytempurl.com/uploads/${item.image}` : '';
@@ -102,7 +102,7 @@ $(document).ready(function () {
 
                          <a id="btn-delete" class="btn-delete3" data-id="${item.staffId}"><i class="fa-solid fa-trash"></i></a>`
                     ];
-                    table.row.add(row).draw(); // Thêm hàng mới
+                    table.row.add(row).draw(); 
                 });
             },
             error: function (xhr, status, error) {
@@ -118,7 +118,7 @@ $(document).ready(function () {
 /*-------------------------------------------------Thêm------------------------------------------------*/
 
     $("#addStaffBtn").click(function () {
-        $("#addStaffModal").show(); // Hiển thị modal thêm món ăn
+        $("#addStaffModal").show(); 
         $("#overlay").show();
     });
 
@@ -157,42 +157,42 @@ $(document).ready(function () {
 
         // Kiểm tra các điều kiện
         if (!staffName || !role) {
-            document.querySelector('.error-message5').innerText = "Vui lòng điền đầy đủ tên và chức vụ"; // Thông báo cho ô username
-            document.querySelector('.error-message5').style.display = 'block'; // Hiển thị phần tử thông báo
+            document.querySelector('.error-message5').innerText = "Vui lòng điền đầy đủ tên và chức vụ"; 
+            document.querySelector('.error-message5').style.display = 'block'; 
             $("#staffName").focus();
-            return; // Ngừng thực hiện nếu tài khoản trống
+            return; 
         }
         if (!usernameStaff) {
-            document.querySelector('.error-message5').innerText = "Tên tài khoản không được để trống"; // Thông báo cho ô username
-            document.querySelector('.error-message5').style.display = 'block'; // Hiển thị phần tử thông báo
-            $("#usernamedStaff").focus(); // Đưa con trỏ vào trường mật khẩu
-            return; // Kết thúc hàm validateInput
+            document.querySelector('.error-message5').innerText = "Tên tài khoản không được để trống"; 
+            document.querySelector('.error-message5').style.display = 'block'; 
+            $("#usernamedStaff").focus(); 
+            return; 
         }
         if (!passwordStaff || passwordStaff.length < 6) {
-            document.querySelector('.error-message5').innerText = "Mật khẩu phải có ít nhất 6 kí tự"; // Thông báo cho ô username
-            document.querySelector('.error-message5').style.display = 'block'; // Hiển thị phần tử thông báo
-            $("#passwordStaff").focus(); // Đưa con trỏ vào trường mật khẩu
-            return; // Kết thúc hàm validateInput
+            document.querySelector('.error-message5').innerText = "Mật khẩu phải có ít nhất 6 kí tự"; 
+            document.querySelector('.error-message5').style.display = 'block'; 
+            $("#passwordStaff").focus(); 
+            return; 
         }
 
         if (!imageFile) {
-            document.querySelector('.error-message5').innerText = "Vui lòng chọn ảnh"; // Thông báo cho ô username
-            document.querySelector('.error-message5').style.display = 'block'; // Hiển thị phần tử thông báo
-            loadingIcon.style.display = 'none'; // Ẩn biểu tượng loading
-            return; // Ngừng thực hiện nếu tài khoản trống
+            document.querySelector('.error-message5').innerText = "Vui lòng chọn ảnh"; 
+            document.querySelector('.error-message5').style.display = 'block'; 
+            loadingIcon.style.display = 'none'; 
+            return; 
         }
         // Tạo form data để gửi ảnh lên API
         var formData = new FormData();
         formData.append("file", imageFile);
         
         $.ajax({
-            url: "https://resmant11111-001-site1.anytempurl.com/controller/upload-image", // URL đến API upload ảnh
+            url: "https://resmant11111-001-site1.anytempurl.com/controller/upload-image", 
             type: "POST",
             data: formData,
             contentType: false,
             processData: false,
             success: function (response) {
-                var imageName1 = response.imagePath.split('/').pop(); // Lấy tên file ảnh từ đường dẫn
+                var imageName1 = response.imagePath.split('/').pop(); 
 
             var newStaffItem = {
                 FullName: staffName,   
@@ -210,7 +210,7 @@ $(document).ready(function () {
                 data: JSON.stringify(newStaffItem),
                 success: function (response) {
                     loadStaffs();
-                    $("#addStaffModal").hide(); // Ẩn modal
+                    $("#addStaffModal").hide(); 
                     
                     showNotification("Nhân viên đã được thêm thành công!");
 
@@ -245,7 +245,7 @@ $(document).ready(function () {
 
     $(document).on('click', '.btn-delete3', function () {
         staffIdToDelete = $(this).data('id');
-        $("#confirmDeleteModal3").show(); // Hiện modal xác nhận
+        $("#confirmDeleteModal3").show(); 
         $("#overlay").show();
         
     });
@@ -257,7 +257,7 @@ $(document).ready(function () {
             success: function (response) {
                 loadStaffs();
                 showNotification("Nhân viên đã được xóa thành công!");
-                $("#confirmDeleteModal3").hide(); // Ẩn modal xác nhận
+                $("#confirmDeleteModal3").hide(); 
             },
             error: function (xhr, status, error) {
                 console.error("Không thể xóa nhân viên:", error);
@@ -290,28 +290,28 @@ $(document).ready(function () {
 
 
     let StaffId;
-// Khi người dùng chọn file ảnh mới
+
 $("#imageUpload1").change(function () {
-    var imageFile1 = $("#imageUpload1")[0].files[0]; // Lấy file ảnh mới
+    var imageFile1 = $("#imageUpload1")[0].files[0]; 
 
     if (imageFile1) {
-        // Hiển thị tên file ảnh
+        
         $("#imageNameEdit1").text("Tên file: " + imageFile1.name);
 
-        // Hiển thị ảnh preview
+        
         var reader = new FileReader();
         reader.onload = function (e) {
-            $("#currentImage1").attr("src", e.target.result).show(); // Hiện ảnh mới
+            $("#currentImage1").attr("src", e.target.result).show();
         };
         reader.readAsDataURL(imageFile1);
     } else {
         $("#imageNameEdit1").text("Không có ảnh");
-        $("#currentImage1").hide(); // Ẩn ảnh nếu không có file nào được chọn
+        $("#currentImage1").hide(); 
     }
 });
 
     $(document).on('click', '.btn-edit3', function () {
-        StaffId = $(this).data('id'); // Lưu ID nhân viên cần sửa
+        StaffId = $(this).data('id'); 
         $.ajax({
             url: `https://resmant11111-001-site1.anytempurl.com/Staff/GetById?id=${StaffId}`,
             method: "GET",
@@ -328,11 +328,11 @@ $("#imageUpload1").change(function () {
                 $("#passwordStaffEdit").prop('disabled', false);
             }
     
-                $("#editStaffModal").show(); // Hiện modal sửa nhân viên
+                $("#editStaffModal").show(); 
                 
                 // Nếu nhân viên có ảnh
             if (staff.image) {
-                $("#imageNameEdit1").text(staff.image); // Cập nhật tên file ảnh
+                $("#imageNameEdit1").text(staff.image); 
                 $("#currentImage1").attr("src", `https://resmant11111-001-site1.anytempurl.com/uploads/${staff.image}`).show();
             } else {
                 $("#imageNameEdit1").text("Không có ảnh");
@@ -340,9 +340,8 @@ $("#imageUpload1").change(function () {
             }
 
             // Reset input file cho hình ảnh mới
-            $("#imageUpload1").val(''); // Đặt lại input file để không giữ file trước đó
-
-            $("#editStaffModal").show(); // Hiện modal sửa nhân viên
+            $("#imageUpload1").val(''); 
+            $("#editStaffModal").show();
             $("#overlay").show();
             },
             error: function (xhr, status, error) {
@@ -360,28 +359,28 @@ $("#imageUpload1").change(function () {
         var usernameStaff = $("#usernameStaffEdit").val().trim();
         var passwordStaff = $("#passwordStaffEdit").val().trim();
         var role = $("#roleEdit").val().trim();
-        var imageInput1 = $("#imageUpload1")[0];  // Đối tượng input file
-        var imageFile1 = imageInput1.files.length > 0 ? imageInput1.files[0] : null;  // Kiểm tra xem có file nào được chọn không
-        var currentImage1 = $("#currentImage1").attr("src").split('/').pop(); // Lấy tên ảnh hiện tại
+        var imageInput1 = $("#imageUpload1")[0];  
+        var imageFile1 = imageInput1.files.length > 0 ? imageInput1.files[0] : null;  
+        var currentImage1 = $("#currentImage1").attr("src").split('/').pop(); 
     
         // Kiểm tra các điều kiện
         if (!staffName || !role) {
-            document.querySelector('.error-message6').innerText = "Vui lòng điền đầy đủ tên và chức vụ"; // Thông báo cho ô username
-            document.querySelector('.error-message6').style.display = 'block'; // Hiển thị phần tử thông báo
+            document.querySelector('.error-message6').innerText = "Vui lòng điền đầy đủ tên và chức vụ"; 
+            document.querySelector('.error-message6').style.display = 'block'; 
             $("#staffName").focus();
-            return; // Ngừng thực hiện nếu tài khoản trống
+            return; 
         }
         if (!passwordStaff || passwordStaff.length < 6) {
-            document.querySelector('.error-message6').innerText = "Mật khẩu phải có ít nhất 6 kí tự"; // Thông báo cho ô username
-            document.querySelector('.error-message6').style.display = 'block'; // Hiển thị phần tử thông báo
-            $("#passwordStaffEdit").focus(); // Đưa con trỏ vào trường mật khẩu
-            return; // Kết thúc hàm validateInput
+            document.querySelector('.error-message6').innerText = "Mật khẩu phải có ít nhất 6 kí tự"; 
+            document.querySelector('.error-message6').style.display = 'block'; 
+            $("#passwordStaffEdit").focus(); 
+            return; 
         }
         if (!usernameStaff) {
-            document.querySelector('.error-message5').innerText = "Tên tài khoản không được để trống"; // Thông báo cho ô username
-            document.querySelector('.error-message5').style.display = 'block'; // Hiển thị phần tử thông báo
-            $("#usernameStaff").focus(); // Đưa con trỏ vào trường mật khẩu
-            return; // Kết thúc hàm validateInput
+            document.querySelector('.error-message5').innerText = "Tên tài khoản không được để trống"; 
+            document.querySelector('.error-message5').style.display = 'block'; 
+            $("#usernameStaff").focus(); 
+            return; 
         }
         if (imageFile1) {
             var formData = new FormData();
@@ -396,12 +395,12 @@ $("#imageUpload1").change(function () {
                 processData: false,
                 success: function (response) {
                     var updatedStaff = {
-                        StaffId: StaffId, // Thêm StaffId vào dữ liệu gửi
+                        StaffId: StaffId, 
                         FullName: staffName,
                         Username: usernameStaff,
                         Password: passwordStaff,
                         Role: role,
-                        image: response.imagePath.split('/').pop() // Chỉ lấy tên file ảnh mới
+                        image: response.imagePath.split('/').pop() 
                     };
     
                     updatedStaff1(updatedStaff);
@@ -413,12 +412,12 @@ $("#imageUpload1").change(function () {
         } else {
             // Nếu không có ảnh mới, giữ lại tên ảnh hiện tại
             var updatedStaff = {
-                StaffId: StaffId, // Thêm StaffId vào dữ liệu gửi
+                StaffId: StaffId, 
                 FullName: staffName,
                 Username: usernameStaff,
                 Password: passwordStaff,
                 Role: role,
-                image: currentImage1 // Giữ lại ảnh cũ
+                image: currentImage1 
             };
     
             updatedStaff1(updatedStaff);
@@ -431,7 +430,7 @@ $("#imageUpload1").change(function () {
             contentType: "application/json",
             data: JSON.stringify(updatedStaff),
             success: function (response) {
-                loadStaffs(); // Giả sử đây là hàm tải lại danh sách nhân viên
+                loadStaffs(); 
                 $("#editStaffModal").hide();
                 
                 showNotification("Nhân viên đã được cập nhật thành công!");
@@ -446,7 +445,7 @@ $("#imageUpload1").change(function () {
     });
     function showNotification(message) {
         $("#notificationMessage").text(message);
-        $("#notificationModal").show(); // Hiển thị modal thông báo
+        $("#notificationModal").show(); 
     }
 
     // Khi nhấn nút Đóng trong modal thông báo

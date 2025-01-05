@@ -118,7 +118,7 @@
 })(jQuery);
 
 function formatPrice(price) {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Định dạng số
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); 
 }
 
 $(document).ready(function() {
@@ -135,10 +135,10 @@ $(document).ready(function() {
      $('#userLink').on('click', function(e) {
         e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
         if (fullName) {
-            // Nếu người dùng đã đăng nhập, dẫn tới UpdateUser.html
+            
             window.location.href = 'UpdateUser.html';
         } else {
-            // Nếu người dùng chưa đăng nhập, dẫn tới LoginUser.html
+            
             window.location.href = 'LoginUser.html';
         }
     });

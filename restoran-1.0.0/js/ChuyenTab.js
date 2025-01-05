@@ -156,17 +156,17 @@ $(document).ready(function () {
   document.getElementById("userRole").innerText = `${role}`;
   // Ngăn người dùng quay lại sau khi đăng xuất
   $("#logoutButton").on("click", function (e) {
-    e.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+    e.preventDefault();
     // Xóa toàn bộ bộ nhớ cache
     sessionStorage.clear();
     localStorage.clear();
-    // Chuyển hướng về trang đăng nhập
+
     window.location.href = "LoginAdmin.html";
   });
 
-  // Kiểm tra xem người dùng đã đăng nhập chưa
+ 
   if (!fullName) {
-    // Nếu không có fullname, chuyển hướng về trang đăng nhập
+
     window.location.href = "LoginAdmin.html";
   }
 });

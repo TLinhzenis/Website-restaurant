@@ -140,20 +140,20 @@ document.addEventListener('DOMContentLoaded', async function () {
 const customerId = localStorage.getItem('customerId');
 
 if (customerId) {
-    // Gọi API để lấy toàn bộ danh sách VoucherWallet
+    
     fetch("https://resmant11111-001-site1.anytempurl.com/VoucherWallet/List")
         .then(response => response.json())
         .then(data => {
             // Lọc danh sách voucher theo CustomerId
             const customerVouchers = data.filter(voucher => voucher.customerId == customerId);
 
-            // Lấy thông tin VoucherType cho từng voucher
+            
             const voucherPromises = customerVouchers.map(voucher =>
                 fetch(`https://resmant11111-001-site1.anytempurl.com/Voucher/GetById?id=${voucher.voucherId}`)
                     .then(response => response.json())
                     .then(voucherDetails => ({
                         ...voucher,
-                        voucherType: voucherDetails.voucherType // Thêm thông tin VoucherType
+                        voucherType: voucherDetails.voucherType 
                     }))
             );
 
@@ -198,13 +198,13 @@ function renderVoucherList(vouchers) {
 function closeModal2() {
     $("#notificationModal").addClass("closing");
 
-    // Đảm bảo thời gian khớp với animation trong CSS
+    
     setTimeout(function () {
         $("#notificationModal").hide();
         $("#overlay").hide();
         $("#notificationModal").removeClass("closing");
-        location.reload(); // Tải lại trang
-    }, 500); // Thời gian trùng với slideDown
+        location.reload(); 
+    }, 500); 
 }
 
 $("#overlay").click(function (e) {

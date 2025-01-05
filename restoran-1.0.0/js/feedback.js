@@ -1,11 +1,11 @@
 $(document).ready(function() {
-// Hàm lấy danh sách feedback từ API (toàn bộ feedback)
+
 function fetchFeedbacks() {
   $.ajax({
-    url: 'https://resmant11111-001-site1.anytempurl.com/Feedback/List', // API lấy toàn bộ feedback
+    url: 'https://resmant11111-001-site1.anytempurl.com/Feedback/List', 
     method: 'GET',
     success: function (data) {
-      renderFeedbackList(data); // Gọi hàm render để hiển thị danh sách feedback
+      renderFeedbackList(data); 
     },
     error: function (error) {
       console.error('Lỗi khi lấy danh sách feedback:', error);
@@ -16,10 +16,10 @@ function fetchFeedbacks() {
 // Hàm lấy danh sách feedback từ API theo rating
 function fetchFeedbacksByRating(rating) {
   $.ajax({
-    url: `https://resmant11111-001-site1.anytempurl.com/Feedback/ListByRating?rating=${rating}`, // API lấy feedback theo rating
+    url: `https://resmant11111-001-site1.anytempurl.com/Feedback/ListByRating?rating=${rating}`, 
     method: 'GET',
     success: function (data) {
-      renderFeedbackList(data); // Gọi hàm render để hiển thị feedback
+      renderFeedbackList(data);
     },
     error: function (error) {
       console.error('Lỗi khi lấy danh sách feedback theo rating:', error);
@@ -30,11 +30,11 @@ function fetchFeedbacksByRating(rating) {
 // Hàm lấy tên khách hàng từ API Customer
 function fetchCustomerName(customerId, callback) {
   $.ajax({
-    url: `https://resmant11111-001-site1.anytempurl.com/Customer/GetById?id=${customerId}`, // API lấy thông tin khách hàng
+    url: `https://resmant11111-001-site1.anytempurl.com/Customer/GetById?id=${customerId}`, 
     method: 'GET',
     success: function (customerData) {
       if (customerData && customerData.fullName) {
-        callback(customerData.fullName); // Gọi callback với fullName
+        callback(customerData.fullName); 
       } else {
         callback('Tên không tìm thấy');
       }
@@ -49,7 +49,7 @@ function fetchCustomerName(customerId, callback) {
 // Hàm render danh sách feedback
 function renderFeedbackList(feedbacks) {
   const container = $('#feedbackContainer');
-  container.empty(); // Xóa nội dung cũ nếu có
+  container.empty(); 
 
   // Duyệt qua tất cả feedbacks
   feedbacks.forEach((feedback) => {
@@ -57,7 +57,7 @@ function renderFeedbackList(feedbacks) {
 
     // Gọi API lấy tên khách hàng dựa trên customerId
     fetchCustomerName(feedback.customerId, function (fullName) {
-      // Tạo HTML cho từng feedback
+
       const feedbackHtml = `
         <div class="testimonial-item bg-transparent rounded p-4">
           <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
@@ -69,7 +69,7 @@ function renderFeedbackList(feedbacks) {
         <br>
       `;
 
-      // Thêm feedback vào container
+
       container.append(feedbackHtml);
     });
   });
@@ -79,13 +79,13 @@ function renderFeedbackList(feedbacks) {
 $('#ratingFilter').on('change', function () {
   const selectedRating = $(this).val();
   if (selectedRating) {
-    fetchFeedbacksByRating(selectedRating); // Lấy feedback theo rating
+    fetchFeedbacksByRating(selectedRating); 
   } else {
-    fetchFeedbacks(); // Hiển thị toàn bộ feedback nếu không chọn rating
+    fetchFeedbacks(); 
   }
 });
 
-// Gọi hàm lấy feedback ban đầu (hiển thị tất cả khi tải trang)
+
 fetchFeedbacks();
  
 
@@ -94,7 +94,7 @@ fetchFeedbacks();
 
 // Xử lý gửi feedback
 $("#sendFeedback").click(function (e) {
-  e.preventDefault(); // Ngăn trang reload
+  e.preventDefault(); 
 
   var customerId = localStorage.getItem('customerId');
   var rating = $("#rating").val().trim();
